@@ -6,7 +6,7 @@ export default function App() {
       <Text style={{fontSize: 20, marginBottom: 15}}>A Simple Text</Text>
 
       <TouchableOpacity 
-        onPress={() => console.log('Button pressed')}
+        onPress={() => console.log('btn pressed')}
         style={{backgroundColor: '#ddd', padding: 10, borderRadius: 5}}
       >
         <Text>Click Me</Text>
