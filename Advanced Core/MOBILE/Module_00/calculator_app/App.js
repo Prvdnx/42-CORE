@@ -18,7 +18,11 @@ export default function App() {
   const operators = ['+', '-', '*', '/'];
 
   const handleBtnPress = (value) => {
-    console.log(`Button pressed: ${value}`);
+    console.log(`Button pressed :${value}`);
+    if (expression.length >= 110 && value !== 'AC' && value !== 'C') {
+      return Alert.alert('Limit reached', 'Maximum 110 characters allowed');
+    }
+
     const lastChar = expression.slice(-1);
 
     if (operators.includes(value)) { // handle operators
@@ -46,11 +50,13 @@ export default function App() {
 
   const evaluateExpression = (expr) => {
     try {
-      if (!/^[\d+\-*\/.() ]+$/.test(expr)) throw new Error('Invalid characters');
+      if (!/^[\d+\-*\/.() eE]+$/.test(expr)) throw new Error('Invalid characters');  // handles e and E for scientific notation
       if (expr.includes('/0') && !expr.includes('/0.')) throw new Error('Division by zero');
       
       const result = Function(`"use strict"; return (${expr})`)();
       return !isFinite(result) ? 'Error' : result.toString();
+      // return !isFinite(result) ? 'Error' : result.toLocaleString('fullwide', {useGrouping: false});
+
     } catch (error) {
       console.error('Evaluation error:', error);
       return 'Error';
@@ -116,18 +122,18 @@ export default function App() {
       </View>
 
       <View /*Display*/ style={{flex: 1, justifyContent: 'flex-end'}}>
-        <View style={[{padding: 20, marginBottom: 10}, isLandscape && styles.displayLandscape]}>
+        <View style={[{padding: 20, marginBottom: 0}, isLandscape && styles.displayLandscape]}>
           <TextInput /*Expression*/
             style={[styles.expressionInput, isLandscape && styles.expressionInputLandscape]}
             editable={false} value={expression} multiline={true}
           />
           <TextInput /*Result*/
-            style={[styles.resultInput, isLandscape && {fontSize: 25, minHeight: 25}]}
+            style={[styles.resultInput, isLandscape && {fontSize: 30}]}
             value={result} editable={false}
           />
         </View>
 
-        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 15, paddingHorizontal: 10}]}>
+        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 10, paddingHorizontal: 10}]}>
           {btnRowConfig.map((row, index) => (
             <View key={index} style={[styles.row, isLandscape && styles.rowLandscape]}>
               {row.map((btn) => {
@@ -153,8 +159,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   header: {
-    // paddingTop: 50,
-    // paddingBottom: 20,
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#333',
@@ -168,8 +172,10 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: '#fff',
     textAlign: 'right',
-    // marginBottom: 10,
-    maxHeight: 200,
+    marginBottom: 10,
+    includeFontPadding: false,
+    paddingBottom: 0,
+    // maxHeight: isLandscape ? Dimensions.get('window').height * 0.3 : Dimensions.get('window').height * 0.4,
   },
   resultInput: {
     fontSize: 48,
@@ -177,7 +183,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontWeight: '300',
     minHeight: 60,
-  },
+   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -202,6 +208,7 @@ const styles = StyleSheet.create({
     flex: 0.2,
     paddingVertical: 5,
     paddingHorizontal: 15,
+    marginBottom: 10,
     maxHeight: 60,
   },
   expressionInputLandscape: {
