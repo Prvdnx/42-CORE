@@ -117,7 +117,7 @@ export default function App() {
 
   return (
     <SafeAreaView /*Header*/ style={styles.container}>
-      <View style={[styles.header, {padding: 5}]}>
+      <View style={[styles.header, {/*padding: 5*/}]}>
         <Text style={[styles.title, isLandscape && {fontSize: 20}]}>Calculator</Text>
       </View>
 
@@ -132,7 +132,7 @@ export default function App() {
           />
         </View>
 
-        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 15, paddingHorizontal: 10, marginTop: 25}]}>
+        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 15, paddingHorizontal: 10, /*marginTop: 25*/}]}>
           {btnRowConfig.map((row, index) => (
             <View key={index} style={[styles.row, isLandscape && styles.rowLandscape]}>
               {row.map((btn) => {
