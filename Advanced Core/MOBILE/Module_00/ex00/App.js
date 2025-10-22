@@ -14,3 +14,9 @@ export default function App() {
     </View>
   );
 }
+
+
+// curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+// echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.zshrc && echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc && source ~/.zshrc
+// nvm install 20.19.4 && nvm use 20.19.4
+// nvm alias default 20.19.4

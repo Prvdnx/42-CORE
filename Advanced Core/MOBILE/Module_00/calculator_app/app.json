@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ex02",
-    "slug": "ex02",
+    "name": "calculator-app",
+    "slug": "calculator-app",
     "version": "1.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
