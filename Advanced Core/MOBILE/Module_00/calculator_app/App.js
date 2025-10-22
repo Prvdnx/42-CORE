@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 
-  //// Landscape styles ////
+  ////= Landscape styles =////
   displayLandscape: {
     flex: 0.2,
     paddingVertical: 5,
