@@ -7,10 +7,10 @@ export default function App() {
   const [screenData, setScreenData] = useState(Dimensions.get('window'));
 
   useEffect(() => {
-    const onChange = (result) => { setScreenData(result.window) };
-
-    Dimensions.addEventListener('change', onChange);
-    return () => Dimensions.removeEventListener('change', onChange);
+    const subscription = Dimensions.addEventListener('change', (result) => {
+      setScreenData(result.window);
+    });
+    return () => subscription.remove();
   }, []);
 
   const isLandscape = screenData.width > screenData.height;
@@ -102,7 +102,7 @@ export default function App() {
       if (value === '0') style.push({width: 125, borderRadius: 8});
     }
     return (
-      <TouchableOpacity style={style} onPress={onPress}>
+      <TouchableOpacity key={value} style={style} onPress={onPress}>
         <Text style={[styles.btnText, isLandscape && {fontSize: 18}]}>{value}</Text>
       </TouchableOpacity>
     );
