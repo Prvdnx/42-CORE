@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function App() {
   const [expression, setExpression] = useState('0');
@@ -109,19 +110,19 @@ export default function App() {
   };
 
   return (
-    <View /*Header*/ style={styles.container}>
-      <View style={[styles.header, isLandscape && {paddingTop: 20, paddingBottom: 10}]}>
+    <SafeAreaView /*Header*/ style={styles.container}>
+      <View style={[styles.header]}>
         <Text style={[styles.title, isLandscape && {fontSize: 20}]}>Calculator</Text>
       </View>
 
       <View /*Display*/ style={{flex: 1, justifyContent: 'flex-end'}}>
         <View style={[{padding: 20, marginBottom: 10}, isLandscape && styles.displayLandscape]}>
-          <TextInput 
+          <TextInput /*Expression*/
             style={[styles.expressionInput, isLandscape && styles.expressionInputLandscape]}
             editable={false} value={expression} multiline={true}
           />
-          <TextInput 
-            style={[styles.resultInput, isLandscape && {fontSize: 20, minHeight: 25}]}
+          <TextInput /*Result*/
+            style={[styles.resultInput, isLandscape && {fontSize: 25, minHeight: 25}]}
             value={result} editable={false}
           />
         </View>
@@ -141,7 +142,7 @@ export default function App() {
           ))}
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -152,9 +153,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   header: {
-    paddingTop: 50,
-    paddingBottom: 20,
+    // paddingTop: 50,
+    // paddingBottom: 20,
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#333',
   },
   title: {
     fontSize: 24,
@@ -165,8 +168,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: '#fff',
     textAlign: 'right',
-    marginBottom: 10,
-    minHeight: 40,
+    // marginBottom: 10,
+    maxHeight: 200,
   },
   resultInput: {
     fontSize: 48,
@@ -199,7 +202,7 @@ const styles = StyleSheet.create({
     flex: 0.2,
     paddingVertical: 5,
     paddingHorizontal: 15,
-    minHeight: 60,
+    maxHeight: 60,
   },
   expressionInputLandscape: {
     fontSize: 16,
