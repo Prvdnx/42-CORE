@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Alert, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
-// import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function App() {
   const [expression, setExpression] = useState('0');
