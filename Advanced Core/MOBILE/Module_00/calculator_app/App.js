@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Dimensions, Alert, SafeAreaView } from 'react-native';
 import { useState, useEffect } from 'react';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+// import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function App() {
   const [expression, setExpression] = useState('0');
@@ -117,7 +117,7 @@ export default function App() {
 
   return (
     <SafeAreaView /*Header*/ style={styles.container}>
-      <View style={[styles.header]}>
+      <View style={[styles.header, {padding: 5}]}>
         <Text style={[styles.title, isLandscape && {fontSize: 20}]}>Calculator</Text>
       </View>
 
@@ -127,13 +127,12 @@ export default function App() {
             style={[styles.expressionInput, isLandscape && styles.expressionInputLandscape]}
             editable={false} value={expression} multiline={true}
           />
-          <TextInput /*Result*/
-            style={[styles.resultInput, isLandscape && {fontSize: 30}]}
+          <TextInput /*Result*/ style={[styles.resultInput, isLandscape && {fontSize: 30}]}
             value={result} editable={false}
           />
         </View>
 
-        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 10, paddingHorizontal: 10}]}>
+        <View /*Buttons*/ style={[{padding: 20} , isLandscape && {paddingVertical: 15, paddingHorizontal: 10, marginTop: 25}]}>
           {btnRowConfig.map((row, index) => (
             <View key={index} style={[styles.row, isLandscape && styles.rowLandscape]}>
               {row.map((btn) => {
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#333',
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#fff',
   },
@@ -173,9 +172,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'right',
     marginBottom: 10,
-    includeFontPadding: false,
+    // includeFontPadding: false,
     paddingBottom: 0,
-    // maxHeight: isLandscape ? Dimensions.get('window').height * 0.3 : Dimensions.get('window').height * 0.4,
   },
   resultInput: {
     fontSize: 48,
