@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 import json
 
 def load_data():
-    data = np.genfromtxt('data.csv', delimiter=',', skip_header=1)
+    try:
+        data = np.genfromtxt('data.csv', delimiter=',', skip_header=1)
+    except FileNotFoundError:
+        print("Error: data.csv not found in current directory")
+        exit(1)
     mileage_raw = data[:, 0]
     price_raw = data[:, 1]
     
