@@ -8,7 +8,7 @@ def load_data():
         data = np.genfromtxt('data.csv', delimiter=',', skip_header=1)
     except FileNotFoundError:
         print("Error: data.csv not found in current directory")
-        exit(1)
+        exit(1)  
     mileage_raw = data[:, 0]
     price_raw = data[:, 1]
     
@@ -33,18 +33,23 @@ def gradient_descent(mileage, price, learning_rate, iterations):
         predictions = theta0 + theta1 * mileage
         error = predictions - price
         
-        grad0 = np.sum(error) / m
-        grad1 = np.sum(error * mileage) / m
-        
-        theta0 -= learning_rate * grad0
-        theta1 -= learning_rate * grad1
-        
+        # grad0 = np.sum(error) / m
+        # grad1 = np.sum(error * mileage) / m
+        # new_theta0 = theta0 - learning_rate * grad0 
+        # new_theta1 = theta1 - learning_rate * grad1 
+        # theta0, theta1 = new_theta0, new_theta1
+
+        tmp0 = learning_rate * (np.sum(error) / m)
+        tmp1 = learning_rate * (np.sum(error * mileage) / m)
+        theta0 -= tmp0
+        theta1 -= tmp1
+
     return theta0, theta1
 
 def plot_data(mileage_raw, price_raw, theta0, theta1):
     plt.scatter(mileage_raw, price_raw, color='blue', label='Data Points')
     
-    # Plot regression line
+    # plot regression line
     x_line = np.array([min(mileage_raw), max(mileage_raw)])
     y_line = theta0 + theta1 * x_line
     plt.plot(x_line, y_line, 'r-', label=f'y = {theta0:.2f} + {theta1:.4f}x')
