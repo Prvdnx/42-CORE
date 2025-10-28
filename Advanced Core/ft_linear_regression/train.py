@@ -18,7 +18,7 @@ def load_data():
     price_min = np.min(price_raw)
     price_max = np.max(price_raw)
     
-    # normalize to 0-1 range
+    # normalize to 0 - 1 range
     mileage_norm = (mileage_raw - mileage_min) / (mileage_max - mileage_min)
     price_norm = (price_raw - price_min) / (price_max - price_min)
     
