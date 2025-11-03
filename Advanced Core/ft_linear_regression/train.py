@@ -18,7 +18,7 @@ def load_data():
     price_min = np.min(price_raw)
     price_max = np.max(price_raw)
     
-    # normalize to 0-1 range
+    # normalize to 0-1 range = x_norm = (x - x_min) / (x_max - x_min)
     mileage_norm = (mileage_raw - mileage_min) / (mileage_max - mileage_min)
     price_norm = (price_raw - price_min) / (price_max - price_min)
     
@@ -69,14 +69,15 @@ if __name__ == "__main__":
     
     theta0_norm, theta1_norm = gradient_descent(X_norm, y_norm, 0.1, 1000) # train on normalized data
     
-    # denormalize thetas to their original scale
+    # denormalize thetas to their original scale: Formula θ1 = θ1_norm × (y_max - y_min) / (x_max - x_min)
+    # Formula θ0 = y_min + θ0_norm × (y_max - y_min) - θ1_norm × (y_max - y_min) × (x_min / (x_max - x_min))
     theta0 = y_min + (y_max - y_min) * theta0_norm - (y_max - y_min) * theta1_norm * (X_min / (X_max - X_min))
     theta1 = theta1_norm * (y_max - y_min) / (X_max - X_min)
 
     # scale_x = X_max - X_min
     # scale_y = y_max - y_min
     # if scale_x == 0:
-    #     raise ValueError("All mileage values are identical; cannot fit a line (division by zero).")
+    #     raise ValueError("mileage values identical; cannot fit a line (division by zero).")
     # theta1 = theta1_norm * (scale_y / scale_x)
     # theta0 = y_min + scale_y * theta0_norm - scale_y * theta1_norm * (X_min / scale_x)
 
