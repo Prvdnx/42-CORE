@@ -91,3 +91,17 @@ if __name__ == "__main__":
 
     if '--plot' in sys.argv:
         plot_data(X_raw, y_raw, theta0, theta1)
+
+
+
+# raw_mileage_data = [10000, 50000, 300000]
+
+# Step 1: find the minimum and maximum
+# mileage_min = 10000
+# mileage_max = 300000
+
+# Step 2: apply the normalization formula to each value
+# normalized_value = (raw_value - min) / (max - min)
+# 1: (10000 - 10000) / (300000 - 10000) = 0 / 290000 = 0.0
+# 2: (50000 - 10000) / (300000 - 10000) = 40000 / 290000 = 0.138
+# 5: (300000 - 10000) / (300000 - 10000) = 290000 / 290000 = 1.0
