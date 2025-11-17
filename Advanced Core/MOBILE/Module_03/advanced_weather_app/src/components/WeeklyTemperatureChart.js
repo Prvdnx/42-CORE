@@ -8,24 +8,24 @@ const WeeklyTemperatureChart = ({ forecastData }) => {
     return null;
   }
 
-  // Extraire les données pour les 7 jours
+  // Extract data for the 7 days
   const weekData = forecastData.slice(0, 7);
   
   const data = {
     labels: weekData.map((item, index) => {
       if (index === 0) return 'Today';
-      // Extraire le jour de la semaine directement de la string formatée "Wed, Jul 23"
+      // Extract the day of the week directly from the formatted string "Wed, Jul 23"
       return item.date.split(',')[0].trim();
     }),
     datasets: [
       {
         data: weekData.map(item => item.minTemp),
-        color: (opacity = 1) => `rgba(70, 130, 180, ${opacity})`, // Bleu pour min temperature
+        color: (opacity = 1) => `rgba(70, 130, 180, ${opacity})`, // Blue for min temperature
         strokeWidth: 3,
       },
       {
         data: weekData.map(item => item.maxTemp),
-        color: (opacity = 1) => `rgba(220, 20, 60, ${opacity})`, // Rouge pour max temperature
+        color: (opacity = 1) => `rgba(220, 20, 60, ${opacity})`, // Red for max temperature
         strokeWidth: 3,
       },
     ],
@@ -33,12 +33,12 @@ const WeeklyTemperatureChart = ({ forecastData }) => {
   };
 
   const chartConfig = {
-    backgroundColor: '#ffffff',
-    backgroundGradientFrom: '#ffffff',
-    backgroundGradientTo: '#f8f9fa',
+    backgroundColor: '#1E1E1E',
+    backgroundGradientFrom: '#1E1E1E',
+    backgroundGradientTo: '#1E1E1E',
     decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(60, 60, 60, ${opacity})`,
+    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
       borderRadius: 16
     },

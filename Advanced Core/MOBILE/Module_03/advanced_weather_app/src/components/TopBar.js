@@ -5,10 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GeocodingService } from '../services/GeocodingService';
 import { LocationService } from '../services/LocationService';
 
-const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, onLocationSelected, onLocationDenied, onConnectionError, onCityNotFound, isLoadingLocation, setIsLoadingLocation }) => {
+const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, onLocationSelected, onLocationDenied, onConnectionError, onCityNotFound, isLoadingLocation, setIsLoadingLocation, isLandscape }) => {
   const [citySuggestions, setCitySuggestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const styles = getStyles(isLandscape);
 
   useEffect(() => {
     const searchCities = async () => {
@@ -120,7 +122,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.topBar}>
           <View style={styles.searchContainer}>
-            <Ionicons name="search" size={20} color="#A9A9A9" style={styles.searchIcon} />
+            <Ionicons name="search" size={isLandscape ? 16 : 20} color="#A9A9A9" style={styles.searchIcon} />
             <TextInput
               style={styles.searchInput}
               placeholder="Search for a city..."
@@ -138,7 +140,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
             {renderSearchAccessory()}
           </View>
           <TouchableOpacity style={[styles.geolocationButton, isGeolocation && styles.geolocationButtonActive]} onPress={handleGeolocationPress} disabled={isLoadingLocation}>
-            {isLoadingLocation ? <ActivityIndicator size="small" color={isGeolocation ? '#fff' : '#0A84FF'} /> : <Ionicons name="location" size={24} color={isGeolocation ? '#fff' : '#0A84FF'} />}
+            {isLoadingLocation ? <ActivityIndicator size="small" color={isGeolocation ? '#fff' : '#0A84FF'} /> : <Ionicons name="location" size={isLandscape ? 18 : 24} color={isGeolocation ? '#fff' : '#0A84FF'} />}
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -167,15 +169,15 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (isLandscape) => StyleSheet.create({
   container: { backgroundColor: 'rgba(30, 30, 30, 0.85)', borderBottomWidth: 1, borderBottomColor: '#333333' },
-  topBar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, gap: 12 },
-  searchContainer: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#2c2c2e', borderRadius: 25, paddingHorizontal: 16, paddingVertical: 12 },
-  searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 16, color: '#FFFFFF' },
+  topBar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: isLandscape ? 4 : 10, gap: 12 },
+  searchContainer: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#2c2c2e', borderRadius: 20, paddingHorizontal: 12, paddingVertical: isLandscape ? 4 : 8 },
+  searchIcon: { marginRight: 8 },
+  searchInput: { flex: 1, fontSize: isLandscape ? 14 : 16, color: '#FFFFFF' },
   loadingIcon: { marginLeft: 8 },
-  clearButton: { paddingHorizontal: 4, paddingVertical: 4 },
-  geolocationButton: { width: 48, height: 48, borderRadius: 24, backgroundColor: '#2c2c2e', borderWidth: 2, borderColor: '#0A84FF', justifyContent: 'center', alignItems: 'center' },
+  clearButton: { padding: 4 },
+  geolocationButton: { width: isLandscape ? 34 : 44, height: isLandscape ? 34 : 44, borderRadius: isLandscape ? 17 : 22, backgroundColor: '#2c2c2e', borderWidth: 1, borderColor: '#0A84FF', justifyContent: 'center', alignItems: 'center' },
   geolocationButtonActive: { backgroundColor: '#0A84FF' },
   suggestionsContainer: { backgroundColor: '#1E1E1E', borderBottomWidth: 1, borderBottomColor: '#333333', maxHeight: 200 },
   suggestionsList: { backgroundColor: '#1E1E1E' },

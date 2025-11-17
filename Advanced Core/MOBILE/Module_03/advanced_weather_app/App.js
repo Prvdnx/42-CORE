@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, StatusBar, useWindowDimensions } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import TopBar from './src/components/TopBar';
 import WeatherBackground from './src/components/WeatherBackground';
@@ -20,6 +20,9 @@ const SCREENS = [
 ];
 
 export default function App() {
+  const { width, height } = useWindowDimensions();
+  const isLandscape = width > height;
+
   const [searchText, setSearchText] = useState('');
   const [isGeolocation, setIsGeolocation] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
@@ -91,6 +94,8 @@ export default function App() {
     loadWeatherData(location);
   };
   
+  const styles = getStyles(isLandscape);
+
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: '#121212' }}>
       <StatusBar barStyle="light-content" />
@@ -109,6 +114,7 @@ export default function App() {
                 onCityNotFound={(msg) => handleError('cityNotFound', msg)}
                 isLoadingLocation={appState.isLoadingLocation}
                 setIsLoadingLocation={(loading) => setAppState(prev => ({ ...prev, isLoadingLocation: loading }))}
+                isLandscape={isLandscape}
               />
 
               <PagerView ref={pagerRef} style={styles.pagerView} initialPage={0} onPageSelected={(e) => setActiveTab(e.nativeEvent.position)}>
@@ -131,7 +137,7 @@ export default function App() {
               <View style={styles.tabBar}>
                 {SCREENS.map(({ name, icon, iconOutline }, index) => (
                   <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
-                    <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#0A84FF' : '#A9A9A9'} />
+                    <Ionicons name={activeTab === index ? icon : iconOutline} size={isLandscape ? 20 : 24} color={activeTab === index ? '#0A84FF' : '#A9A9A9'} />
                     <Text style={[styles.tabLabel, { color: activeTab === index ? '#0A84FF' : '#A9A9A9' }]}>{name}</Text>
                   </TouchableOpacity>
                 ))}
@@ -144,10 +150,10 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (isLandscape) => StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
   pagerView: { flex: 1 },
-  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(24, 24, 24, 0.8)', borderTopWidth: 1, borderTopColor: '#333333', paddingTop: 5, paddingBottom: 20 },
-  tabItem: { flex: 1, alignItems: 'center', paddingVertical: 8 },
-  tabLabel: { fontSize: 12, fontWeight: '600', marginTop: 4 },
+  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(24, 24, 24, 0.8)', borderTopWidth: 1, borderTopColor: '#333333', paddingTop: isLandscape ? 2 : 5, paddingBottom: isLandscape ? 2 : 20 },
+  tabItem: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: isLandscape ? 2 : 8 },
+  tabLabel: { fontSize: 12, fontWeight: '600', marginTop: isLandscape ? 2 : 4 },
 });

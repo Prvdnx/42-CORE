@@ -8,13 +8,13 @@ const TemperatureChart = ({ forecastData }) => {
     return null;
   }
 
-  // Prendre toutes les 24 heures pour le graphique
+  // Take all 24 hours for the chart
   const chartData = forecastData;
   
   const data = {
     labels: chartData.map((item, index) => {
       if (index === 0) return 'Now';
-      // Afficher une heure sur 3 pour éviter l'encombrement avec 24h
+      // Display one hour out of 3 to avoid clutter with 24h
       if (index % 3 === 0) {
         return item.time.substring(0, 2) + 'h';
       }
@@ -32,18 +32,18 @@ const TemperatureChart = ({ forecastData }) => {
     backgroundGradientFrom: '#ffffff',
     backgroundGradientTo: '#f8f9fa',
     decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`, // Bleu comme le reste de l'app
-    labelColor: (opacity = 1) => `rgba(60, 60, 60, ${opacity})`, // Gris foncé pour les labels
+    color: (opacity = 1) => `rgba(0, 122, 255, ${opacity})`, // Blue like the rest of the app
+    labelColor: (opacity = 1) => `rgba(60, 60, 60, ${opacity})`, // Dark gray for the labels
     style: {
       borderRadius: 16
     },
     propsForDots: {
       r: '6',
       strokeWidth: '2',
-      stroke: '#007AFF', // Bleu pour les points
+      stroke: '#007AFF', // Blue for the dots
       fill: '#007AFF'
     },
-    fillShadowGradientFrom: 'rgba(0, 122, 255, 0.3)', // Dégradé bleu transparent
+    fillShadowGradientFrom: 'rgba(0, 122, 255, 0.3)', // Transparent blue gradient
     fillShadowGradientTo: 'rgba(0, 122, 255, 0.1)',
   };
 
@@ -55,10 +55,7 @@ const TemperatureChart = ({ forecastData }) => {
         height={220}
         chartConfig={chartConfig}
         bezier
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
+        style={{ marginVertical: 8, borderRadius: 16 }}
         verticalLabelRotation={0}
         horizontalLabelRotation={0}
         fromZero={false}
