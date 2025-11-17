@@ -1,0 +1,345 @@
+To understand this project enough to reproduce it, you should study the files in a specific order that follows the flow of data and logic through the application.
+
+### Step 1: The "Why" - Project Requirements
+
+*   **File:** `subjects.txt`
+*   **Purpose:** Before diving into the code, read this file. It explains the requirements for each module (`Module01`, `Module02`, `Module03`). This will give you a clear understanding of *why* the code is structured the way it is and what features were built in what order.
+
+### Step 2: The "Brain" - Top-Level State Management
+
+*   **File:** `App.js`
+*   **Purpose:** This is the most important file. It's the root of your application and controls everything.
+*   **What to study:**
+    *   **State:** Look at all the `useState` hooks. Understand what pieces of information (like `selectedLocation`, `weatherData`, and `appState`) are being stored.
+    *   **Data Flow:** Find the `loadWeatherData` function. See how it uses the `WeatherService` to fetch data and updates the state with `setWeatherData`.
+    *   **Lifecycle:** Examine the `useEffect` hook. See how it calls `askForGeolocation` on the initial render to get the user's location.
+    *   **Component Assembly:** Look at the `return` statement to see how it assembles the main components (`TopBar`, `PagerView` for the screens, and the bottom `tabBar`). Pay close attention to the props being passed down to each component.
+
+### Step 3: The "Data" - Service Layer
+
+*   **Directory:** `src/services/`
+*   **Purpose:** These files are responsible for all communication with the outside world (APIs and device hardware). They isolate your data-fetching logic.
+*   **Study Order:**
+    1.  `LocationService.js`: The simplest service. See how it uses Expo's `Location` library to get the device's GPS coordinates.
+    2.  `GeocodingService.js`: Understand its two jobs: finding city suggestions from a search query and getting a location name from GPS coordinates.
+    3.  `WeatherService.js`: See how it takes coordinates and fetches the three different types of weather data (current, today, weekly) from the Open-Meteo API. Notice how the raw API data is transformed into a cleaner format for the app.
+
+### Step 4: The "Tools" - Shared Utilities and Components
+
+*   **Directory:** `src/utils/`
+*   **Directory:** `src/components/`
+*   **Purpose:** These are the reusable building blocks used to construct your UI and share logic.
+*   **Study Order:**
+    1.  `weatherUtils.js`: A perfect example of a simple, reusable utility function.
+    2.  `WeatherScreenLayout.js`: A crucial component. Understand how it uses its props (`isLoading`, `error`, etc.) to decide whether to show a loading indicator, an error message, or the actual content. This component prevents a lot of repeated code in the screens.
+    3.  `TopBar.js`: The most complex UI component. Study how it manages its own state for search suggestions, how it uses `useEffect` for debouncing search requests, and how it uses callbacks (like `onLocationSelected`) to send information back up to `App.js`.
+    4.  `TemperatureChart.js` & `WeeklyTemperatureChart.js`: Look at these to see how you can encapsulate a specific piece of UI, like a chart, into its own component.
+
+### Step 5: The "Pages" - Screen Components
+
+*   **Directory:** `src/screens/`
+*   **Purpose:** These files represent the individual screens for each tab.
+*   **What to study:** Notice how simple these files are now. Their only job is to take the data passed down as props from `App.js` and render the specific content for that page. They delegate all the loading/error logic to `WeatherScreenLayout`.
+
+
+============================================================
+
+Piscine Mobile - 1
+Structure and Logic
+Summary: This document contains the subject matter for Module01 of the Piscine
+Mobile.
+Version: 2.4
+Contents
+I Instructions 2
+II Specific Instructions 3
+III Introduction 4
+IV Exercise 00: BottomBar 5
+V Exercise 01: TopBar 7
+VI Submission and peer-evaluation 9
+
+Chapter I
+Instructions
+• Only this page will serve as reference. Do not trust rumors.
+• Read attentively the whole document before beginning.
+• Your exercises will be corrected by your piscine colleagues.
+• The document can be relied upon, do not blindly trust the demos or pictures example which can contain not required additions.
+• Got a question? Ask your peer on the right. Otherwise, try your peer on the left.
+• By Odin, by Thor ! Use your brain !!!
+Intra indicates the date and the hour of closing for your
+repositories. This date and hour also corresponds to the beginning
+of the peer-evaluation period for the corresponding piscine day.
+This peer-evaluation period lasts exactly 24h. After 24h passed,
+your missing peer grades will be completed with a 0.
+
+Chapter II
+Specific Instructions
+The project in this module will continue in the next module, so it is important to complete
+it thoroughly.
+
+Chapter III
+Introduction
+
+Chapter IV
+Exercise 00: BottomBar
+Exercise :
+BottomBar
+Turn-in directory : mobileModule01
+Files to turn in : weather_app and all necessary files
+Forbidden functions : None
+In Module01, you will begin preparing your weather application. This application, like
+all the others you will complete by the end of the Piscine, must be responsive.
+To start, create a new project called weather_app.
+Now, you will create the structure of your application with the following components:
+- An AppBar that includes a search TextField and a geolocation button.
+- A BottomBar with 3 tabs: “Currently”, “Today” and “Weekly”.
+- Each tab should have its own content.
+Your application must be responsive.
+The BottomBar:
+• Create a BottomBar with 3 tabs.
+• Each tab should have a name and an icon (Currently, Today, Weekly).
+• You should be able to switch between tabs by clicking on them or by swiping; both
+methods should work.
+
+Piscine Mobile - 1 Structure and Logic
+• When you switch tabs, the content of the page should change. For now, simply
+display the name of the tab as text, nothing more!
+• When the application starts, the first tab (Currently) should be selected by default.
+In Flutter:
+Use the “TabBar” widget to create a TopBar with tabs.
+Use the “TabBarView” widget to create the different views.
+Use the “BottomAppBar” widget to create the BottomBar.
+
+Chapter V
+Exercise 01: TopBar
+Exercise :
+TopBar
+Turn-in directory : mobileModule01
+Files to turn in : weather_app and all necessary files
+Forbidden functions : None
+The TopBar:
+• It includes a search TextField.
+• It includes a geolocation button.
+Both the TextField and the geolocation button should work correctly!
+The application should display either the text entered in the TextField or the geolocation
+data, depending on which one is used.
+Details:
+• If you enter text in the search TextField, the application should display the tab
+name along with the entered text in all tabs.
+• If you click the geolocation button, the application should display the tab name
+along with the word “Geolocation” in all tabs.
+At this stage, your application should look like the following basic layout:
+
+Piscine Mobile - 1 Structure and Logic
+And if you search for a location in the search bar, it should look like this:
+
+Chapter VI
+Submission and peer-evaluation
+Turn in your assignment in your Git repository as usual. Only the work inside your repository will be evaluated during the defense. Don’t hesitate to double check the names of
+your folders and files to ensure they are correct.
+The evaluation process will happen on the computer of the evaluated group.
+
+
+
+============================================================
+
+
+
+Piscine Mobile - 2
+API and Data Management
+Summary: This document contains the subject for Module 02 of the Piscine Mobile.
+Version: 2.2
+Contents
+I Instructions 2
+II Specific Instructions 3
+III Introduction 4
+IV Exercise 00: Where are we? 5
+V Exercise 01: Searcher 7
+VI Exercise 02: Fill the Views 9
+VII Exercise 03: What’s wrong with you? 11
+VIII Submission and peer-evaluation 13
+
+Chapter I
+Instructions
+• Only this page will serve as reference. Do not trust rumors.
+• Read attentively the whole document before beginning.
+• Your exercises will be corrected by your piscine colleagues.
+• The document can be relied upon, do not blindly trust the demos or pictures example which can contain not required additions.
+• Got a question? Ask your peer on the right. Otherwise, try your peer on the left.
+• By Odin, by Thor ! Use your brain !!!
+Intra indicates the date and the hour of closing for your
+repositories. This date and hour also corresponds to the beginning
+of the peer-evaluation period for the corresponding piscine day.
+This peer-evaluation period lasts exactly 24h. After 24h passed,
+your missing peer grades will be completed with a 0.
+
+Chapter II
+Specific Instructions
+This module is a continuation of the previous one. For clarity, you will copy the project
+from the previous module into a new repository to continue working on it.
+
+Chapter III
+Introduction
+
+Chapter IV
+Exercise 00: Where are we?
+Exercise :
+Where are we?
+Turn-in directory : mobileModule02
+Files to turn in : medium_weather_app and all necessary files
+Forbidden functions : None
+In the previous module, you created a weather app that currently displays a simple text.
+Now it’s time to add real data to your app.
+To achieve this, you will need:
+• A weather API.
+• Geolocation using the device’s GPS.
+• A Geocoding API to retrieve the city name from the coordinates.
+Start by implementing geolocation.
+When the application starts or when the user clicks a geolocation button, you need to
+determine the device’s location to fetch the weather.
+Use the device’s GPS to get the coordinates.
+This requires obtaining the user’s permission to retrieve and use their location.
+
+Piscine Mobile - 2 API and Data Management
+You must handle both cases: when the user grants permission and when they deny it.
+• If the user grants permission, you will retrieve the coordinates and use them to
+fetch the weather.
+For now, just display the coordinates as text.
+• If the user denies permission, your app should still function.
+The user should be able to enter a city name in the search field to get the weather,
+but they must be informed that you don’t have access to their location.
+At the start of your application, you should have something like this:
+You must not use an external API for geolocation; you are required to
+use the device’s GPS to obtain the coordinates.
+
+Chapter V
+Exercise 01: Searcher
+Exercise :
+Searcher
+Turn-in directory : mobileModule02
+Files to turn in : medium_weather_app and all necessary files
+Forbidden functions : None
+You also have a search bar to get the weather by entering a city name, country, region,
+etc.
+You will use the weather API to get the weather.
+You will also need the Geocoding API to obtain city names from coordinates or coordinates from city names.
+When you query the API for weather by city name, you will often receive a list of
+cities matching the name you entered.
+You must display a suggestion list of cities, with each suggestion showing:
+• The city name.
+• The city’s region.
+• The country of the city.
+This will allow the user to choose the correct city.
+The suggestion list should update dynamically as the user types in the search bar.
+When the user selects a city from the list, fetch the weather for that specific city.
+The user should also be able to search without selecting a city from the list.
+
+Piscine Mobile - 2 API and Data Management
+Your app should look something like this:
+For this project, we will use:
+• Geocoding API from Open-Meteo to get coordinates from city
+names and populate the search list.
+
+Chapter VI
+Exercise 02: Fill the Views
+Exercise :
+Fill the Views
+Turn-in directory : mobileModule02
+Files to turn in : medium_weather_app and all necessary files
+Forbidden functions : None
+Now it’s time to populate the views with the data.
+In your first tab “Current”, you need to display:
+• The location (city name, region, and country).
+• The current temperature (in Celsius).
+• The current weather description (e.g., cloudy, sunny, rainy).
+• The current wind speed (in km/h).
+In your second tab “Today”, you should display:
+• The location (city name, region, and country).
+• A list of the day’s weather, showing:
+◦ The time of day.
+◦ The temperature at each hour.
+◦ The weather description (cloudy, sunny, rainy, etc.) at each hour.
+◦ The wind speed (in km/h) at each hour.
+In your third tab “Weekly”, display:
+• The location (city name, region, and country).
+
+Piscine Mobile - 2 API and Data Management
+• A list of the weather for each day of the week, including:
+◦ The date.
+◦ The minimum and maximum temperatures of the day.
+◦ The weather description (e.g., cloudy, sunny, rainy).
+Be mindful of the following points:
+• When you run the application, it should start on the first tab “Current”.
+• When you perform a search, you should remain on the tab where you initiated the
+search.
+• When switching tabs, always display the data from the last search.
+For now, don’t focus on the design—just ensure that the information is displayed
+correctly.
+You will enhance the design in the next module.
+Your app should look something like this:
+For this project, we will use the following APIs:
+• Weather Forecast API from Open-Meteo.
+
+Chapter VII
+Exercise 03: What’s wrong with
+you?
+Exercise :
+What’s wrong with you?
+Turn-in directory : mobileModule02
+Files to turn in : medium_weather_app and all necessary files
+Forbidden functions : None
+Great job so far!
+But there’s still more to be done.
+You’ve already handled the case where the user denies location access, but there are
+other situations to account for:
+• The user enters a city name that doesn’t exist.
+• The connection to the API fails.
+In both cases, you must inform the user that the city name is invalid or that there
+was a connection issue.
+The message should remain visible until the user enters a valid city name or the connection
+to the API is restored.
+Never underestimate the user’s ability to break your application!
+You must always be prepared to handle any edge cases.
+Your app should display something like this:
+
+Piscine Mobile - 2 API and Data Management
+
+Chapter VIII
+Submission and peer-evaluation
+Turn in your assignment in your Git repository as usual. Only the work inside your repository will be evaluated during the defense. Don’t hesitate to double check the names of
+your folders and files to ensure they are correct.
+The evaluation process will happen on the computer of the evaluated
+group.
+
+
+
+============================================================
+
+
+
+Piscine Mobile - 3
+Design
+Summary: This document contains the subject for Module 03 of Piscine Mobile.
+Version: 1.2
+Contents
+I Instructions 2
+II Specific Instructions 3
+III Introduction 4
+IV Exercise 00: Search bar 5
+V Exercise 01: Background 6
+VI Exercise 02: Current weather 7
+VII Exercise 03: Today’s weather 9
+VIII Exercise 04: Weekly weather 11
+IX Submission and peer-evaluation 13
+
+Chapter I
+Instructions
+• If you have problems installing the tools needed for your project on the 42 computers, you can use a virtual machine. In this case, you will have to :
+◦ install the virtual machine software on your computer.
+◦ install the operating system of your choice.
+◦ install the tools needed for your project.
+◦ Make sure you have the space on your session to install all of this.
+◦ You must have everything installed before the evaluation.
+• Only this page will serve as reference. Do not trust rumors.
+• Read attentively the whole document before beginning.
+• Your exercises will be corrected by your piscine colleagues.
+• The document can be relied upon, do not blindly trust the demos or pictures example which c

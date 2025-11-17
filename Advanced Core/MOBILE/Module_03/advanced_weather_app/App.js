@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import TopBar from './src/components/TopBar';
 import WeatherBackground from './src/components/WeatherBackground';
@@ -39,20 +39,10 @@ export default function App() {
     setAppState(prevState => ({ ...prevState, error: { type: errorType, message } }));
   };
 
-  const clearState = (isLoading = true) => {
-    setAppState({
-      isLoadingLocation: false,
-      isLocationDenied: false,
-      isLoadingWeather: isLoading,
-      error: null,
-    });
-    if (!isLoading) setWeatherData({ current: null, today: null, weekly: null });
-  };
-
   const loadWeatherData = useCallback(async (location) => {
     if (!location?.latitude || !location?.longitude) return;
 
-    clearState();
+    setAppState(prev => ({...prev, isLoadingWeather: true, error: null}));
     setSelectedLocation(location);
 
     try {
@@ -63,11 +53,7 @@ export default function App() {
       ]);
       setWeatherData({ current, today, weekly });
     } catch (err) {
-      if (err.message.includes('Network')) {
-        handleError('connection', 'The service connection is lost, please check your internet connection or try again later');
-      } else {
         handleError('weather', 'Unable to load weather data. Please try again later.');
-      }
     } finally {
       setAppState(prev => ({ ...prev, isLoadingWeather: false }));
     }
@@ -79,13 +65,7 @@ export default function App() {
       try {
         const coords = await LocationService.getCurrentPosition();
         const locationNameData = await GeocodingService.getLocationName(coords.latitude, coords.longitude);
-        
-        // Correctly combine the objects, preserving the precise coordinates
-        const location = {
-          ...locationNameData, // Get the name and display info
-          ...coords,          // Overwrite with precise, numeric coordinates
-          isGeolocation: true,
-        };
+        const location = { ...locationNameData, ...coords, isGeolocation: true };
 
         setIsGeolocation(true);
         setSearchText(location.displayName);
@@ -94,7 +74,7 @@ export default function App() {
       } catch (error) {
         setIsGeolocation(false);
         if (error.message.includes('denied')) {
-          setAppState(prev => ({ ...prev, isLocationDenied: true, isLoadingLocation: false }));
+          setAppState(prev => ({ ...prev, isLocationDenied: true }));
         } else {
           handleError('location', 'Could not get your current location.');
         }
@@ -110,9 +90,10 @@ export default function App() {
     setSearchText(location.displayName);
     loadWeatherData(location);
   };
-
+  
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: '#121212' }}>
+      <StatusBar barStyle="light-content" />
       <SafeAreaProvider>
         <WeatherBackground>
           <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -150,8 +131,8 @@ export default function App() {
               <View style={styles.tabBar}>
                 {SCREENS.map(({ name, icon, iconOutline }, index) => (
                   <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
-                    <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#007AFF' : 'gray'} />
-                    <Text style={[styles.tabLabel, { color: activeTab === index ? '#007AFF' : 'gray' }]}>{name}</Text>
+                    <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#0A84FF' : '#A9A9A9'} />
+                    <Text style={[styles.tabLabel, { color: activeTab === index ? '#0A84FF' : '#A9A9A9' }]}>{name}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -166,8 +147,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
   pagerView: { flex: 1 },
-  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(248, 249, 250, 0.7)', borderTopWidth: 1, borderTopColor: '#e0e0e0',
-     paddingTop: 5, paddingBottom: 20 },
+  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(24, 24, 24, 0.8)', borderTopWidth: 1, borderTopColor: '#333333', paddingTop: 5, paddingBottom: 20 },
   tabItem: { flex: 1, alignItems: 'center', paddingVertical: 8 },
   tabLabel: { fontSize: 12, fontWeight: '600', marginTop: 4 },
 });

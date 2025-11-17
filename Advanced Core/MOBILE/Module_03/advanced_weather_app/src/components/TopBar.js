@@ -104,11 +104,11 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
   };
 
   const renderSearchAccessory = () => {
-    if (isSearching) return <ActivityIndicator size="small" color="#007AFF" style={styles.loadingIcon} />;
+    if (isSearching) return <ActivityIndicator size="small" color="#0A84FF" style={styles.loadingIcon} />;
     if (searchText.length > 0) {
       return (
         <TouchableOpacity onPress={clearSearch} style={styles.clearButton}>
-          <Ionicons name="close-circle" size={20} color="#999" />
+          <Ionicons name="close-circle" size={20} color="#A9A9A9" />
         </TouchableOpacity>
       );
     }
@@ -120,7 +120,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
       <SafeAreaView style={styles.container} edges={['top']}>
         <View style={styles.topBar}>
           <View style={styles.searchContainer}>
-            <Ionicons name="search" size={20} color="#666" style={styles.searchIcon} />
+            <Ionicons name="search" size={20} color="#A9A9A9" style={styles.searchIcon} />
             <TextInput
               style={styles.searchInput}
               placeholder="Search for a city..."
@@ -130,7 +130,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
                 if (isGeolocation && text !== selectedLocation?.displayName) setIsGeolocation(false);
               }}
               onSubmitEditing={handleDirectSearch}
-              placeholderTextColor="#999"
+              placeholderTextColor="#A9A9A9"
               editable={!isLoadingLocation}
               returnKeyType="search"
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
@@ -138,7 +138,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
             {renderSearchAccessory()}
           </View>
           <TouchableOpacity style={[styles.geolocationButton, isGeolocation && styles.geolocationButtonActive]} onPress={handleGeolocationPress} disabled={isLoadingLocation}>
-            {isLoadingLocation ? <ActivityIndicator size="small" color={isGeolocation ? '#fff' : '#007AFF'} /> : <Ionicons name="location" size={24} color={isGeolocation ? '#fff' : '#007AFF'} />}
+            {isLoadingLocation ? <ActivityIndicator size="small" color={isGeolocation ? '#fff' : '#0A84FF'} /> : <Ionicons name="location" size={24} color={isGeolocation ? '#fff' : '#0A84FF'} />}
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -150,7 +150,7 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity style={styles.suggestionItem} onPress={() => handleCitySelect(item)}>
-                <Ionicons name="location-outline" size={16} color="#666" />
+                <Ionicons name="location-outline" size={16} color="#A9A9A9" />
                 <View style={styles.suggestionTextContainer}>
                   <Text style={styles.suggestionName}>{item.name}</Text>
                   <Text style={styles.suggestionDetails}>{item.region && `${item.region}, `}{item.country}</Text>
@@ -168,24 +168,21 @@ const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, on
 };
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: 'rgba(255, 255, 255, 0.7)', borderBottomWidth: 1, borderBottomColor: 'rgba(224, 224, 224, 0.6)' },
+  container: { backgroundColor: 'rgba(30, 30, 30, 0.85)', borderBottomWidth: 1, borderBottomColor: '#333333' },
   topBar: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, gap: 12 },
-  searchContainer: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#f5f5f5', borderRadius: 25,
-     paddingHorizontal: 16, paddingVertical: 12 },
+  searchContainer: { flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor: '#2c2c2e', borderRadius: 25, paddingHorizontal: 16, paddingVertical: 12 },
   searchIcon: { marginRight: 10 },
-  searchInput: { flex: 1, fontSize: 16, color: '#333' },
+  searchInput: { flex: 1, fontSize: 16, color: '#FFFFFF' },
   loadingIcon: { marginLeft: 8 },
   clearButton: { paddingHorizontal: 4, paddingVertical: 4 },
-  geolocationButton: { width: 48, height: 48, borderRadius: 24, backgroundColor: '#f0f8ff', borderWidth: 2, borderColor: '#007AFF',
-     justifyContent: 'center', alignItems: 'center' },
-  geolocationButtonActive: { backgroundColor: '#007AFF' },
-  suggestionsContainer: { backgroundColor: '#fff', borderBottomWidth: 1, borderBottomColor: '#e0e0e0', maxHeight: 200 },
-  suggestionsList: { backgroundColor: '#fff' },
-  suggestionItem: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12, borderBottomWidth: 1,
-     borderBottomColor: '#f0f0f0' },
+  geolocationButton: { width: 48, height: 48, borderRadius: 24, backgroundColor: '#2c2c2e', borderWidth: 2, borderColor: '#0A84FF', justifyContent: 'center', alignItems: 'center' },
+  geolocationButtonActive: { backgroundColor: '#0A84FF' },
+  suggestionsContainer: { backgroundColor: '#1E1E1E', borderBottomWidth: 1, borderBottomColor: '#333333', maxHeight: 200 },
+  suggestionsList: { backgroundColor: '#1E1E1E' },
+  suggestionItem: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#333333' },
   suggestionTextContainer: { marginLeft: 10, flex: 1 },
-  suggestionName: { fontSize: 16, fontWeight: '600', color: '#333' },
-  suggestionDetails: { fontSize: 14, color: '#666', marginTop: 2 },
+  suggestionName: { fontSize: 16, fontWeight: '600', color: '#FFFFFF' },
+  suggestionDetails: { fontSize: 14, color: '#A9A9A9', marginTop: 2 },
 });
 
 export default TopBar;

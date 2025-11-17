@@ -22,7 +22,7 @@ const CurrentlyScreen = ({ weatherData, locationData, isLoading, error, connecti
               <Ionicons 
                 name={locationData.isGeolocation ? "location" : "location-outline"} 
                 size={20} 
-                color="#007AFF" 
+                color="#0A84FF" 
               />
               <Text style={styles.locationText}>{locationData.displayName}</Text>
             </View>
@@ -65,20 +65,17 @@ const CurrentlyScreen = ({ weatherData, locationData, isLoading, error, connecti
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
   scrollContent: { flexGrow: 1, paddingBottom: 320 },
-  content: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 20, },
-  locationContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 32, paddingHorizontal: 20, paddingVertical: 12,
-     backgroundColor: 'rgba(240, 248, 255, 0.8)', borderRadius: 20, maxWidth: '90%', alignSelf: 'center', },
-  locationText: { fontSize: 16, fontWeight: '600', color: '#333', marginLeft: 8, textAlign: 'center', },
-  temperatureContainer: { alignItems: 'center', marginBottom: 40, backgroundColor: 'rgba(255, 255, 255, 0.8)', paddingVertical: 20,
-     paddingHorizontal: 60, borderRadius: 15, marginHorizontal: 20, maxWidth: '90%', alignSelf: 'center', },
+  content: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 20, paddingVertical: 20 },
+  locationContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 32, paddingHorizontal: 20, paddingVertical: 12, backgroundColor: 'rgba(30, 30, 30, 0.85)', borderRadius: 20, maxWidth: '90%', alignSelf: 'center' },
+  locationText: { fontSize: 16, fontWeight: '600', color: '#FFFFFF', marginLeft: 8, textAlign: 'center' },
+  temperatureContainer: { alignItems: 'center', marginBottom: 40, backgroundColor: 'rgba(30, 30, 30, 0.85)', paddingVertical: 20, paddingHorizontal: 60, borderRadius: 15, marginHorizontal: 20, maxWidth: '90%', alignSelf: 'center' },
   weatherIcon: { marginBottom: 10 },
-  temperature: { fontSize: 80, fontWeight: '200', color: '#333', textAlign: 'center', },
-  description: { fontSize: 22, fontWeight: '500', color: '#666', marginTop: 8, textAlign: 'center', textTransform: 'capitalize', },
-  detailsContainer: { flexDirection: 'row', justifyContent: 'space-around', width: '100%', maxWidth: 350, paddingVertical: 20,
-     backgroundColor: 'rgba(255, 255, 255, 0.8)', paddingHorizontal: 15, borderRadius: 15, marginHorizontal: 20, alignSelf: 'center', },
-  detailItem: { alignItems: 'center', flex: 1, paddingHorizontal: 10, },
-  detailLabel: { fontSize: 14, color: '#666', marginTop: 8, marginBottom: 4, textAlign: 'center', },
-  detailValue: { fontSize: 18, fontWeight: '600', color: '#333', textAlign: 'center', },
+  temperature: { fontSize: 80, fontWeight: '200', color: '#FFFFFF', textAlign: 'center' },
+  description: { fontSize: 22, fontWeight: '500', color: '#A9A9A9', marginTop: 8, textAlign: 'center', textTransform: 'capitalize' },
+  detailsContainer: { flexDirection: 'row', justifyContent: 'space-around', width: '100%', maxWidth: 350, backgroundColor: 'rgba(30, 30, 30, 0.85)', paddingVertical: 20, paddingHorizontal: 15, borderRadius: 15, marginHorizontal: 20, alignSelf: 'center' },
+  detailItem: { alignItems: 'center', flex: 1, paddingHorizontal: 10 },
+  detailLabel: { fontSize: 14, color: '#A9A9A9', marginTop: 8, marginBottom: 4, textAlign: 'center' },
+  detailValue: { fontSize: 18, fontWeight: '600', color: '#FFFFFF', textAlign: 'center' },
 });
 
 export default CurrentlyScreen;

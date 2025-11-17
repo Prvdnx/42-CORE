@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 const MessageDisplay = ({ icon, title, message }) => (
   <View style={styles.messageContainer}>
-    {icon && <Ionicons name={icon} size={48} color="#666" />}
+    {icon && <Ionicons name={icon} size={48} color="#A9A9A9" />}
     {title && <Text style={styles.emptyTitle}>{title}</Text>}
     {message && <Text style={styles.emptyMessage}>{message}</Text>}
   </View>
@@ -30,7 +30,7 @@ const WeatherScreenLayout = ({
         </View>
       ) : isLoading ? (
         <View style={styles.messageContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
+          <ActivityIndicator size="large" color="#0A84FF" />
           <Text style={styles.loadingText}>Loading weather data...</Text>
         </View>
       ) : !data || !locationData ? (
@@ -56,11 +56,11 @@ const WeatherScreenLayout = ({
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
-  messageContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 40, },
-  loadingText: { marginTop: 16, fontSize: 16, color: '#666' },
-  errorMessage: { fontSize: 16, color: '#FF6B6B', textAlign: 'center', lineHeight: 24, },
-  emptyTitle: { fontSize: 20, fontWeight: '600', color: '#333', marginTop: 16, marginBottom: 8, textAlign: 'center', },
-  emptyMessage: { fontSize: 16, color: '#666', textAlign: 'center', lineHeight: 24, },
+  messageContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 40 },
+  loadingText: { marginTop: 16, fontSize: 16, color: '#A9A9A9' },
+  errorMessage: { fontSize: 16, color: '#FF6B6B', textAlign: 'center', lineHeight: 24 },
+  emptyTitle: { fontSize: 20, fontWeight: '600', color: '#FFFFFF', marginTop: 16, marginBottom: 8, textAlign: 'center' },
+  emptyMessage: { fontSize: 16, color: '#A9A9A9', textAlign: 'center', lineHeight: 24 },
 });
 
 export default WeatherScreenLayout;
