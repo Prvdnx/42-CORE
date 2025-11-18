@@ -1,0 +1,63 @@
+Screens Layer - Complete Breakdown
+
+### The "Why"
+
+This is the final layer of the application, where all the data and reusable components come together to form the user interface for each tab. Because of the work we did in the previous layers, you will notice that these screen components are now very clean, simple, and easy to understand. Their only job is to display data; they don't contain any complex logic themselves.
+
+---
+
+### The Main Pattern: `WeatherScreenLayout`
+
+All three screen components follow the exact same pattern:
+
+1.  **Receive Props**: They receive a standard set of props from `App.js`, including the specific data they need (`weatherData` or `forecastData`), `locationData`, and all the status flags (`isLoading`, `error`, etc.).
+
+2.  **Use `WeatherScreenLayout`**: Each screen immediately uses the `WeatherScreenLayout` component. This is the key to keeping them so simple. They delegate all the responsibility for handling loading, error, and empty states to the layout component.
+
+3.  **Render Prop (`children`)**: They pass a function to the `WeatherScreenLayout` as the `children` prop. This function contains the JSX for what to display *only when the data is valid and ready*. The `WeatherScreenLayout` is responsible for deciding *if and when* to call this function.
+
+---
+
+### 1. `CurrentlyScreen.js` - The Most Complex Screen
+
+**Purpose:** This screen displays the current weather conditions.
+
+**Code Breakdown:**
+
+*   **Responsive Layout**: This is the only screen with a significantly different layout for landscape mode. It uses the `useWindowDimensions` hook to check if `width > height`.
+*   **Conditional JSX**: It uses a ternary operator (`isLandscape ? ... : ...`) to render two completely different layout structures:
+    *   **Landscape**: A two-column layout. The main temperature information is on the left, and a `rightColumn` contains the location and the weather details (Humidity and Wind Speed), which are stacked vertically.
+    *   **Portrait**: A simple, single-column layout where each block of information is stacked on top of the next.
+*   **Dynamic Styles (`getStyles`)**: The component uses a `getStyles` function that takes `isLandscape` as an argument. This function returns a different set of styles depending on the orientation, allowing for fine-tuned control over font sizes, margins, and padding in each layout.
+
+---
+
+### 2. `TodayScreen.js` - The List Display
+
+**Purpose:** This screen displays the hourly forecast for the next 24 hours.
+
+**Code Breakdown:**
+
+*   **Header**: It displays a simple header with the location and the title "Today's Forecast".
+*   **Chart**: It uses the `TemperatureChart` component, passing in the `forecastData` it received as a prop. This is a great example of component reuse.
+*   **Hourly List (`.map`)**: It maps over the `forecastData` array to render a list of the hourly weather. For each hour, it displays the time, temperature, a weather icon, and the wind speed.
+*   **`isCurrentHour`**: It checks if `index === 0` to identify the first item in the list, which represents the current hour. It then uses this boolean to apply special styling (`currentHourItem`) to make that row stand out, as required by the subject.
+
+---
+
+### 3. `WeeklyScreen.js` - The 7-Day Forecast
+
+**Purpose:** This screen displays the forecast for the next 7 days.
+
+**Code Breakdown:**
+
+*   **Chart**: Similar to the `TodayScreen`, it starts by displaying a chart. This time, it uses the `WeeklyTemperatureChart` component to show the min and max temperature trends over the week.
+*   **Daily List (`.map`)**: It maps over the `forecastData` to render a list of the daily weather for the next 7 days.
+*   **Data Formatting**: Inside the map, it does some minor data formatting:
+    *   It checks if `index === 0` to display the word "Today" instead of the day of the week.
+    *   It splits the `date` string to separate the day from the date for styling purposes.
+*   **Simple Display**: For each day, it displays the day name, the date, a weather icon, and the min/max temperatures.
+
+### In Summary
+
+The screen components are the "last stop" in the application's data flow. They are intentionally kept as simple as possible. They receive data from their parent (`App.js`), pass it on to any child components they use (like the charts), and use the `WeatherScreenLayout` to handle all the complex conditional logic. This makes them very easy to read and understand.

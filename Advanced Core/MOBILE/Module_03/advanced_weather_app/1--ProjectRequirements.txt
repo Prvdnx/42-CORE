@@ -1,0 +1,72 @@
+Project Requirements - Complete Breakdown
+
+### The "Why"
+
+This document analyzes the `subjects.txt` file, which contains the complete requirements for the weather application, broken down into three modules. Understanding this evolution is the key to understanding the final code. The project was built in stages, and each stage added a new layer of functionality.
+
+---
+
+### Module 01: Structure and Logic - The Skeleton
+
+**Purpose:** The goal of this first module was to build the basic, non-functional skeleton of the application. It focuses purely on layout and navigation, without any real data.
+
+**Key Requirements & How They Shaped the Code:**
+
+1.  **Project Setup**: You were required to create a new project. This is the foundation of everything.
+
+2.  **Component Structure**: The subject explicitly demanded three main UI parts:
+    *   An `AppBar` (which we call `TopBar`) with a search field and a geolocation button.
+    *   A `BottomBar` with three tabs: "Currently", "Today", and "Weekly".
+    *   Content for each tab.
+
+3.  **Navigation**: The app needed to support two ways of switching between tabs: **tapping** on the tab icons and **swiping** left and right. This directly led to the use of the `PagerView` component in `App.js`, which provides the swipe functionality, and the `TouchableOpacity` components in the `tabBar` to handle the taps.
+
+4.  **Responsiveness**: The requirement for the app to be "responsive" was introduced here. This is a core principle that influenced many later decisions about layout and styling.
+
+5.  **Basic Interactivity (No Real Data)**: At this stage, the app was only required to *pretend* to work. When you typed in the search bar, it was supposed to display the entered text in the content area. This early requirement is why the `searchText` state was created in `App.js` and passed down to the `TopBar`.
+
+**Result after Module 01:** A visually correct but non-functional application shell. It had the right layout and navigation but was filled with placeholder text.
+
+---
+
+### Module 02: API and Data Management - The Muscles and Nerves
+
+**Purpose:** This module was about bringing the application to life by connecting it to real-world data and services.
+
+**Key Requirements & How They Shaped the Code:**
+
+1.  **Real Geolocation**: You were required to use the device's actual GPS to get the user's location. This is why the `expo-location` library was added and the `LocationService.js` was created. It also introduced the need for **permissions handling** (asking the user for permission and handling denial), which is a major part of the `LocationService`.
+
+2.  **API Integration**: The subject mandated the use of specific APIs:
+    *   **Open-Meteo Geocoding API**: To get a list of cities from a search query. This led to the `GeocodingService.js` and its `searchCities` function.
+    *   **Weather Forecast API (Open-Meteo)**: To get the actual weather data. This led to the `WeatherService.js` and its three main functions (`getCurrentWeather`, `getTodayForecast`, `getWeeklyForecast`).
+
+3.  **Search Suggestions**: The app had to display a dynamic list of city suggestions as the user typed. This is why the `TopBar` component has its own internal state and a `useEffect` hook with a debounce (`setTimeout`) to manage these suggestions efficiently.
+
+4.  **Populating Views**: You had to replace the placeholder text from Module 01 with real data from the APIs. This is the reason why `App.js` fetches all the data and then passes down the relevant pieces (`weatherData.current`, `weatherData.today`, etc.) to each of the screen components.
+
+5.  **Error Handling**: The subject explicitly required handling cases where the user enters a non-existent city or the API connection fails. This is why the `appState` object in `App.js` includes properties for `error`, `connectionError`, and `cityNotFoundError`, and why the `WeatherScreenLayout` component exists to display these error messages to the user.
+
+**Result after Module 02:** A fully functional, data-driven application. The UI was still basic, but all the core logic for fetching, managing, and displaying weather data was in place.
+
+---
+
+### Module 03: Design - The Skin
+
+**Purpose:** This module was all about making the application look polished and professional. It took the functional app from Module 02 and applied a complete visual overhaul.
+
+**Key Requirements & How They Shaped the Code:**
+
+1.  **Background**: The app needed a dynamic or visually appealing background. This led to the creation of the `WeatherBackground.js` component.
+
+2.  **Styled Components**: The requirements for this module specified detailed layouts for each screen, including charts and specific data arrangements. This drove the creation of the detailed `StyleSheet` objects in every component and the use of the `react-native-chart-kit` library for the `TemperatureChart.js` and `WeeklyTemperatureChart.js` components.
+
+3.  **Dark Mode by Design**: The final design pass implemented a dark theme. This is why all the colors in the stylesheets were changed from default values (like `'#fff'` and `'#000'`) to specific dark mode colors (like `'#121212'` and `'#FFFFFF'`).
+
+4.  **Responsive Polish**: The requirement for a "responsive" app from Module 01 was fully realized here. The final implementation uses the `useWindowDimensions` hook to create dynamic styles that adapt to the screen's orientation (portrait vs. landscape), ensuring the layout is optimized for both.
+
+**Result after Module 03:** A complete, functional, and visually polished weather application that meets all the requirements from all three modules.
+
+### In Summary
+
+By studying the project in this order, you can see the clear, logical progression. It starts with a simple skeleton, then adds the data and logic to make it work, and finally applies the design to make it look great. Every piece of code in the final project exists to satisfy a specific requirement from one of these three modules.
