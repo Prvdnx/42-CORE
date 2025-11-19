@@ -27,7 +27,7 @@ const TodayScreen = ({ forecastData, locationData, isLoading, error, connectionE
               />
               <Text style={styles.locationText}>{locationData.displayName}</Text>
             </View>
-            <Text style={styles.headerTitle}>Today's Forecast</Text>
+            <Text style={styles.headerTitle}>"Today's Forecast"</Text>
           </View>
 
           {/* Temperature Chart */}
