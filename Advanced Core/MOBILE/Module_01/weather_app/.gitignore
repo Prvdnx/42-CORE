@@ -1,0 +1,13 @@
+# Node
+/node_modules
+npm-debug.log
+
+# Expo
+.expo/
+
+# IDE specific
+.idea/
+*.iml
+
+# macOS
+.DS_Store
