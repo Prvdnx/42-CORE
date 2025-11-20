@@ -43,3 +43,6 @@ readme.txt
 
 # typescript
 *.tsbuildinfo
+
+.idea
+.qodo

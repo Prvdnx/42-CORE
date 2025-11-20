@@ -24,6 +24,11 @@ start() {
   npx expo start
 }
 
+# Tunnel - Starts the Expo development server with tunnel.
+tunnel() {
+  echo "🚀 Starting the application..."
+  npx expo start --tunnel
+}
 
 # --- Main Logic ---
 COMMAND=$1
@@ -38,6 +43,9 @@ if [ -z "$COMMAND" ]; then
 fi
 
 case "$COMMAND" in
+  install)
+    install
+    ;;
   start)
     start
     ;;
@@ -47,7 +55,7 @@ case "$COMMAND" in
   rebuild)
     clean
     install
-    start --clear
+    tunnel --clear
     ;;
   *)
     echo "Error: Unknown command '$COMMAND'"
