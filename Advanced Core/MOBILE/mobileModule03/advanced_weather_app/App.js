@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, StatusBar, useWindowDimensions } from 'react-native';
@@ -101,7 +101,7 @@ export default function App() {
       <StatusBar barStyle="light-content" />
       <SafeAreaProvider>
         <WeatherBackground>
-          <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled={Platform.OS === 'ios'}>
             <View style={styles.container}>
               <TopBar
                 searchText={searchText}
@@ -134,14 +134,16 @@ export default function App() {
                 ))}
               </PagerView>
 
-              <View style={styles.tabBar}>
-                {SCREENS.map(({ name, icon, iconOutline }, index) => (
-                  <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
-                    <Ionicons name={activeTab === index ? icon : iconOutline} size={isLandscape ? 20 : 24} color={activeTab === index ? '#0A84FF' : '#A9A9A9'} />
-                    <Text style={[styles.tabLabel, { color: activeTab === index ? '#0A84FF' : '#A9A9A9' }]}>{name}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              <SafeAreaView edges={['bottom']}>
+                <View style={styles.tabBar}>
+                  {SCREENS.map(({ name, icon, iconOutline }, index) => (
+                    <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
+                      <Ionicons name={activeTab === index ? icon : iconOutline} size={isLandscape ? 20 : 24} color={activeTab === index ? '#0A84FF' : '#A9A9A9'} />
+                      <Text style={[styles.tabLabel, { color: activeTab === index ? '#0A84FF' : '#A9A9A9' }]}>{name}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </SafeAreaView>
             </View>
           </KeyboardAvoidingView>
         </WeatherBackground>
@@ -153,7 +155,7 @@ export default function App() {
 const getStyles = (isLandscape) => StyleSheet.create({
   container: { flex: 1, backgroundColor: 'transparent' },
   pagerView: { flex: 1 },
-  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(24, 24, 24, 0.8)', borderTopWidth: 1, borderTopColor: '#333333', paddingTop: isLandscape ? 2 : 5, paddingBottom: isLandscape ? 2 : 20 },
+  tabBar: { flexDirection: 'row', backgroundColor: 'rgba(24, 24, 24, 0.8)', borderTopWidth: 1, borderTopColor: '#333333', paddingTop: isLandscape ? 2 : 5 },
   tabItem: { flex: 1, alignItems: 'center', justifyContent: 'center', paddingVertical: isLandscape ? 2 : 8 },
   tabLabel: { fontSize: 12, fontWeight: '600', marginTop: isLandscape ? 2 : 4 },
 });

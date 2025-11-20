@@ -11,6 +11,7 @@ const WeeklyScreen = ({ forecastData, locationData }) => {
       <FlatList
         data={forecastData}
         keyExtractor={(item) => item.date}
+        contentContainerStyle={{ paddingBottom: 8 }}
         renderItem={({ item }) => (
           <View style={styles.dailyItem}>
             <Text>{item.date}</Text>

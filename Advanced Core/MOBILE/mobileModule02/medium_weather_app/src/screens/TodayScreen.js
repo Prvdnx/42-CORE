@@ -11,6 +11,7 @@ const TodayScreen = ({ forecastData, locationData }) => {
       <FlatList
         data={forecastData}
         keyExtractor={(item) => item.time}
+        contentContainerStyle={{ paddingBottom: 8 }}
         renderItem={({ item }) => (
           <View style={styles.hourlyItem}>
             <Text>{item.time}</Text>

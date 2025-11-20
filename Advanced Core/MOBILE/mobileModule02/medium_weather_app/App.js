@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator } from 'react-native';
@@ -73,7 +73,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled={Platform.OS === 'ios'}>
           <View style={styles.container}>
             <TopBar
               searchText={searchText}
@@ -101,14 +101,16 @@ export default function App() {
               ))}
             </PagerView>
 
-            <View style={styles.tabBar}>
-              {SCREENS.map(({ name, icon, iconOutline }, index) => (
-                <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
-                  <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#007AFF' : 'gray'} />
-                  <Text style={[styles.tabLabel, { color: activeTab === index ? '#007AFF' : 'gray' }]}>{name}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
+            <SafeAreaView edges={['bottom']}>
+              <View style={styles.tabBar}>
+                {SCREENS.map(({ name, icon, iconOutline }, index) => (
+                  <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
+                    <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#007AFF' : 'gray'} />
+                    <Text style={[styles.tabLabel, { color: activeTab === index ? '#007AFF' : 'gray' }]}>{name}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </SafeAreaView>
           </View>
         </KeyboardAvoidingView>
       </SafeAreaProvider>
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
   pagerView: { flex: 1 },
   errorText: { color: 'red', textAlign: 'center', marginTop: 20 },
-  tabBar: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: '#e0e0e0', paddingTop: 5, paddingBottom: 20 },
+  tabBar: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: '#e0e0e0', paddingTop: 5 },
   tabItem: { flex: 1, alignItems: 'center', paddingVertical: 8 },
   tabLabel: { fontSize: 12, fontWeight: '600', marginTop: 4 },
 });

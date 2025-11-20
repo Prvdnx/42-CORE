@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View, TouchableOpacity, Text, StyleSheet, KeyboardAvoidingView, Platform, TextInput } from 'react-native';
@@ -13,20 +13,22 @@ const SCREENS = [
 
 const TopBar = ({ searchText, setSearchText, onGeolocationPress }) => {
   return (
-    <View style={styles.topBarContainer}>
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={20} color="#666" style={{marginRight: 10}} />
-        <TextInput
-          style={{flex: 1, fontSize: 16}}
-          placeholder="Search for a city..."
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-      </View>
-      <TouchableOpacity onPress={onGeolocationPress} style={styles.geoButton}>
-        <Ionicons name="location" size={24} color="#007AFF" />
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <View style={styles.topBarContainer}>
+            <View style={styles.searchContainer}>
+                <Ionicons name="search" size={20} color="#666" style={{marginRight: 10}} />
+                <TextInput
+                style={{flex: 1, fontSize: 16}}
+                placeholder="Search for a city..."
+                value={searchText}
+                onChangeText={setSearchText}
+                />
+            </View>
+            <TouchableOpacity onPress={onGeolocationPress} style={styles.geoButton}>
+                <Ionicons name="location" size={24} color="#007AFF" />
+            </TouchableOpacity>
+        </View>
+    </SafeAreaView>
   );
 };
 
@@ -52,7 +54,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled={Platform.OS === 'ios'}>
             <View style={styles.container}>
               <TopBar
                 searchText={searchText}
@@ -71,14 +73,16 @@ export default function App() {
                 ))}
               </PagerView>
 
-              <View style={styles.tabBar}>
-                {SCREENS.map(({ name, icon, iconOutline }, index) => (
-                  <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
-                    <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#007AFF' : 'gray'} />
-                    <Text style={[styles.tabLabel, { color: activeTab === index ? '#007AFF' : 'gray' }]}>{name}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              <SafeAreaView edges={['bottom']}>
+                <View style={styles.tabBar}>
+                  {SCREENS.map(({ name, icon, iconOutline }, index) => (
+                    <TouchableOpacity key={name} style={styles.tabItem} onPress={() => pagerRef.current?.setPage(index)}>
+                      <Ionicons name={activeTab === index ? icon : iconOutline} size={24} color={activeTab === index ? '#007AFF' : 'gray'} />
+                      <Text style={[styles.tabLabel, { color: activeTab === index ? '#007AFF' : 'gray' }]}>{name}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </SafeAreaView>
             </View>
         </KeyboardAvoidingView>
       </SafeAreaProvider>
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
   pagerView: { flex: 1 },
   page: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   pageText: { fontSize: 20 },
-  tabBar: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: '#e0e0e0', paddingTop: 5, paddingBottom: 20 },
+  tabBar: { flexDirection: 'row', borderTopWidth: 1, borderTopColor: '#e0e0e0', paddingTop: 5 },
   tabItem: { flex: 1, alignItems: 'center', paddingVertical: 8 },
   tabLabel: { fontSize: 12, fontWeight: '600', marginTop: 4 },
   topBarContainer: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 10,
