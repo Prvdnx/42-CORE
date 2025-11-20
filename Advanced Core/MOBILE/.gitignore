@@ -1,0 +1,8 @@
+.expo/
+
+.idea/
+*.iml
+
+.DS_Store
+
+.qodo
