@@ -13,7 +13,7 @@ const SCREENS = [
 
 const TopBar = ({ searchText, setSearchText, onGeolocationPress }) => {
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top']}>
+    <SafeAreaView edges={['top']}>
         <View style={styles.topBarContainer}>
             <View style={styles.searchContainer}>
                 <Ionicons name="search" size={20} color="#666" style={{marginRight: 10}} />
@@ -37,7 +37,7 @@ export default function App() {
   const [searchText, setSearchText] = useState('');
   const [isGeolocation, setIsGeolocation] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const pagerRef = useRef(null);
+  const pagerRef = useRef(null); //Creates ref to be attached to PagerView component; allows to call setPage to control pager (to switch pages when a tab is tapped)
 
   const handleGeolocationPress = () => {
     setIsGeolocation(true);
