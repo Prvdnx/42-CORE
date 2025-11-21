@@ -38,7 +38,7 @@ export const GeocodingService = {
     }
   },
 
-  async getLocationName(latitude, longitude) {
+  async getLocationName(latitude, longitude) { // handles reverse geocoding for geolocation
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`;
     const options = { headers: { 'User-Agent': 'WeatherApp/1.0' } };
 
@@ -81,3 +81,41 @@ export const GeocodingService = {
     };
   }
 };
+
+
+
+
+// //test to fetch and log raw geocoding data
+// const logGeocodingData = async (query) => {
+//   const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=10&language=en&format=json`;
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log('Raw Geocoding Data:', data); // logs full raw JSON response
+//   } catch (error) {
+//     console.error('Error fetching geocoding data:', error);
+//   }
+// };
+// logGeocodingData('London');
+
+
+// // test to fetch and log raw reverse geocoding data
+// const logReverseGeocodingData = async (latitude, longitude) => {
+//   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`;
+//   try {
+//     const response = await fetch(url, {
+//       headers: { 'User-Agent': 'WeatherApp/1.0' } // required by Nominatim API
+//     });
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log('Raw Reverse Geocoding Data:', data); // logs the full raw JSON response
+//   } catch (error) {
+//     console.error('Error fetching reverse geocoding data:', error);
+//   }
+// };
+// logReverseGeocodingData(40.7128, -74.0060); //New york city

@@ -81,7 +81,7 @@ const TodayScreen = ({ forecastData, locationData, isLoading, error, connectionE
             })}
           </View>
 
-          {/* Spacer at the bottom for full scroll */}
+          {/* spacer at the bottom for full scroll */}
           <View style={styles.bottomSpacer} />
         </ScrollView>
       )}

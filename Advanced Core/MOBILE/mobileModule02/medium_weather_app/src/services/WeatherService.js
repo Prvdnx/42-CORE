@@ -71,3 +71,22 @@ export const WeatherService = {
     return weatherCodes[code] || 'Unknown';
   }
 };
+
+
+
+
+// // test to fetch and log raw weather forecast data
+// const logWeatherData = async (latitude, longitude) => {
+//   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=temperature_2m,relative_humidity_2m&daily=temperature_2m_max,temperature_2m_min&timezone=auto`;
+//   try {
+//     const response = await fetch(url);
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     console.log('Raw Weather Forecast Data:', data); // Logs the full raw JSON response
+//   } catch (error) {
+//     console.error('Error fetching weather data:', error);
+//   }
+// };
+// logWeatherData(40.7128, -74.0060); //new york city

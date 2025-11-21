@@ -108,6 +108,7 @@ export default function App() {
                 setSearchText={setSearchText}
                 isGeolocation={isGeolocation}
                 setIsGeolocation={setIsGeolocation}
+                selectedLocation={selectedLocation}
                 onLocationSelected={handleLocationSelected}
                 onLocationDenied={() => setAppState(prev => ({ ...prev, isLocationDenied: true }))}
                 onConnectionError={(msg) => handleError('connection', msg)}

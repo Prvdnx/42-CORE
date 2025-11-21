@@ -5,7 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { GeocodingService } from '../services/GeocodingService';
 import { LocationService } from '../services/LocationService';
 
-const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, onLocationSelected, onLocationDenied, onConnectionError, onCityNotFound, isLoadingLocation, setIsLoadingLocation, isLandscape }) => {
+const TopBar = ({ searchText, setSearchText, isGeolocation, setIsGeolocation, selectedLocation, onLocationSelected,
+                onLocationDenied, onConnectionError, onCityNotFound, isLoadingLocation, setIsLoadingLocation, isLandscape }) => {
   const [citySuggestions, setCitySuggestions] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);

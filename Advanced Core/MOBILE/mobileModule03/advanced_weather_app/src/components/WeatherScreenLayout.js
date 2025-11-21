@@ -10,16 +10,8 @@ const MessageDisplay = ({ icon, title, message }) => (
   </View>
 );
 
-const WeatherScreenLayout = ({
-  data,
-  locationData,
-  isLoading,
-  error,
-  connectionError,
-  cityNotFoundError,
-  isLocationDenied,
-  children,
-}) => {
+const WeatherScreenLayout = ({ data, locationData, isLoading, error, connectionError,
+                            cityNotFoundError, isLocationDenied, children, }) => {
   const displayError = connectionError || cityNotFoundError || error;
 
   return (
