@@ -88,4 +88,3 @@ export default WeeklyScreen;
 //     precipitation: number,  // mm
 //     uvIndex: number
 //   }// ...7 daily entries
-
