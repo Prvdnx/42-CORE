@@ -77,3 +77,15 @@ const styles = StyleSheet.create({
 });
 
 export default WeeklyScreen;
+
+
+// // // expected shape of forecastData prop
+//   {
+//     date: string,           // "Mon 21"
+//     minTemp: number,        // °C
+//     maxTemp: number,
+//     condition: string,
+//     precipitation: number,  // mm
+//     uvIndex: number
+//   }// ...7 daily entries
+

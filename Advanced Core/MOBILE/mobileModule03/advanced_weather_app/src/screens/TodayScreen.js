@@ -118,3 +118,12 @@ const styles = StyleSheet.create({
 });
 
 export default TodayScreen;
+
+// // expected shape of forecastData prop
+  // {
+  //   time: string,           // "14:00", "15:00" etc.
+  //   temperature: number,    // °C
+  //   condition: string,
+  //   windSpeed: number,
+  //   precipitation: number   // mm
+  // } // ...24 hourly entries

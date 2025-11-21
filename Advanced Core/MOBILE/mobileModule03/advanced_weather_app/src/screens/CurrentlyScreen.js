@@ -111,3 +111,14 @@ const getStyles = (isLandscape) => StyleSheet.create({
 });
 
 export default CurrentlyScreen;
+
+
+// // expected shape of weatherData prop
+// {
+//   temperature: number,      // Current temp in °C
+//   condition: string,        // "Clear", "Rain", etc.
+//   windSpeed: number,        // km/h
+//   humidity: number,         // Percentage
+//   feelsLike: number,        // Perceived temp in °C
+//   icon: string              // Weather icon code
+// }
