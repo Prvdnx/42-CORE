@@ -60,15 +60,27 @@ const TopBar = ({ searchText, setSearchText, onLocationSelected, onLocationDenie
     }
   };
 
-  const handleGeolocationPress = async () => {
-    try {
-      const coords = await LocationService.getCurrentPosition();
-      if (onLocationSelected) onLocationSelected({ ...coords, isGeolocation: true });
-    } catch (error) {
-      console.error('Geolocation error:', error);
-      if (onLocationDenied) onLocationDenied();
-    }
-  };
+  // const handleGeolocationPress = async () => {
+  //   try {
+  //     const coords = await LocationService.getCurrentPosition();
+  //     if (onLocationSelected) onLocationSelected({ ...coords, isGeolocation: true });
+  //   } catch (error) {
+  //     console.error('Geolocation error:', error);
+  //     if (onLocationDenied) onLocationDenied();
+  //   }
+  // };
+
+const handleGeolocationPress = async () => {
+  try {
+    const coords = await LocationService.getCurrentPosition();
+    const locationNameData = await GeocodingService.getLocationName(coords.latitude, coords.longitude);
+    const location = { ...locationNameData, ...coords, isGeolocation: true };
+    if (onLocationSelected) onLocationSelected(location);
+  } catch (error) {
+    console.error('Geolocation error:', error);
+    if (onLocationDenied) onLocationDenied();
+  }
+};
 
   return (
     <View>
