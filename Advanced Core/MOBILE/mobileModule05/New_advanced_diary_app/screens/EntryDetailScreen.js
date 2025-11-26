@@ -50,97 +50,22 @@ const EntryDetailScreen = ({ route, navigation }) => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.card,
-    padding: 24,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 24,
-  },
-  headerTitle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    flex: 1,
-  },
-  feelingBadge: {
-    width: 36,
-    height: 36,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',    
-  },
-  closeButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 12,
-    backgroundColor: colors.background,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24, // xl
-    fontWeight: '500',
-    color: colors.text,
-  },
-  feelingLabel: {
-    fontSize: 14, // sm
-    color: colors.secondaryText,
-  },
+  container: { flex: 1, backgroundColor: colors.card, padding: 24, },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24, },
+  headerTitle: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, },
+  feelingBadge: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', },
+  closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
+              alignItems: 'center', },
+  title: { fontSize: 24, fontWeight: '500', color: colors.text, },
+  feelingLabel: {fontSize: 14, color: colors.secondaryText, },
   scrollContainer: { flex: 1 },
-  date: {
-    fontSize: 14, // sm
-    color: colors.secondaryText,
-    marginBottom: 16,
-  },
-  contentCard: {
-    backgroundColor: colors.background,
-    borderRadius: 16,
-    padding: 16,
-  },
-  content: {
-    fontSize: 16,
-    color: colors.text,
-    lineHeight: 26, // relaxed
-  },
-  actions: {
-    flexDirection: 'row',
-    gap: 12,
-    paddingTop: 16,
-    marginTop: 24,
-    borderTopWidth: 1,
-    borderColor: colors.border,
-  },
-  deleteButton: {
-    flex: 1,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: 'rgba(255, 107, 107, 0.1)',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 8,
-  },
-  deleteButtonText: {
-    color: '#FF6B6B',
-    fontWeight: '500',
-  },
-  primaryButton: {
-    flex: 1,
-    height: 48,
-    borderRadius: 12,
-    backgroundColor: '#5B8CFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  primaryButtonText: {
-    color: 'white',
-    fontWeight: '500',
-  },
+  date: { fontSize: 14, color: colors.secondaryText, marginBottom: 16, },
+  contentCard: { backgroundColor: colors.background, borderRadius: 16, padding: 16, },
+  content: { fontSize: 16, color: colors.text, lineHeight: 26, },
+  actions: { flexDirection: 'row', gap: 12, paddingTop: 16, marginTop: 24, borderTopWidth: 1,
+          borderColor: colors.border, },
+  deleteButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)', flexDirection: 'row',
+              justifyContent: 'center', alignItems: 'center', gap: 8, },
 });
  
 export default EntryDetailScreen;

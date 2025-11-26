@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } fr
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon, Trash2 } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
+import EntryListItem from '../components/EntryListItem';
 import { useTheme } from '../context/ThemeContext';
 
 const dummyEntries = [
@@ -93,18 +94,7 @@ const EntriesListScreen = ({ navigation }) => {
 
           <Text style={[styles.sectionTitle, { marginTop: 32 }]}>All Entries</Text>
           {dummyEntries.map(item => (
-            <View key={item.id} style={styles.allEntriesCard}>
-              <TouchableOpacity style={styles.allEntriesClickable} onPress={() => navigation.navigate('EntryDetail', { entry: item })}>
-                <View style={styles.allEntriesHeader}>
-                  <FeelingIcon feeling={item.feeling} />
-                  <Text style={styles.entryTitle}>{item.title}</Text>
-                </View>
-                <Text style={styles.entryDate}>{item.date}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.deleteButton}>
-                <Trash2 color="#FF6B6B" size={16} />
-              </TouchableOpacity>
-            </View>
+            <EntryListItem key={item.id} item={item} />
           ))}
 
         </View>
@@ -119,183 +109,36 @@ const EntriesListScreen = ({ navigation }) => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  header: {
-    paddingTop: 56,
-    paddingHorizontal: 24,
-    paddingBottom: 24,
-    borderBottomLeftRadius: 32,
-    borderBottomRightRadius: 32,
-  },
-  profileRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  userInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 16,
-  },
-  avatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  userName: {
-    fontSize: 24, // xl
-    fontWeight: '500',
-    color: '#FFFFFF',
-  },
-  headerActions: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  headerButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  statsCard: {
-    marginTop: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 16,
-    padding: 16,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  statsLabel: {
-    color: 'rgba(255, 255, 255, 0.9)',
-    fontSize: 14,
-  },
-  statsValue: {
-    color: 'white',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  feelingsDistribution: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 8,
-  },
-  feelingStatItem: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 8,
-    padding: 8,
-    alignItems: 'center',
-    gap: 4,
-  },
-  feelingStatText: {
-    color: 'white',
-    fontSize: 12,
-  },
-  contentArea: {
-    paddingBottom: 120, // Extra padding for FAB and nav bar
-    padding: 24,
-  },
-  sectionTitle: {
-    fontSize: 20, // lg
-    fontWeight: '500',
-    color: colors.text,
-    marginBottom: 16,
-  },
-  recentEntryCard: {
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.00,
-    elevation: 1,
-  },
-  allEntriesCard: {
-    flexDirection: 'row',
-    backgroundColor: colors.card,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.00,
-    elevation: 1,
-    alignItems: 'center',
-  },
-  allEntriesClickable: {
-    flex: 1,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  allEntriesHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  entryTitle: {
-    fontSize: 16, // base
-    fontWeight: '500',
-    color: colors.text,
-  },
-  entryContent: {
-    fontSize: 14, // sm
-    color: colors.secondaryText,
-    marginBottom: 8,
-    lineHeight: 20,
-  },
-  entryDate: {
-    fontSize: 12, // xs
-    color: colors.secondaryText,
-  },
-  deleteButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 16,
-  },
-  fab: {
-    position: 'absolute',
-    right: 24,
-    bottom: 96,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#5B8CFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
-    elevation: 8,
-  },
+  safeArea: { flex: 1, backgroundColor: colors.background, },
+  container: { flex: 1, backgroundColor: colors.background, },
+  header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
+  profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
+  userInfo: { flexDirection: 'row', alignItems: 'center', gap: 16, },
+  avatar: { width: 64, height: 64, borderRadius: 32, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2,
+          borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
+  userName: { fontSize: 24, fontWeight: '500', color: '#FFFFFF', },
+  headerActions: { flexDirection: 'row', gap: 8, },
+  headerButton: { width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center',
+              alignItems: 'center', },
+  statsCard: { marginTop: 24, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: 16, padding: 16, },
+  statsRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, },
+  statsLabel: { color: 'rgba(255, 255, 255, 0.9)', fontSize: 14, },
+  statsValue: { color: 'white', fontSize: 14, fontWeight: '600', },
+  feelingsDistribution: { flexDirection: 'row', justifyContent: 'space-between', gap: 8, },
+  feelingStatItem: { flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 8, padding: 8, alignItems: 'center',
+                  gap: 4, },
+  feelingStatText: { color: 'white', fontSize: 12, },
+  contentArea: { paddingBottom: 120, padding: 24, },
+  sectionTitle: { fontSize: 20, fontWeight: '500', color: colors.text, marginBottom: 16, },
+  recentEntryCard: { backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.18, shadowRadius: 1.00, elevation: 1, },
+  cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, },
+  entryTitle: { fontSize: 16, fontWeight: '500', color: colors.text, },
+  entryContent: { fontSize: 14, color: colors.secondaryText, marginBottom: 8, lineHeight: 20, },
+  entryDate: { fontSize: 12, color: colors.secondaryText, },
+  fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56,
+        borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
 });
  
 export default EntriesListScreen;

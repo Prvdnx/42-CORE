@@ -43,17 +43,10 @@ const AppContent = () => {
       <Stack.Navigator
         initialRouteName="Welcome"
         screenOptions={{
-          headerStyle: {
-            backgroundColor: colors.card,
-            shadowOpacity: 0,
-            elevation: 0,
-            borderBottomWidth: 1,
-            borderBottomColor: colors.border,
-          },
+          headerStyle: { backgroundColor: colors.card, shadowOpacity: 0, elevation: 0,
+                      borderBottomWidth: 1, borderBottomColor: colors.border,},
           headerTintColor: colors.text,
-          headerTitleStyle: {
-            fontWeight: '500',
-          },
+          headerTitleStyle: { fontWeight: '500', },
           cardStyle: { backgroundColor: colors.background },
         }}
       >
