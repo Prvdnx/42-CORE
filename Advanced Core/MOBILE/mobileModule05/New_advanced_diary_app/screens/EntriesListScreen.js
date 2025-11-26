@@ -42,8 +42,7 @@ const EntriesListScreen = ({ navigation }) => {
               </View>
               <View>
                 <Text style={styles.userName}>Sarah Johnson</Text>
-                <Text style={styles.userEmail}>sarah.j@email.com</Text>
-              </View>
+               </View>
             </View>
             <View style={styles.headerActions}>
               <TouchableOpacity style={styles.headerButton}>
