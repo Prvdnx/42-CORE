@@ -27,11 +27,9 @@ const NewEntryScreen = ({ navigation }) => {
 
       <Text style={styles.label}>Title</Text>
       <TextInput
-        style={styles.input}
-        placeholder="Enter a title"
+        style={styles.input} placeholder="Enter a title"
         placeholderTextColor={colors.secondaryText}
-        value={title}
-        onChangeText={setTitle}
+        value={title} onChangeText={setTitle}
       />
 
       <Text style={styles.label}>How are you feeling?</Text>
@@ -53,9 +51,7 @@ const NewEntryScreen = ({ navigation }) => {
         style={[styles.input, styles.multilineInput]}
         placeholder="Write your thoughts..."
         placeholderTextColor={colors.secondaryText}
-        value={content}
-        onChangeText={setContent}
-        multiline
+        value={content} onChangeText={setContent} multiline
       />
 
       <View style={styles.actions}>
@@ -71,8 +67,8 @@ const NewEntryScreen = ({ navigation }) => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.card, padding: 24, },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, },
+  container: { flex: 1, backgroundColor: colors.card, padding: 24, paddingTop: 85, },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, },
   closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
               alignItems: 'center', },
   title: { fontSize: 24, fontWeight: '500', color: colors.text, },
@@ -87,7 +83,8 @@ const getStyles = (colors) => StyleSheet.create({
   feelingText: { color: colors.text, fontSize: 14 },
   feelingTextSelected: { color: 'white' },
   actions: { flexDirection: 'row', gap: 12, marginTop: 32, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border,},
-  secondaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center' },
+  secondaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center',
+                  borderWidth: 1, borderColor: colors.border },
   secondaryButtonText: { color: colors.text, fontWeight: '500' },
   primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center' },
   primaryButtonText: { color: 'white', fontWeight: '500' },

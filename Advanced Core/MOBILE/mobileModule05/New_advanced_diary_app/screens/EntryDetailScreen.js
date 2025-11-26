@@ -50,7 +50,7 @@ const EntryDetailScreen = ({ route, navigation }) => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.card, padding: 24, },
+  container: { flex: 1, backgroundColor: colors.card, padding: 24, paddingTop: 70, },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24, },
   headerTitle: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, },
   feelingBadge: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', },
@@ -66,6 +66,10 @@ const getStyles = (colors) => StyleSheet.create({
           borderColor: colors.border, },
   deleteButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)', flexDirection: 'row',
               justifyContent: 'center', alignItems: 'center', gap: 8, },
+  deleteButtonText: { color: '#FF6B6B', fontWeight: '500', },
+  primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center',
+              alignItems: 'center', },
+  primaryButtonText: { color: 'white', fontWeight: '500', },
 });
  
 export default EntryDetailScreen;

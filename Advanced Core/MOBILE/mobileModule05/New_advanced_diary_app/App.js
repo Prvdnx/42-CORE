@@ -56,7 +56,7 @@ const AppContent = () => {
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="EntryDetail" component={EntryDetailScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="NewEntry" component={NewEntryScreen} options={{ title: 'New Entry' }} />
+          <Stack.Screen name="NewEntry" component={NewEntryScreen} options={{ headerShown: false }} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
