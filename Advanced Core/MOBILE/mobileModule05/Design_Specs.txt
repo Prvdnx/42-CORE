@@ -1,0 +1,299 @@
+Diary App - Simplified Design Specification
+Overall Design Summary
+A minimalist diary/journal app with a calming blue color scheme. The app has three main screens accessible through bottom navigation: Login → Profile (Home) ↔ Agenda (Calendar). Dark mode is supported throughout.
+
+Color Palette
+Light Mode
+Primary Blue: Bright calm blue (#5B8CFF) - used for buttons, headers, active states
+Background: Very light cool gray (#F5F7FA) - main page background
+Card/Surface: Pure white (#FFFFFF) - containers for content
+Text Primary: Almost black (#1C1C1E) - main text
+Text Secondary: Medium gray (#8E8E93) - muted text, hints
+Borders: Very light gray (#E5E5EA) - dividers, borders
+Dark Mode
+Background: Very dark gray (#1C1C1E)
+Card/Surface: Slightly lighter dark (#2C2C2E)
+Text Primary: White
+Text Secondary: Medium gray (#98989D)
+Borders: Dark gray (#38383A)
+Primary Blue: Same bright blue (#5B8CFF) - maintains prominence
+Feeling/Emotion Colors (same in both modes)
+Happy: Bright yellow (#FFD60A)
+Sad: Soft red (#FF6B6B)
+Excited: Orange (#FF9500)
+Calm: Light cyan blue (#64D2FF)
+Anxious: Purple (#BF5AF2)
+Typography & Spacing Standards
+Text Sizes
+Headings (h1): Extra large, medium weight (500)
+Headings (h2): Large, medium weight
+Headings (h3, h4): Normal, medium weight
+Body text: Normal size, regular weight (400)
+Small text: Small size for dates/metadata
+Extra small: Tiny size (12px) for labels
+Spacing
+Screen padding: 24px from edges
+Card padding: 16px inside cards
+Gap between elements: 12-16px
+Large gaps: 32px
+Border Radius (rounded corners)
+Major components (cards, sections): 16px
+Buttons: 12px
+Modals: 32px at top
+Perfect circles: 50% (avatars, FAB)
+Login Screen
+Layout: Center everything on screen
+
+App Icon Container (96px square)
+
+Blue gradient background (lighter blue to darker blue)
+24px border radius with shadow
+White BookOpen icon inside (book icon)
+App Title: "Diary App"
+
+Extra large text, centered
+Dark color in light mode, white in dark mode
+Subtitle: "Your personal journal"
+
+Smaller, grayed-out text
+Centered below title
+Login Button (full width, 48px tall)
+
+Solid blue background
+White text saying "Login"
+Click to enter the app as logged-in user
+Subtle shadow
+Divider Section
+
+Horizontal line on left
+Text "Or continue with" in center
+Horizontal line on right
+Google Button (full width, 48px)
+
+White/light background with thin border
+Google logo (4-color) on left
+Text "Continue with Google" centered
+Slightly lighter shadow than primary button
+GitHub Button (full width, 48px)
+
+Same styling as Google button
+GitHub logo on left
+Text "Continue with GitHub" centered
+Profile Screen (Home)
+Header Section (Blue gradient background)
+Gradient: Light blue to darker blue, diagonal direction
+Rounded bottom: 32px curve at bottom
+Padding: Extra padding at top (for phone status bar), 24px sides, 32px bottom
+Profile Row
+Left side:
+
+Avatar: 64px circle with semi-transparent white background, white border, user emoji 👤 inside
+User Info: Name "Sarah Johnson" (white), Email below (white, 80% opacity)
+Right side (two small buttons stacked):
+
+Dark Mode Toggle: 40px square button, semi-transparent white background, Sun or Moon icon
+Logout Button: Same styling, LogOut icon
+Stats Card (below profile)
+Semi-transparent white background with blur effect
+Shows "Total Entries" count
+Below: 5 small equal-width stat boxes showing counts for each feeling (Happy, Sad, Excited, Calm, Anxious)
+Each box has feeling icon and count number
+Main Content Area (White/light background)
+Scrollable section below header
+Extra padding at bottom for FAB and navigation
+Recent Entries Section
+Header "Recent Entries" (medium bold text)
+Shows top 3 most recent entries as cards
+All Entries Section
+Header "All Entries" (medium bold text)
+Lists all entries in chronological order
+Entry Card Layout (for each entry)
+White background, rounded 16px
+Subtle shadow (increases on hover)
+Top row: Entry title on left, feeling emoji/icon on right
+Middle: First 2 lines of entry content (truncated)
+Bottom: Date in small gray text
+Right side: Trash icon button to delete
+Hover effect: Shadow increases, slight scale transform
+Click: Opens entry detail modal
+Floating Action Button (FAB)
+Position: Fixed bottom-right of screen
+Size: 56px circle
+Blue background with large shadow
+White Plus icon inside
+Click: Opens "New Entry" modal
+Bottom Navigation Bar
+Fixed at very bottom
+White/light background with subtle top border
+Rounded top corners (32px)
+Two navigation items: Home (active by default) and Agenda
+Each has icon and label
+Active item: Blue icon and text
+Inactive item: Gray icon and text
+Agenda Screen (Calendar)
+Header Section (Same blue gradient as Profile)
+Title "Calendar" in white, extra large text
+Below: Month navigation row
+Month Navigation
+Left arrow button: Previous month
+Month/Year label: "November 2025" centered, white text
+Right arrow button: Next month
+All buttons: Semi-transparent white with slight blur
+Calendar Container
+Semi-transparent white background with blur
+Day headers: Sun, Mon, Tue, Wed, Thu, Fri, Sat (gray text)
+Day grid: 7 columns, equal spacing
+Each date button:
+Square shape
+Rounded 12px corners
+Regular date has semi-transparent white background
+Today has brighter white background (40% opacity)
+Selected date has solid white background, blue text, shadow, slight scale increase
+Dates with entries show tiny white dot below the number
+Transitions/animations on interaction
+Entries List Section (below calendar)
+Date header: Full date like "Wednesday, November 20, 2025"
+Empty state: Card saying "No entries for this date" if none exist
+Entry cards (same as Profile screen but clickable to view detail)
+Bottom Navigation
+Same as Profile screen, but Agenda is active/blue
+New Entry Modal
+Overlay
+Semi-transparent black background with blur effect
+Covers entire screen
+Slides up from bottom on appearance
+Modal Panel
+Appears from bottom of screen
+White/light background
+Rounded 32px at top corners only
+Can scroll if content is too tall
+Header (sticky at top)
+Left: "New Entry" title
+Right: X close button
+Border line at bottom
+Form Content
+Title Input
+
+Label: "Title" (small gray)
+Text field with 12px padding, rounded 12px
+Light background with thin border
+Focus: Blue ring around field
+Date Input
+
+Same styling as title
+Default to today's date
+Type: date picker
+Feeling Selector
+
+Label: "How are you feeling?"
+5 buttons in a row (wraps if needed)
+Each button has feeling icon + label
+Unselected: Light background, thin border
+Selected: Blue background, white text, shadow, slight scale up
+Hover: Border becomes blue even if unselected
+Content Textarea
+
+Label: "Content"
+Large text area (6 rows)
+Same styling as input fields
+Placeholder: "Write your thoughts..."
+Can't be resized
+Bottom Buttons
+Cancel Button: Light background, dark text, full width on left
+Save Entry Button: Blue background, white text, shadow, full width on right
+Both with rounded 12px, 48px tall
+Both have click animations (scale down)
+Entry Detail Modal
+Same overlay and panel structure as New Entry
+Header
+Left: Feeling badge (circle with feeling icon and background color)
+Title and feeling label
+Right: Close button
+Content
+Date: Display as formatted date "Wednesday, November 20, 2025"
+Entry Content: Large block of text with preserved line breaks, good spacing
+Content area: Light background box, rounded 16px
+Bottom Buttons
+Delete Button: Red/destructive background (semi-transparent), red text, trash icon + label
+Close Button: Blue background, white text
+Both 48px tall, rounded 12px
+Icons Used (All from Lucide React)
+BookOpen: App icon on login screen (book icon)
+Home: Navigation icon for Profile screen
+Calendar: Navigation icon for Agenda screen
+LogOut: Profile logout button
+Moon/Sun: Dark mode toggle (Moon in dark mode, Sun in light mode)
+Plus: FAB button (thick 2.5px stroke)
+X: Close buttons on modals
+Trash2: Delete buttons for entries
+ChevronLeft/ChevronRight: Calendar month navigation
+Smile: Happy feeling icon (yellow)
+Frown: Sad feeling icon (red)
+Zap: Excited feeling icon (orange)
+Wind: Calm feeling icon (cyan)
+AlertCircle: Anxious feeling icon (purple)
+Interactions & Animations
+Hover Effects
+Buttons: Shadow increases, background may lighten/darken
+Cards: Shadow increases
+Interactive elements: Cursor becomes pointer
+Click/Active Effects
+All buttons: Scale down to 95% when clicked
+Selected calendar dates: Scale up to 105%
+Form focus: Ring appears around field
+Transitions
+All property changes: Smooth 200ms animation
+Modal appears: Slide up from bottom in 300ms
+Dark mode toggle: Instant class change
+Backdrop Effects
+Modal overlay: Semi-transparent black (50%) with blur
+Header cards: White with transparency + blur effect
+Calendar: White with transparency + blur effect
+Content & Sample Data
+User Profile
+Name: "Sarah Johnson"
+Email: "sarah.j@email.com"
+Avatar emoji: 👤
+Sample Entries (7 total, spread across November 2025)
+Each entry should have:
+
+Title (2-5 words)
+Content (2-3 sentences)
+Date (spread across different days)
+One of 5 feelings
+Examples:
+
+"First Day at New Job" - Excited - Nov 20 - "Started new position, team is welcoming..."
+"Productive Day" - Happy - Nov 19
+"Tough Day" - Anxious - Nov 18
+"Meditation Practice" - Calm - Nov 17
+"Missing Friends" - Sad - Nov 16
+"Weekend Plans" - Excited - Nov 15
+"Gratitude Moment" - Happy - Nov 14
+Responsive Behavior
+Device Frame
+Always 390px × 844px (iPhone-sized)
+Rounded corners (40px) with shadow around entire app
+Light gray background behind frame
+Content Adaptation
+All text wraps naturally
+Images/icons scale proportionally
+Scrollable areas available where needed
+Fixed navigation always visible
+FAB always in same position
+User Flow
+Login Screen: First thing user sees
+Profile Screen: After login, shows all entries and stats (default view)
+Agenda Screen: Click Calendar in nav to see calendar view
+New Entry: Click blue plus button to create entry
+View Entry: Click any entry card to see full details
+Dark Mode: Toggle with moon/sun button in header
+Logout: Click logout button to return to login screen
+Key Design Principles
+Calming: Soft blues and grays create peaceful feel
+Minimalist: Only shows necessary information
+Clear hierarchy: Headers, content, actions are distinct
+Consistent: Same patterns repeated (cards, buttons, spacing)
+Accessible: Good contrast, readable text, intuitive layout
+Emotional: Feeling system with distinct colors and icons
+Smooth: All animations feel natural and responsive
