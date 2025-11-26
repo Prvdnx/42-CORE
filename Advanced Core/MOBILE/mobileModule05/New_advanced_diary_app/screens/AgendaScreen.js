@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Calendar } from 'react-native-calendars';
-import { ChevronLeft, ChevronRight, Smile, Frown } from 'lucide-react-native';
+import { ChevronLeft, ChevronRight } from 'lucide-react-native';
+import FeelingIcon from '../components/FeelingIcon';
+import { useTheme } from '../context/ThemeContext';
 
 const dummyEntries = {
   '2025-11-20': [
@@ -11,31 +13,16 @@ const dummyEntries = {
   '2025-11-18': [
     { id: '2', title: 'Feeling a bit down', feeling: 'Sad' },
   ],
-};
-
-const feelingIcons = {
-  Happy: <Smile color="#FFD60A" size={20} />,
-  Sad: <Frown color="#FF6B6B" size={20} />,
+  '2025-10-15': [
+    { id: '8', title: 'October day', feeling: 'Calm' },
+  ]
 };
 
 const AgendaScreen = ({ navigation }) => {
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
   const [selectedDate, setSelectedDate] = useState('2025-11-20');
-
-  const renderHeader = (date) => {
-    const header = date.toString('MMMM yyyy');
-    return (
-      <View style={styles.calendarHeader}>
-        <TouchableOpacity style={styles.monthNavButton}>
-          <ChevronLeft color="white" size={20} />
-        </TouchableOpacity>
-        <Text style={styles.monthLabel}>{header}</Text>
-        <TouchableOpacity style={styles.monthNavButton}>
-          <ChevronRight color="white" size={20} />
-        </TouchableOpacity>
-      </View>
-    );
-  };
-
+  
   const entriesForSelectedDate = dummyEntries[selectedDate] || [];
 
   return (
@@ -50,17 +37,25 @@ const AgendaScreen = ({ navigation }) => {
               ...Object.keys(dummyEntries).reduce((acc, date) => ({ ...acc, [date]: { marked: true, dotColor: 'white' } }), {}),
               [selectedDate]: { selected: true, selectedColor: '#FFFFFF', selectedTextColor: '#5B8CFF' },
             }}
-            renderHeader={renderHeader}
+            renderArrow={(direction) => (
+              <View style={styles.monthNavButton}>
+                {direction === 'left' 
+                  ? <ChevronLeft color="white" size={20} /> 
+                  : <ChevronRight color="white" size={20} />
+                }
+              </View>
+            )}
+            enableSwipeMonths={true}
             theme={{
               calendarBackground: 'transparent',
-              dayTextColor: 'white',
+              dayTextColor: '#FFFFFF',
               textDisabledColor: 'rgba(255, 255, 255, 0.5)',
-              monthTextColor: 'white',
+              monthTextColor: '#FFFFFF',
               textDayFontWeight: '500',
               textMonthFontWeight: 'bold',
               textDayHeaderFontWeight: 'normal',
-              textDayFontSize: 14,
-              textMonthFontSize: 24,
+              textDayFontSize: 16,
+              monthTextFontWeight: '500', // Corrected prop name for newer versions
               textDayHeaderFontSize: 12,
               'stylesheet.calendar.header': {
                 week: {
@@ -71,7 +66,8 @@ const AgendaScreen = ({ navigation }) => {
                 dayHeader: {
                   color: 'rgba(255, 255, 255, 0.7)',
                 }
-              }
+              },
+              'stylesheet.day.basic': { text: { color: '#FFFFFF' } }
             }}
           />
         </LinearGradient>
@@ -82,7 +78,7 @@ const AgendaScreen = ({ navigation }) => {
             entriesForSelectedDate.map(item => (
               <TouchableOpacity key={item.id} style={styles.entryCard} onPress={() => navigation.navigate('EntryDetail', { entry: { ...item, date: selectedDate, content: 'Details...' } })}>
                 <View style={styles.cardHeader}>
-                  {feelingIcons[item.feeling]}
+                  <FeelingIcon feeling={item.feeling} />
                   <Text style={styles.entryTitle}>{item.title}</Text>
                 </View>
               </TouchableOpacity>
@@ -98,9 +94,9 @@ const AgendaScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#F5F7FA' },
-  container: { flex: 1, backgroundColor: '#F5F7FA' },
+const getStyles = (colors) => StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1, backgroundColor: colors.background },
   header: {
     paddingTop: 56,
     paddingHorizontal: 24,
@@ -108,14 +104,12 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
   },
-  headerTitle: { fontSize: 28, fontWeight: '500', color: 'white', marginBottom: 24 },
-  calendarHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%', paddingHorizontal: 10 },
+  headerTitle: { fontSize: 28, fontWeight: '500', color: '#FFFFFF', marginBottom: 24 },
   monthNavButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center', alignItems: 'center' },
-  monthLabel: { fontSize: 24, fontWeight: '500', color: 'white' },
   contentArea: { padding: 24 },
-  sectionTitle: { fontSize: 20, fontWeight: '500', color: '#1C1C1E', marginBottom: 16 },
+  sectionTitle: { fontSize: 20, fontWeight: '500', color: colors.text, marginBottom: 16 },
   entryCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -133,17 +127,17 @@ const styles = StyleSheet.create({
   entryTitle: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#1C1C1E',
+    color: colors.text,
   },
   noEntriesCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.card,
     borderRadius: 16,
     padding: 32,
     alignItems: 'center',
     justifyContent: 'center',
   },
   noEntriesText: {
-    color: '#8E8E93',
+    color: colors.secondaryText,
   },
 });
 

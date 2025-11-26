@@ -2,9 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BookOpen, Github } from 'lucide-react-native';
+import { useTheme } from '../context/ThemeContext';
 
 const WelcomeScreen = ({ navigation }) => {
-  // Dummy Google Icon - replace with actual SVG if available
+  const { colors } = useTheme();
+  const styles = getStyles(colors);
+
+  // Dummy Google Icon
   const GoogleIcon = () => (
     <View style={{ width: 20, height: 20 }}>
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}>G</Text>
@@ -45,7 +49,7 @@ const WelcomeScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         <TouchableOpacity style={[styles.button, styles.secondaryButton]}>
-          <Github color="#1C1C1E" size={20} />
+          <Github color={colors.text} size={20} />
           <Text style={styles.secondaryButtonText}>Continue with GitHub</Text>
         </TouchableOpacity>
       </View>
@@ -53,17 +57,17 @@ const WelcomeScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors) => StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: colors.background,
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 24,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: colors.background,
   },
   iconContainer: {
     borderRadius: 24,
@@ -84,12 +88,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '500',
-    color: '#1C1C1E',
+    color: colors.text,
     letterSpacing: -0.5,
   },
   subtitle: {
     fontSize: 16,
-    color: '#8E8E93',
+    color: colors.secondaryText,
     marginBottom: 48,
   },
   button: {
@@ -124,16 +128,16 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E5E5EA',
+    backgroundColor: colors.border,
   },
   dividerText: {
     marginHorizontal: 16,
-    color: '#8E8E93',
+    color: colors.secondaryText,
   },
   secondaryButton: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.card,
     borderWidth: 1,
-    borderColor: '#E5E5EA',
+    borderColor: colors.border,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.18,
@@ -141,7 +145,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   secondaryButtonText: {
-    color: '#1C1C1E',
+    color: colors.text,
     fontSize: 16,
     fontWeight: '500',
     marginLeft: 12,

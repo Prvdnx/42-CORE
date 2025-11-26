@@ -1,27 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { X, Trash2, Smile, Frown, Zap, Wind, AlertCircle } from 'lucide-react-native';
-
-const feelingMap = {
-  Happy: { icon: Smile, color: '#FFD60A' },
-  Sad: { icon: Frown, color: '#FF6B6B' },
-  Excited: { icon: Zap, color: '#FF9500' },
-  Calm: { icon: Wind, color: '#64D2FF' },
-  Anxious: { icon: AlertCircle, color: '#BF5AF2' },
-};
+import { X, Trash2 } from 'lucide-react-native';
+import FeelingIcon from '../components/FeelingIcon';
+import { useTheme } from '../context/ThemeContext';
 
 const EntryDetailScreen = ({ route, navigation }) => {
   const { entry } = route.params;
-  const feeling = feelingMap[entry.feeling] || feelingMap.Happy;
-  const FeelingIcon = feeling.icon;
+  const { colors } = useTheme();
+  const styles = getStyles(colors, entry.feeling);
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.headerTitle}>
-          <View style={[styles.feelingBadge, { backgroundColor: `${feeling.color}20` }]}>
-            <FeelingIcon color={feeling.color} size={20} />
+          <View style={styles.feelingBadge}>
+            <FeelingIcon feeling={entry.feeling} size={20} />
           </View>
           <View>
             <Text style={styles.title}>{entry.title}</Text>
@@ -29,7 +23,7 @@ const EntryDetailScreen = ({ route, navigation }) => {
           </View>
         </View>
         <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
-          <X color="#8E8E93" size={20} />
+          <X color={colors.secondaryText} size={20} />
         </TouchableOpacity>
       </View>
 
@@ -55,10 +49,10 @@ const EntryDetailScreen = ({ route, navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.card,
     padding: 24,
   },
   header: {
@@ -78,39 +72,39 @@ const styles = StyleSheet.create({
     height: 36,
     borderRadius: 12,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center',    
   },
   closeButton: {
     width: 36,
     height: 36,
     borderRadius: 12,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
     fontSize: 24, // xl
     fontWeight: '500',
-    color: '#1C1C1E',
+    color: colors.text,
   },
   feelingLabel: {
     fontSize: 14, // sm
-    color: '#8E8E93',
+    color: colors.secondaryText,
   },
   scrollContainer: { flex: 1 },
   date: {
     fontSize: 14, // sm
-    color: '#8E8E93',
+    color: colors.secondaryText,
     marginBottom: 16,
   },
   contentCard: {
-    backgroundColor: '#F5F7FA',
+    backgroundColor: colors.background,
     borderRadius: 16,
     padding: 16,
   },
   content: {
     fontSize: 16,
-    color: '#1C1C1E',
+    color: colors.text,
     lineHeight: 26, // relaxed
   },
   actions: {
@@ -119,7 +113,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     marginTop: 24,
     borderTopWidth: 1,
-    borderColor: '#E5E5EA',
+    borderColor: colors.border,
   },
   deleteButton: {
     flex: 1,
@@ -148,5 +142,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
 });
-
+ 
 export default EntryDetailScreen;

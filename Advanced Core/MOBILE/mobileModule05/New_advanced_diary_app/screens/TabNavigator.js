@@ -2,22 +2,25 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home, Calendar } from 'lucide-react-native';
 
+import { useTheme } from '../context/ThemeContext';
 import EntriesListScreen from '../screens/EntriesListScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const { colors } = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#5B8CFF',
-        tabBarInactiveTintColor: '#8E8E93',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.secondaryText,
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
+          backgroundColor: colors.card,
           borderTopWidth: 1,
-          borderTopColor: '#E5E5EA',
+          borderTopColor: colors.border,
           borderTopLeftRadius: 32,
           borderTopRightRadius: 32,
           position: 'absolute',
