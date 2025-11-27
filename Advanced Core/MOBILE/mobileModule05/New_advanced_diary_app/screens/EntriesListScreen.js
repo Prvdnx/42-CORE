@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Plus, LogOut, Sun, Moon, Trash2 } from 'lucide-react-native';
+import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
+
 import FeelingIcon from '../components/FeelingIcon';
 import EntryListItem from '../components/EntryListItem';
 import NewEntryScreen from './NewEntryScreen';
 import EntryDetailScreen from './EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
+import { useAuth } from '../context/AuthContext';
 
 const dummyEntries = [
   { id: '1', title: 'A Great Day', date: 'Nov 20, 2025', content: 'Had a wonderful time with friends, feeling very happy and grateful...', feeling: 'Happy' },
@@ -19,71 +21,56 @@ const dummyEntries = [
   { id: '7', title: 'Minor Setback', date: 'Nov 14, 2025', content: 'A small mistake at work was annoying.', feeling: 'Annoyed' },
 ];
 
-const EntriesListScreen = ({ navigation }) => {
+const EntriesListScreen = () => {
   const { theme, toggleTheme, colors } = useTheme();
   const { showOverlay } = useOverlay();
+  const { user, logout } = useAuth();
   const styles = getStyles(colors);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
-        {/* Header Section */}
         <LinearGradient colors={['#5B8CFF', '#4A7AE8']} style={styles.header} >
           <View style={styles.profileRow}>
             <View style={styles.userInfo}>
               <View style={styles.avatar}><Text>👤</Text></View>
-              <View><Text style={styles.userName}>Sarah Johnson</Text></View>
+              <View>
+                <Text style={styles.userName}>{user?.name || 'User'}</Text>
+                <Text style={styles.userEmail}>{user?.email}</Text>
+              </View>
             </View>
             <View style={styles.headerActions}>
               <TouchableOpacity style={styles.headerButton} onPress={toggleTheme}>
                 {theme === 'light' ? <Moon color="white" size={20} /> : <Sun color="white" size={20} />}
               </TouchableOpacity>
-              <TouchableOpacity style={styles.headerButton} onPress={() => navigation.navigate('Welcome')}>
+              <TouchableOpacity style={styles.headerButton} onPress={logout}>
                 <LogOut color="white" size={20} />
               </TouchableOpacity>
             </View>
           </View>
 
-          {/* Stats Card */}
           <View style={styles.statsCard}>
             <View style={styles.statsRow}>
               <Text style={styles.statsLabel}>Total Entries</Text>
               <Text style={styles.statsValue}>{dummyEntries.length}</Text>
             </View>
             <View style={styles.feelingsDistribution}>
-              <View style={styles.feelingStatItem}>
-                <FeelingIcon feeling="Happy" size={16} color="white" />
-                <Text style={styles.feelingStatText}>45%</Text>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Happy" size={16} color="white" /><Text style={styles.feelingStatText}>45%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Sad" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Excited" size={16} color="white" /><Text style={styles.feelingStatText}>20%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Calm" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Anxious" size={16} color="white" /><Text style={styles.feelingStatText}>5%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Angry" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
+              <View style={styles.feelingStatItem}><FeelingIcon feeling="Annoyed" size={16} color="white" /><Text style={styles.feelingStatText}>5%</Text></View>
               </View>
-              <View style={styles.feelingStatItem}>
-                <FeelingIcon feeling="Sad" size={16} color="white" />
-                <Text style={styles.feelingStatText}>15%</Text>
-              </View>
-              <View style={styles.feelingStatItem}>
-                <FeelingIcon feeling="Excited" size={16} color="white" />
-                <Text style={styles.feelingStatText}>20%</Text>
-              </View>
-              <View style={styles.feelingStatItem}>
-                <FeelingIcon feeling="Calm" size={16} color="white" />
-                <Text style={styles.feelingStatText}>15%</Text>
-              </View>
-              <View style={styles.feelingStatItem}>
-                <FeelingIcon feeling="Anxious" size={16} color="white" />
-                <Text style={styles.feelingStatText}>5%</Text>
-              </View>
-            </View>
           </View>
         </LinearGradient>
 
-        {/* Content Area */}
         <View style={styles.contentArea} >
           <Text style={styles.sectionTitle}>Recent Entries (Last 2)</Text>
           {dummyEntries.slice(0, 2).map(item => (
             <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
-              <View style={styles.cardHeader}>
-                <Text style={styles.entryTitle}>{item.title}</Text>
-                <FeelingIcon feeling={item.feeling} />
-              </View>
+              <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
               <Text style={styles.entryContent} numberOfLines={2}>{item.content}</Text>
               <Text style={styles.entryDate}>{item.date}</Text>
             </TouchableOpacity>
@@ -91,11 +78,9 @@ const EntriesListScreen = ({ navigation }) => {
 
           <Text style={[styles.sectionTitle, { marginTop: 32 }]}>All Entries</Text>
           {dummyEntries.map(item => <EntryListItem key={item.id} item={item} />)}
-
         </View>
       </ScrollView>
 
-      {/* Floating action button */}
       <TouchableOpacity style={styles.fab} onPress={() => showOverlay(<NewEntryScreen />)}>
         <Plus color="white" size={24} strokeWidth={2.5} />
       </TouchableOpacity>
@@ -109,31 +94,26 @@ const getStyles = (colors) => StyleSheet.create({
   header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 16, },
-  avatar: { width: 64, height: 64, borderRadius: 32, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2,
-          borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
-  userName: { fontSize: 24, fontWeight: '500', color: '#FFFFFF', },
+  avatar: { width: 64, height: 64, borderRadius: 32, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
+  userName: { fontSize: 24, fontWeight: '500', color: '#FFFFFF', marginBottom: 4 },
+  userEmail: { fontSize: 14, color: 'rgba(255, 255, 255, 0.8)' },
   headerActions: { flexDirection: 'row', gap: 8, },
-  headerButton: { width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center',
-              alignItems: 'center', },
+  headerButton: { width: 40, height: 40, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center', alignItems: 'center', },
   statsCard: { marginTop: 24, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderRadius: 16, padding: 16, },
   statsRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, },
   statsLabel: { color: 'rgba(255, 255, 255, 0.9)', fontSize: 14, },
   statsValue: { color: 'white', fontSize: 14, fontWeight: '600', },
   feelingsDistribution: { flexDirection: 'row', justifyContent: 'space-between', gap: 8, },
-  feelingStatItem: { flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 8, padding: 8, alignItems: 'center',
-                  gap: 4, },
+  feelingStatItem: { flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 8, padding: 8, alignItems: 'center', gap: 4, },
   feelingStatText: { color: 'white', fontSize: 12, },
   contentArea: { paddingBottom: 120, padding: 24, },
   sectionTitle: { fontSize: 20, fontWeight: '500', color: colors.text, marginBottom: 16, },
-  recentEntryCard: { backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
-  shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.18, shadowRadius: 1.00, elevation: 1, },
+  recentEntryCard: { backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.18, shadowRadius: 1.00, elevation: 1, },
   cardHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, },
   entryTitle: { fontSize: 16, fontWeight: '500', color: colors.text, },
   entryContent: { fontSize: 14, color: colors.secondaryText, marginBottom: 8, lineHeight: 20, },
   entryDate: { fontSize: 12, color: colors.secondaryText, },
-  fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56,
-        borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
+  fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
 });
  
 export default EntriesListScreen;
