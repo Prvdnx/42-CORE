@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Trash2 } from 'lucide-react-native';
 import FeelingIcon from './FeelingIcon';
+import EntryDetailScreen from '../screens/EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
+import { useOverlay } from '../context/OverlayContext';
 
 const EntryListItem = ({ item, showDate = true }) => {
   const { colors } = useTheme();
-  const navigation = useNavigation();
+  const { showOverlay } = useOverlay();
   const styles = getStyles(colors);
 
   const handlePress = () => {
-    navigation.navigate('EntryDetail', { entry: item });
+    showOverlay(<EntryDetailScreen entry={item} />);
   };
 
   const handleDelete = () => {

@@ -1,57 +1,63 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { X, Trash2 } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
+import { useOverlay } from '../context/OverlayContext';
 
-const EntryDetailScreen = ({ route, navigation }) => {
-  const { entry } = route.params;
+const EntryDetailScreen = ({ entry }) => {
   const { colors } = useTheme();
+  const { hideOverlay } = useOverlay();
   const styles = getStyles(colors, entry.feeling);
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerTitle}>
-          <View style={styles.feelingBadge}>
-            <FeelingIcon feeling={entry.feeling} size={20} />
+    <Modal animationType="fade" transparent={true} visible={true} onRequestClose={hideOverlay} >
+      <View style={styles.overlay}>
+        <View style={styles.panel}>
+          {/* Header */}
+          <View style={styles.header}>
+            <View style={styles.headerTitle}>
+              <View style={styles.feelingBadge}>
+                <FeelingIcon feeling={entry.feeling} size={20} />
+              </View>
+              <View>
+                <Text style={styles.title}>{entry.title}</Text>
+                <Text style={styles.feelingLabel}>{entry.feeling}</Text>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.closeButton} onPress={hideOverlay}>
+              <X color={colors.secondaryText} size={20} />
+            </TouchableOpacity>
           </View>
-          <View>
-            <Text style={styles.title}>{entry.title}</Text>
-            <Text style={styles.feelingLabel}>{entry.feeling}</Text>
+
+          {/* Content */}
+          <ScrollView style={styles.scrollContainer}>
+            <Text style={styles.date}>{entry.date}</Text>
+            <View style={styles.contentCard}>
+              <Text style={styles.content}>{entry.content}</Text>
+            </View>
+          </ScrollView>
+
+          {/* Actions */}
+          <View style={styles.actions}>
+            <TouchableOpacity style={styles.deleteButton}>
+              <Trash2 color="#FF6B6B" size={16} />
+              <Text style={styles.deleteButtonText}>Delete Entry</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.primaryButton} onPress={hideOverlay}>
+              <Text style={styles.primaryButtonText}>Close</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
-          <X color={colors.secondaryText} size={20} />
-        </TouchableOpacity>
       </View>
-
-      {/* Content */}
-      <ScrollView style={styles.scrollContainer}>
-        <Text style={styles.date}>{entry.date}</Text>
-        <View style={styles.contentCard}>
-          <Text style={styles.content}>{entry.content}</Text>
-        </View>
-      </ScrollView>
-
-      {/* Actions */}
-      <View style={styles.actions}>
-        <TouchableOpacity style={styles.deleteButton}>
-          <Trash2 color="#FF6B6B" size={16} />
-          <Text style={styles.deleteButtonText}>Delete Entry</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.primaryButtonText}>Close</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Modal>
   );
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.card, padding: 24, paddingTop: 70, },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24, },
+  overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center' },
+  panel: { width: '90%', maxHeight: '85%', backgroundColor: colors.card, borderRadius: 24, padding: 24, flex: 1 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, },
   headerTitle: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, },
   feelingBadge: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', },
   closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',

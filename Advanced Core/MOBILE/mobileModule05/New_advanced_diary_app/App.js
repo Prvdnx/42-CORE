@@ -3,10 +3,9 @@ import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { OverlayProvider } from './context/OverlayContext';
 
 import WelcomeScreen from './screens/WelcomeScreen';
-import EntryDetailScreen from './screens/EntryDetailScreen';
-import NewEntryScreen from './screens/NewEntryScreen';
 import TabNavigator from './screens/TabNavigator';
 
 const Stack = createStackNavigator();
@@ -54,10 +53,6 @@ const AppContent = () => {
           <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
         </Stack.Group>
-        <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen name="EntryDetail" component={EntryDetailScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="NewEntry" component={NewEntryScreen} options={{ headerShown: false }} />
-        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -66,7 +61,9 @@ const AppContent = () => {
 export default function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <OverlayProvider>
+        <AppContent />
+      </OverlayProvider>
     </ThemeProvider>
   );
 }

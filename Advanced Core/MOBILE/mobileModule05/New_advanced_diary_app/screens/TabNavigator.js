@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Calendar } from 'lucide-react-native';
+import { UserRound, Calendar } from 'lucide-react-native';
 
 import { useTheme } from '../context/ThemeContext';
 import EntriesListScreen from '../screens/EntriesListScreen';
@@ -21,7 +21,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Profile" component={EntriesListScreen}
-        options={{ tabBarIcon: ({ color, size }) => <Home color={color} size={size} />, }}
+        options={{ tabBarIcon: ({ color, size }) => <UserRound color={color} size={size} />, }}
       />
       <Tab.Screen
         name="Agenda" component={AgendaScreen}

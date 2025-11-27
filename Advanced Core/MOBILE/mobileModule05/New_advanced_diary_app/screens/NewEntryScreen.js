@@ -1,73 +1,72 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { X } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
+import { useOverlay } from '../context/OverlayContext';
 
-const NewEntryScreen = ({ navigation }) => {
+const NewEntryScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [feeling, setFeeling] = useState('');
   const { colors } = useTheme();
+  const { hideOverlay } = useOverlay();
   const styles = getStyles(colors);
 
   const saveEntry = () => {
     console.log('Saving entry:', { title, content, feeling });
-    navigation.goBack();
+    hideOverlay();
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>New Entry</Text>
-        <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
-          <X color={colors.secondaryText} size={20} />
-        </TouchableOpacity>
+    <Modal animationType="fade" transparent={true} visible={true} onRequestClose={hideOverlay} >
+      <View style={styles.overlay}>
+        <View style={styles.panel}>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            <View style={styles.header}>
+              <Text style={styles.title}>New Entry</Text>
+              <TouchableOpacity style={styles.closeButton} onPress={hideOverlay}>
+                <X color={colors.secondaryText} size={20} />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.label}>Title</Text>
+            <TextInput style={styles.input} placeholder="Enter a title"
+              placeholderTextColor={colors.secondaryText} value={title} onChangeText={setTitle}
+            />
+            <Text style={styles.label}>How are you feeling?</Text>
+            <View style={styles.feelingSelector}>
+              {['Happy', 'Sad', 'Excited', 'Calm', 'Anxious', 'Angry', 'Annoyed'].map(f => (
+                <TouchableOpacity key={f} style={[styles.feelingButton,
+                  feeling === f && styles.feelingSelected]} onPress={() => setFeeling(f)}
+                >
+                  <FeelingIcon feeling={f} size={16} color={feeling === f ? 'white' : colors.text} />
+                  <Text style={[styles.feelingText, feeling === f && styles.feelingTextSelected]}>{f}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+            <Text style={styles.label}>Content</Text>
+            <TextInput style={[styles.input, styles.multilineInput]} placeholder="Write your thoughts..."
+              placeholderTextColor={colors.secondaryText} value={content} onChangeText={setContent} multiline
+            />
+            <View style={styles.actions}>
+              <TouchableOpacity style={styles.secondaryButton} onPress={hideOverlay}>
+                <Text style={styles.secondaryButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.primaryButton} onPress={saveEntry}>
+                <Text style={styles.primaryButtonText}>Save Entry</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </View>
       </View>
-
-      <Text style={styles.label}>Title</Text>
-      <TextInput
-        style={styles.input} placeholder="Enter a title"
-        placeholderTextColor={colors.secondaryText}
-        value={title} onChangeText={setTitle}
-      />
-
-      <Text style={styles.label}>How are you feeling?</Text>
-      <View style={styles.feelingSelector}>
-        {['Happy', 'Sad', 'Excited', 'Calm', 'Anxious', 'Angry', 'Annoyed'].map(f => (
-          <TouchableOpacity
-            key={f}
-            style={[styles.feelingButton, feeling === f && styles.feelingSelected]}
-            onPress={() => setFeeling(f)}
-          >
-            <FeelingIcon feeling={f} size={16} color={feeling === f ? 'white' : colors.text} />
-            <Text style={[styles.feelingText, feeling === f && styles.feelingTextSelected]}>{f}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      <Text style={styles.label}>Content</Text>
-      <TextInput
-        style={[styles.input, styles.multilineInput]}
-        placeholder="Write your thoughts..."
-        placeholderTextColor={colors.secondaryText}
-        value={content} onChangeText={setContent} multiline
-      />
-
-      <View style={styles.actions}>
-        <TouchableOpacity style={styles.secondaryButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.secondaryButtonText}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.primaryButton} onPress={saveEntry}>
-          <Text style={styles.primaryButtonText}>Save Entry</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+    </Modal>
   );
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.card, padding: 24, paddingTop: 85, },
+  overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center', },
+  panel: { width: '90%', maxHeight: '85%', backgroundColor: colors.card, borderRadius: 24, padding: 24, flex: 1 },
+  scrollContent: { flexGrow: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, },
   closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
               alignItems: 'center', },

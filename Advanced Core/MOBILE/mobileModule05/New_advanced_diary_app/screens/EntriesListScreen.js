@@ -4,7 +4,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon, Trash2 } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import EntryListItem from '../components/EntryListItem';
+import NewEntryScreen from './NewEntryScreen';
+import EntryDetailScreen from './EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
+import { useOverlay } from '../context/OverlayContext';
 
 const dummyEntries = [
   { id: '1', title: 'A Great Day', date: 'Nov 20, 2025', content: 'Had a wonderful time with friends, feeling very happy and grateful...', feeling: 'Happy' },
@@ -18,24 +21,18 @@ const dummyEntries = [
 
 const EntriesListScreen = ({ navigation }) => {
   const { theme, toggleTheme, colors } = useTheme();
+  const { showOverlay } = useOverlay();
   const styles = getStyles(colors);
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.container}>
         {/* Header Section */}
-        <LinearGradient
-          colors={['#5B8CFF', '#4A7AE8']}
-          style={styles.header}
-        >
+        <LinearGradient colors={['#5B8CFF', '#4A7AE8']} style={styles.header} >
           <View style={styles.profileRow}>
             <View style={styles.userInfo}>
-              <View style={styles.avatar}>
-                <Text>👤</Text>
-              </View>
-              <View>
-                <Text style={styles.userName}>Sarah Johnson</Text>
-              </View>
+              <View style={styles.avatar}><Text>👤</Text></View>
+              <View><Text style={styles.userName}>Sarah Johnson</Text></View>
             </View>
             <View style={styles.headerActions}>
               <TouchableOpacity style={styles.headerButton} onPress={toggleTheme}>
@@ -82,7 +79,7 @@ const EntriesListScreen = ({ navigation }) => {
         <View style={styles.contentArea} >
           <Text style={styles.sectionTitle}>Recent Entries (Last 2)</Text>
           {dummyEntries.slice(0, 2).map(item => (
-            <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => navigation.navigate('EntryDetail', { entry: item })}>
+            <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
               <View style={styles.cardHeader}>
                 <Text style={styles.entryTitle}>{item.title}</Text>
                 <FeelingIcon feeling={item.feeling} />
@@ -93,15 +90,13 @@ const EntriesListScreen = ({ navigation }) => {
           ))}
 
           <Text style={[styles.sectionTitle, { marginTop: 32 }]}>All Entries</Text>
-          {dummyEntries.map(item => (
-            <EntryListItem key={item.id} item={item} />
-          ))}
+          {dummyEntries.map(item => <EntryListItem key={item.id} item={item} />)}
 
         </View>
       </ScrollView>
 
       {/* Floating action button */}
-      <TouchableOpacity style={styles.fab} onPress={() => navigation.navigate('NewEntry')}>
+      <TouchableOpacity style={styles.fab} onPress={() => showOverlay(<NewEntryScreen />)}>
         <Plus color="white" size={24} strokeWidth={2.5} />
       </TouchableOpacity>
     </SafeAreaView>

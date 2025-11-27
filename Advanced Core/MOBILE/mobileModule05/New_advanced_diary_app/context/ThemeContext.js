@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, useWindowDimensions } from 'react-native';
 
 // color palettes
 const LightColors = {
@@ -27,12 +27,15 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const systemScheme = useColorScheme(); // dark or light
   const [theme, setTheme] = useState(systemScheme || 'light');
+  const { width, height } = useWindowDimensions();
+
+  const isLandscape = width > height;
 
   const toggleTheme = () => { setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light')); };
 
   const colors = theme === 'light' ? LightColors : DarkColors;
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme, colors }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme, toggleTheme, colors, isLandscape }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => useContext(ThemeContext);
