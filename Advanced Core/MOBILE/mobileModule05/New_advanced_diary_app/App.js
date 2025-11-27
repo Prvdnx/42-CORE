@@ -2,10 +2,10 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, ActivityIndicator } from 'react-native';
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import * as SecureStore from 'expo-secure-store';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { OverlayProvider } from './context/OverlayContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import TabNavigator from './screens/TabNavigator';
@@ -14,7 +14,6 @@ const Stack = createStackNavigator();
 
 const AppContent = () => {
   const { theme, colors } = useTheme();
-  const { user, loading } = useAuth();
 
   const AppLightTheme = {
     ...DefaultTheme,
@@ -40,32 +39,49 @@ const AppContent = () => {
     },
   };
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.background }}>
-        <ActivityIndicator size="large" color={colors.primary} />
-      </View>
-    );
-  }
-
   return (
     <NavigationContainer theme={theme === 'light' ? AppLightTheme : AppDarkTheme}>
-      <Stack.Navigator>
-        {user ? ( <Stack.Screen name="MainApp" component={TabNavigator} options={{ headerShown: false }} />
-        ) : ( <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} /> )}
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <SignedIn>
+          <Stack.Screen name="MainApp" component={TabNavigator} />
+        </SignedIn>
+        <SignedOut>
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        </SignedOut>
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
+// This object tells Clerk how to securely store the session token.
+const tokenCache = {
+  async getToken(key) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key, value) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
+};
+
 export default function App() {
   return (
-    <ThemeProvider>
-      <OverlayProvider>
-        <AuthProvider>
+    <ClerkProvider
+      tokenCache={tokenCache}
+      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
+      <ThemeProvider>
+        <OverlayProvider>
           <AppContent />
-        </AuthProvider>
-      </OverlayProvider>
-    </ThemeProvider>
+        </OverlayProvider>
+      </ThemeProvider>
+    </ClerkProvider>
   );
 }

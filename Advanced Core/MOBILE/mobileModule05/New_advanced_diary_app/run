@@ -17,8 +17,8 @@ clean() {
 install() {
   echo "📦 Installing dependencies..."
   npm install
-  npx expo install --fix
   npx expo-doctor
+  npx expo install --fix
   echo "✅ Dependencies installed successfully."
 }
 

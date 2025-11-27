@@ -9,7 +9,7 @@ import NewEntryScreen from './NewEntryScreen';
 import EntryDetailScreen from './EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
-import { useAuth } from '../context/AuthContext';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 
 const dummyEntries = [
   { id: '1', title: 'A Great Day', date: 'Nov 20, 2025', content: 'Had a wonderful time with friends, feeling very happy and grateful...', feeling: 'Happy' },
@@ -24,7 +24,8 @@ const dummyEntries = [
 const EntriesListScreen = () => {
   const { theme, toggleTheme, colors } = useTheme();
   const { showOverlay } = useOverlay();
-  const { user, logout } = useAuth();
+  const { signOut } = useAuth();
+  const { user } = useUser();
   const styles = getStyles(colors);
 
   return (
@@ -35,15 +36,15 @@ const EntriesListScreen = () => {
             <View style={styles.userInfo}>
               <View style={styles.avatar}><Text>👤</Text></View>
               <View>
-                <Text style={styles.userName}>{user?.name || 'User'}</Text>
-                <Text style={styles.userEmail}>{user?.email}</Text>
+                <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
+                <Text style={styles.userEmail}>{user?.primaryEmailAddress?.emailAddress}</Text>
               </View>
             </View>
             <View style={styles.headerActions}>
               <TouchableOpacity style={styles.headerButton} onPress={toggleTheme}>
                 {theme === 'light' ? <Moon color="white" size={20} /> : <Sun color="white" size={20} />}
               </TouchableOpacity>
-              <TouchableOpacity style={styles.headerButton} onPress={logout}>
+              <TouchableOpacity style={styles.headerButton} onPress={() => signOut()}>
                 <LogOut color="white" size={20} />
               </TouchableOpacity>
             </View>
