@@ -41,14 +41,16 @@ const AppContent = () => {
 
   return (
     <NavigationContainer theme={theme === 'light' ? AppLightTheme : AppDarkTheme}>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <SignedIn>
+      <SignedIn>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="MainApp" component={TabNavigator} />
-        </SignedIn>
-        <SignedOut>
+        </Stack.Navigator>
+      </SignedIn>
+      <SignedOut>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        </SignedOut>
-      </Stack.Navigator>
+        </Stack.Navigator>
+      </SignedOut>
     </NavigationContainer>
   );
 };
