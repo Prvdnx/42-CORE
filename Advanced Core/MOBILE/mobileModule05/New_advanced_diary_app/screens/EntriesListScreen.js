@@ -52,7 +52,7 @@ const EntriesListScreen = () => {
 
           <View style={styles.statsCard}>
             <View style={styles.statsRow}>
-              <Text style={styles.statsLabel}>Total Entries</Text>
+              <Text style={styles.statsLabel}>Stats for all Entries</Text>
               <Text style={styles.statsValue}>{dummyEntries.length}</Text>
             </View>
             <View style={styles.feelingsDistribution}>
@@ -68,7 +68,7 @@ const EntriesListScreen = () => {
         </LinearGradient>
 
         <View style={styles.contentArea} >
-          <Text style={styles.sectionTitle}>Recent Entries (Last 2)</Text>
+          <Text style={styles.sectionTitle}>Your last diary entries</Text>
           {dummyEntries.slice(0, 2).map(item => (
             <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
               <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
