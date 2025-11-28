@@ -8,6 +8,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { OverlayProvider } from './context/OverlayContext';
 
 import WelcomeScreen from './screens/WelcomeScreen';
+import AuthOptionsScreen from './screens/AuthOptionsScreen';
 import TabNavigator from './screens/TabNavigator';
 
 const Stack = createStackNavigator();
@@ -49,6 +50,7 @@ const AppContent = () => {
       <SignedOut>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
+          <Stack.Screen name="AuthOptions" component={AuthOptionsScreen} />
         </Stack.Navigator>
       </SignedOut>
     </NavigationContainer>
