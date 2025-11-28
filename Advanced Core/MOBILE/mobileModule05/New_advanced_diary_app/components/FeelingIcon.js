@@ -15,8 +15,7 @@ const FeelingIcon = ({ feeling, size = 20, color }) => {
   const feelingData = feelingMap[feeling];
 
   if (!feelingData) {
-    // Return a default or null if feeling is not found
-    return null;
+    return null; // if feeling is not found
   }
 
   const { Icon, defaultColor } = feelingData;
