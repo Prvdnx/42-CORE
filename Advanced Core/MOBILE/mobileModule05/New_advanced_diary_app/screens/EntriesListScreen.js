@@ -37,7 +37,7 @@ const EntriesListScreen = () => {
               <View style={styles.avatar}><Text>👤</Text></View>
               <View>
                 <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
-                <Text style={styles.userEmail}>{user?.primaryEmailAddress?.emailAddress}</Text>
+                {/* <Text style={styles.userEmail}>{user?.primaryEmailAddress?.emailAddress}</Text> */}
               </View>
             </View>
             <View style={styles.headerActions}>
@@ -95,7 +95,7 @@ const getStyles = (colors) => StyleSheet.create({
   header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 16, },
-  avatar: { width: 64, height: 64, borderRadius: 32, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
+  avatar: { width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
   userName: { fontSize: 24, fontWeight: '500', color: '#FFFFFF', marginBottom: 4 },
   userEmail: { fontSize: 14, color: 'rgba(255, 255, 255, 0.8)' },
   headerActions: { flexDirection: 'row', gap: 8, },
