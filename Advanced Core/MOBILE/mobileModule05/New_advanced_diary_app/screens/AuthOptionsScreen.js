@@ -26,7 +26,7 @@ const AuthOptionsScreen = () => {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
           <Image source={require('../assets/images/WritingGIF+.gif')} style={styles.smallGif} contentFit="contain" autoplay loop />
-          <Text style={styles.subtitle}>Log into your personal mood diary</Text>
+          <Text style={styles.subtitle}>Login to document your feelings daily</Text>
           
           <TouchableOpacity style={[styles.button, styles.secondaryButton]} onPress={() => handleOAuth(startGoogle)}>
             <FontAwesome name="google" size={24} color="#DB4437" style={{ marginRight: 15 }} />
@@ -54,3 +54,5 @@ const getStyles = (colors, isLandscape) => StyleSheet.create({
 });
 
 export default AuthOptionsScreen;
+
+// Log into your personal mood diary

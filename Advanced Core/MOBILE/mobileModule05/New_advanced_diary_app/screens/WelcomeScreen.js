@@ -37,8 +37,10 @@ const getStyles = (colors, isLandscape) => StyleSheet.create({
   title: { fontSize: 48, fontWeight: '500', textAlign: 'center', color: colors.text, letterSpacing: -0.5 },
   button: { width: '35%', height: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', flexDirection: 'row',
           marginTop: !isLandscape ? 122 : 0,  maxWidth: 320, },
-  primaryButton: { backgroundColor: '#2d76f4ff',borderWidth: 2, borderColor: '#a8adb4ff', elevation: 5 },
+  primaryButton: { backgroundColor: '#2d76f461',borderWidth: 2, borderColor: '#a8adb4ff', elevation: 5 },
   primaryButtonText: { color: 'white', fontSize: 20, fontWeight: '500' },
 });
 
 export default WelcomeScreen;
+
+// #2d76f4ff #a8adb4ff
