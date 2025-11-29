@@ -86,10 +86,10 @@ const getStyles = (colors) => StyleSheet.create({
     alignItems: 'center',
   },
   title: { fontSize: 24, fontWeight: '500', color: colors.text, },
-  label: { fontSize: 14, color: colors.secondaryText, marginBottom: 8, marginTop: 16, },
+  label: { fontSize: 16, color: colors.secondaryText, marginBottom: 8, marginTop: 16, },
   input: {
     width: '100%', padding: 16, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
-    borderRadius: 12, fontSize: 16, color: colors.text,
+    borderRadius: 12, fontSize: 18, color: colors.text,
   },
   multilineInput: { height: 120, textAlignVertical: 'top', },
   feelingSelector: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, },
@@ -98,7 +98,7 @@ const getStyles = (colors) => StyleSheet.create({
     borderRadius: 12, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
   },
   feelingSelected: { backgroundColor: '#5B8CFF', borderColor: '#5B8CFF', },
-  feelingText: { color: colors.text, fontSize: 14 },
+  feelingText: { color: colors.text, fontSize: 16 },
   feelingTextSelected: { color: 'white' },
   actions: { flexDirection: 'row', gap: 12, marginTop: 32, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border, },
   secondaryButton: {

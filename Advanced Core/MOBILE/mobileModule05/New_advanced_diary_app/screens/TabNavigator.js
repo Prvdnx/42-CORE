@@ -19,7 +19,7 @@ const TabNavigator = () => {
           backgroundColor: colors.card, borderTopWidth: 1, borderTopColor: colors.border,
           borderTopLeftRadius: 32, borderTopRightRadius: 32, position: 'absolute', height: isLandscape ? 50 : 70, paddingBottom: 10, paddingTop: 10,
         },
-        tabBarLabelStyle: { fontSize: 12, fontWeight: '500', },
+        tabBarLabelStyle: { fontSize: 14, fontWeight: '500', },
       }} >
 
       <Tab.Screen name="Profile" component={EntriesListScreen}
