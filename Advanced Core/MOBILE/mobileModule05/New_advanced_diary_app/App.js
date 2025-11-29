@@ -4,6 +4,8 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack';
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import * as SecureStore from 'expo-secure-store';
+import { useFonts, Kalam_400Regular } from '@expo-google-fonts/kalam';
+import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { OverlayProvider } from './context/OverlayContext';
 import { EntriesProvider } from './context/EntriesContext';
@@ -11,6 +13,8 @@ import { EntriesProvider } from './context/EntriesContext';
 import WelcomeScreen from './screens/WelcomeScreen';
 import AuthOptionsScreen from './screens/AuthOptionsScreen';
 import TabNavigator from './screens/TabNavigator';
+
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createStackNavigator();
 
@@ -77,6 +81,18 @@ const tokenCache = {
 };
 
 export default function App() {
+  const [fontsLoaded] = useFonts({ Kalam_400Regular });
+
+  React.useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <ThemeProvider>

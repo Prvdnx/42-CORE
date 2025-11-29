@@ -19,6 +19,7 @@ install() {
   npm install
   npx expo-doctor
   npx expo install --fix
+  npx expo install --check
   echo "✅ Dependencies installed successfully."
 }
 

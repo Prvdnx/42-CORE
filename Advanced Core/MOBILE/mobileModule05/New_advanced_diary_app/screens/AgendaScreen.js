@@ -11,8 +11,8 @@ import { useEntries } from '../context/EntriesContext';
 import { getCalendarDate } from '../utils/appUtils';
 
 const AgendaScreen = ({ navigation }) => {
-  const { colors, theme } = useTheme();
-  const styles = getStyles(colors);
+  const { colors, theme, fontFamily } = useTheme();
+  const styles = getStyles(colors, fontFamily);
   const { entries, loading } = useEntries();
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
@@ -43,7 +43,7 @@ const AgendaScreen = ({ navigation }) => {
       <StatusBar barStyle="light-content" backgroundColor="#5B8CFF" translucent={false} />
       <ScrollView style={styles.container}>
         <LinearGradient colors={['#5B8CFF', '#4A7AE8']} style={styles.header}>
-          <Text style={styles.headerTitle}>Calendar</Text>
+          <Text style={styles.headerTitle}>Mood Calendar</Text>
           <Calendar current={selectedDate} onDayPress={(day) => setSelectedDate(day.dateString)} markedDates={markedDates}
             renderArrow={(direction) => (
               <View style={styles.monthNavButton}>
@@ -55,10 +55,8 @@ const AgendaScreen = ({ navigation }) => {
               calendarBackground: 'transparent', dayTextColor: '#FFFFFF', textDisabledColor: 'rgba(255, 255, 255, 0.5)',
               monthTextColor: '#FFFFFF', textDayFontWeight: '500', textMonthFontWeight: 'bold', textDayHeaderFontWeight: 'normal',
               textDayFontSize: 16, monthTextFontWeight: '500', textDayHeaderFontSize: 12,
-              'stylesheet.calendar.header': {
-                week: { marginTop: 8, flexDirection: 'row', justifyContent: 'space-around', },
-                dayHeader: { color: 'rgba(255, 255, 255, 0.7)', }
-              },
+              'stylesheet.calendar.header': { week: { marginTop: 8, flexDirection: 'row', justifyContent: 'space-around', },
+                                            dayHeader: { color: 'rgba(255, 255, 255, 0.7)', } },
               'stylesheet.day.basic': { text: { color: '#FFFFFF' } }
             }}
           />
@@ -78,18 +76,18 @@ const AgendaScreen = ({ navigation }) => {
   );
 };
 
-const getStyles = (colors) => StyleSheet.create({
+const getStyles = (colors, fontFamily) => StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background, overflow: 'hidden' },
   container: { flex: 1, backgroundColor: colors.background, },
   header: { paddingTop: 15, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
-  headerTitle: { fontSize: 32, fontWeight: '500', color: '#FFFFFF', marginBottom: 24 },
+  headerTitle: { fontSize: 35, textAlign: 'center', fontWeight: '500', color: '#FFFFFF', marginBottom: 10, marginTop: 5, fontFamily },
   monthNavButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center', alignItems: 'center' },
   contentArea: { padding: 24, marginBottom: 70 },
-  sectionTitle: { fontSize: 24, fontWeight: '500', color: colors.text, marginBottom: 16 },
+  sectionTitle: { fontSize: 25, fontWeight: '500', color: colors.text, marginBottom: 16, fontFamily },
   loadingContainer: { paddingVertical: 60, alignItems: 'center', gap: 16 },
   loadingText: { fontSize: 16, color: colors.secondaryText },
   noEntriesCard: { backgroundColor: colors.card, borderRadius: 16, padding: 32, alignItems: 'center', justifyContent: 'center', },
-  noEntriesText: { color: colors.secondaryText, },
+  noEntriesText: { color: colors.secondaryText, fontFamily },
 });
 
 export default AgendaScreen;

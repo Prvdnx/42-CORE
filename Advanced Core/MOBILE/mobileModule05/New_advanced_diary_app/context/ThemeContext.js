@@ -34,8 +34,9 @@ export const ThemeProvider = ({ children }) => {
   const toggleTheme = () => { setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light')); };
 
   const colors = theme === 'light' ? LightColors : DarkColors;
+  const fontFamily = 'Kalam_400Regular'; // Handwriting font for the app
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme, colors, isLandscape }}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ theme, toggleTheme, colors, isLandscape, fontFamily }}>{children}</ThemeContext.Provider>;
 };
 
 export const useTheme = () => useContext(ThemeContext);

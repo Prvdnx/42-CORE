@@ -19,3 +19,23 @@ export const getCalendarDate = (date) => {
 // String utilities
 export const capitalize = (str) => str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 export const sanitizeString = (str) => str?.trim() || '';
+
+// Entry utilities
+export const handleDeleteEntry = (entryId, deleteEntryFn, onSuccess) => {
+    const { Alert } = require('react-native');
+    Alert.alert(
+        "Delete Entry",
+        "Are you sure you want to delete this entry?",
+        [
+            { text: "Cancel", style: "cancel" },
+            {
+                text: "Delete",
+                style: "destructive",
+                onPress: async () => {
+                    await deleteEntryFn(entryId);
+                    if (onSuccess) onSuccess();
+                }
+            }
+        ]
+    );
+};

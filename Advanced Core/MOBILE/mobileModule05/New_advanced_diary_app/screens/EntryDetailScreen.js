@@ -1,35 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { X, Trash2 } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useEntries } from '../context/EntriesContext';
-import { formatDate } from '../utils/appUtils';
+import { formatDate, handleDeleteEntry } from '../utils/appUtils';
 
 const EntryDetailScreen = ({ entry }) => {
-  const { colors } = useTheme();
+  const { colors, fontFamily } = useTheme();
   const { hideOverlay } = useOverlay();
   const { deleteEntry } = useEntries();
-  const styles = getStyles(colors, entry.feeling);
-
-  const handleDelete = async () => {
-    Alert.alert(
-      "Delete Entry",
-      "Are you sure you want to delete this entry?",
-      [
-        { text: "Cancel", style: "cancel" },
-        {
-          text: "Delete",
-          style: "destructive",
-          onPress: async () => {
-            await deleteEntry(entry.id);
-            hideOverlay();
-          }
-        }
-      ]
-    );
-  };
+  const styles = getStyles(colors, fontFamily);
 
   return (
     <Modal animationType="fade" transparent={true} visible={true} onRequestClose={hideOverlay} >
@@ -61,7 +43,7 @@ const EntryDetailScreen = ({ entry }) => {
 
           {/* Actions */}
           <View style={styles.actions}>
-            <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+            <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteEntry(entry.id, deleteEntry, hideOverlay)}>
               <Trash2 color="#FF6B6B" size={16} />
               <Text style={styles.deleteButtonText}>Delete Entry</Text>
             </TouchableOpacity>
@@ -75,7 +57,7 @@ const EntryDetailScreen = ({ entry }) => {
   );
 };
 
-const getStyles = (colors) => StyleSheet.create({
+const getStyles = (colors, fontFamily) => StyleSheet.create({
   overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'center', alignItems: 'center' },
   panel: { width: '90%', maxHeight: '85%', backgroundColor: colors.card, borderRadius: 24, padding: 24, flex: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, },
@@ -85,12 +67,12 @@ const getStyles = (colors) => StyleSheet.create({
     width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
     alignItems: 'center',
   },
-  title: { fontSize: 24, fontWeight: '500', color: colors.text, },
-  feelingLabel: { fontSize: 16, color: colors.secondaryText, },
+  title: { fontSize: 28, fontWeight: '500', color: colors.text, fontFamily },
+  feelingLabel: { fontSize: 18, color: colors.secondaryText, fontFamily },
   scrollContainer: { flex: 1 },
-  date: { fontSize: 16, color: colors.secondaryText, marginBottom: 16, },
+  date: { fontSize: 18, color: colors.secondaryText, marginBottom: 16, fontFamily },
   contentCard: { backgroundColor: colors.background, borderRadius: 16, padding: 16, },
-  content: { fontSize: 18, color: colors.text, lineHeight: 28, },
+  content: { fontSize: 20, color: colors.text, lineHeight: 30, fontFamily },
   actions: {
     flexDirection: 'row', gap: 12, paddingTop: 16, marginTop: 24, borderTopWidth: 1,
     borderColor: colors.border,

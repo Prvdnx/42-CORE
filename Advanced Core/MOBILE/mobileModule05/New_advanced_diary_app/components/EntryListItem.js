@@ -6,16 +6,15 @@ import EntryDetailScreen from '../screens/EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useEntries } from '../context/EntriesContext';
-import { formatDate } from '../utils/appUtils';
+import { formatDate, handleDeleteEntry } from '../utils/appUtils';
 
 const EntryListItem = ({ item, showDate = true }) => {
-  const { colors } = useTheme();
+  const { colors, fontFamily } = useTheme();
   const { showOverlay } = useOverlay();
   const { deleteEntry } = useEntries();
-  const styles = getStyles(colors);
+  const styles = getStyles(colors, fontFamily);
 
   const handlePress = () => { showOverlay(<EntryDetailScreen entry={item} />); };
-  const handleDelete = async () => { await deleteEntry(item.id); };
 
   return (
     <View style={styles.card}>
@@ -26,22 +25,22 @@ const EntryListItem = ({ item, showDate = true }) => {
         </View>
         {showDate && item.date && <Text style={styles.date}>{formatDate(item.date)}</Text>}
       </TouchableOpacity>
-      <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+      <TouchableOpacity style={styles.deleteButton} onPress={() => handleDeleteEntry(item.id, deleteEntry)}>
         <Trash2 color="#FF6B6B" size={16} />
       </TouchableOpacity>
     </View>
   );
 };
 
-const getStyles = (colors) => StyleSheet.create({
+const getStyles = (colors, fontFamily) => StyleSheet.create({
   card: {
     flexDirection: 'row', backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 1, elevation: 2, alignItems: 'center',
   },
   clickableArea: { flex: 1, },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, },
-  title: { fontSize: 16, fontWeight: '500', color: colors.text, },
-  date: { fontSize: 12, color: colors.secondaryText, marginTop: 4, },
+  title: { fontSize: 20, fontWeight: '500', color: colors.text, fontFamily },
+  date: { fontSize: 16, color: colors.secondaryText, marginTop: 4, fontFamily },
   deleteButton: { padding: 8, marginLeft: 16, },
 });
 
