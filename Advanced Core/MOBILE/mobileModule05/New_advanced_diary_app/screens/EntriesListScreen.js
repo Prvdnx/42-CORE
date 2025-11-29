@@ -109,10 +109,10 @@ const EntriesListScreen = () => {
   );
 };
 
-const getStyles = (colors, fontFamily) => StyleSheet.create({
+const getStyles = (colors, fontFamily, isLandscape) => StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background, overflow: 'hidden' },
   container: { flex: 1, backgroundColor: colors.background, },
-  header: { paddingTop: 18, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
+  header: { paddingTop: isLandscape ? 0 : 24, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 9, },
   avatar: { width: 60, height: 60, borderRadius: 30, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
