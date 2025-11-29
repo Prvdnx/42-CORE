@@ -54,5 +54,3 @@ const getStyles = (colors, isLandscape) => StyleSheet.create({
 });
 
 export default AuthOptionsScreen;
-
-// Log into your personal mood diary

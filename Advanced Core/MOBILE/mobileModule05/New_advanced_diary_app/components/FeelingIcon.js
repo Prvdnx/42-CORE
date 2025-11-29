@@ -1,21 +1,27 @@
 import React from 'react';
-import { Smile, Frown, Zap, Wind, AlertCircle, Angry, Annoyed } from 'lucide-react-native';
+import { Smile, Frown, Zap, Wind, AlertCircle, Angry, Annoyed, ThumbsUp, ThumbsDown } from 'lucide-react-native';
 
 const feelingMap = {
-  Happy: { Icon: Smile, defaultColor: '#FFD60A' },
-  Sad: { Icon: Frown, defaultColor: '#FF6B6B' },
-  Excited: { Icon: Zap, defaultColor: '#FF9500' },
-  Calm: { Icon: Wind, defaultColor: '#64D2FF' },
-  Anxious: { Icon: AlertCircle, defaultColor: '#BF5AF2' },
-  Angry: { Icon: Angry, defaultColor: '#FF3B30' },
-  Annoyed: { Icon: Annoyed, defaultColor: '#A0A0A0' },
+  good: { Icon: ThumbsUp, defaultColor: '#34C759' },
+  bad: { Icon: ThumbsDown, defaultColor: '#FF3B30' },
+  happy: { Icon: Smile, defaultColor: '#FFD60A' },
+  sad: { Icon: Frown, defaultColor: '#FF6B6B' },
+  excited: { Icon: Zap, defaultColor: '#FF9500' },
+  calm: { Icon: Wind, defaultColor: '#64D2FF' },
+  anxious: { Icon: AlertCircle, defaultColor: '#BF5AF2' },
+  angry: { Icon: Angry, defaultColor: '#FF3B30' },
+  annoyed: { Icon: Annoyed, defaultColor: '#A0A0A0' }
 };
 
 const FeelingIcon = ({ feeling, size = 20, color }) => {
-  const feelingData = feelingMap[feeling];
+  if (!feeling) return null;
 
-  if (!feelingData) {
-    return null; // if feeling is not found
+  const normalizedFeeling = feeling.toLowerCase().trim();
+  const feelingData = feelingMap[normalizedFeeling];
+
+  if (!feelingData) { // if unknown feeling
+    console.log(`FeelingIcon: Unknown feeling "${feeling}"`);
+    return null;
   }
 
   const { Icon, defaultColor } = feelingData;
@@ -24,4 +30,5 @@ const FeelingIcon = ({ feeling, size = 20, color }) => {
   return <Icon color={iconColor} size={size} />;
 };
 
+export const feelingKeys = Object.keys(feelingMap);
 export default FeelingIcon;

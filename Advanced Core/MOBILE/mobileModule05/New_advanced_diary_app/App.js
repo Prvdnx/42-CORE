@@ -6,6 +6,7 @@ import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import * as SecureStore from 'expo-secure-store';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { OverlayProvider } from './context/OverlayContext';
+import { EntriesProvider } from './context/EntriesContext';
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import AuthOptionsScreen from './screens/AuthOptionsScreen';
@@ -57,7 +58,7 @@ const AppContent = () => {
   );
 };
 
-// This object tells Clerk how to securely store the session token.
+// tells Clerk how to securely store the session token.
 const tokenCache = {
   async getToken(key) {
     try {
@@ -77,14 +78,13 @@ const tokenCache = {
 
 export default function App() {
   return (
-    <ClerkProvider
-      tokenCache={tokenCache}
-      publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}
-    >
+    <ClerkProvider tokenCache={tokenCache} publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <ThemeProvider>
-        <OverlayProvider>
-          <AppContent />
-        </OverlayProvider>
+        <EntriesProvider>
+          <OverlayProvider>
+            <AppContent />
+          </OverlayProvider>
+        </EntriesProvider>
       </ThemeProvider>
     </ClerkProvider>
   );

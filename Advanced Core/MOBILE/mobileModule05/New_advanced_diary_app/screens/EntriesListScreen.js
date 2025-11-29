@@ -3,30 +3,30 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } fr
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
 
-import FeelingIcon from '../components/FeelingIcon';
+import FeelingIcon, { feelingKeys } from '../components/FeelingIcon';
 import EntryListItem from '../components/EntryListItem';
 import NewEntryScreen from './NewEntryScreen';
 import EntryDetailScreen from './EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useAuth, useUser } from '@clerk/clerk-expo';
-
-const dummyEntries = [
-  { id: '1', title: 'A Great Day', date: 'Nov 20, 2025', content: 'Had a wonderful time with friends, feeling very happy and grateful...', feeling: 'Happy' },
-  { id: '2', title: 'Productive Morning', date: 'Nov 19, 2025', content: 'Finished a big project at work. Felt very excited and accomplished.', feeling: 'Excited' },
-  { id: '3', title: 'Feeling a bit down', date: 'Nov 18, 2025', content: 'Work was stressful today. Trying to stay positive for tomorrow.', feeling: 'Sad' },
-  { id: '4', title: 'A Calm Evening', date: 'Nov 17, 2025', content: 'Spent the evening reading a book. It was very relaxing.', feeling: 'Calm' },
-  { id: '5', title: 'Anxious about tomorrow', date: 'Nov 16, 2025', content: 'Have a big presentation tomorrow and feeling a bit anxious.', feeling: 'Anxious' },
-  { id: '6', title: 'Traffic Jam', date: 'Nov 15, 2025', content: 'Stuck in traffic for an hour. So angry.', feeling: 'Angry' },
-  { id: '7', title: 'Minor Setback', date: 'Nov 14, 2025', content: 'A small mistake at work was annoying.', feeling: 'Annoyed' },
-];
+import { useEntries } from '../context/EntriesContext';
 
 const EntriesListScreen = () => {
   const { theme, toggleTheme, colors } = useTheme();
   const { showOverlay } = useOverlay();
   const { signOut } = useAuth();
   const { user } = useUser();
+  const { entries } = useEntries();
   const styles = getStyles(colors);
+
+  // calculate stats
+  const totalEntries = entries.length;
+  const feelingCounts = entries.reduce((acc, entry) => {
+    const feeling = (entry.feeling || 'Unknown').toLowerCase().trim();
+    acc[feeling] = (acc[feeling] || 0) + 1;
+    return acc;
+  }, {});
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -53,32 +53,41 @@ const EntriesListScreen = () => {
           <View style={styles.statsCard}>
             <View style={styles.statsRow}>
               <Text style={styles.statsLabel}>Stats for all Entries</Text>
-              <Text style={styles.statsValue}>{dummyEntries.length}</Text>
+              <Text style={styles.statsValue}>{totalEntries}</Text>
             </View>
-            <View style={styles.feelingsDistribution}>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Happy" size={16} color="white" /><Text style={styles.feelingStatText}>45%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Sad" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Excited" size={16} color="white" /><Text style={styles.feelingStatText}>20%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Calm" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Anxious" size={16} color="white" /><Text style={styles.feelingStatText}>5%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Angry" size={16} color="white" /><Text style={styles.feelingStatText}>15%</Text></View>
-              <View style={styles.feelingStatItem}><FeelingIcon feeling="Annoyed" size={16} color="white" /><Text style={styles.feelingStatText}>5%</Text></View>
-              </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.feelingsScroll}>
+              {feelingKeys.map(f => {
+                const count = feelingCounts[f] || 0;
+                const percentage = totalEntries > 0 ? Math.round((count / totalEntries) * 100) : 0;                
+                const displayName = f.charAt(0).toUpperCase() + f.slice(1); // capitalize first letter for display
+                return (
+                  <View key={f} style={styles.feelingStatItem}>
+                    <FeelingIcon feeling={f} size={24} color="white" />
+                    <Text style={styles.feelingStatPercentage}>{percentage}%</Text>
+                    <Text style={styles.feelingStatName}>{displayName}</Text>
+                  </View>
+                );
+              })}
+            </ScrollView>
           </View>
         </LinearGradient>
 
         <View style={styles.contentArea} >
           <Text style={styles.sectionTitle}>Your last diary entries</Text>
-          {dummyEntries.slice(0, 2).map(item => (
-            <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
-              <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
-              <Text style={styles.entryContent} numberOfLines={2}>{item.content}</Text>
-              <Text style={styles.entryDate}>{item.date}</Text>
-            </TouchableOpacity>
-          ))}
+          {entries.length > 0 ? (
+            entries.slice(0, 2).map(item => (
+              <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
+                <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
+                <Text style={styles.entryContent} numberOfLines={2}>{item.content}</Text>
+                <Text style={styles.entryDate}>{item.date}</Text>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text style={{ color: colors.secondaryText, marginBottom: 16 }}>No entries yet. Start by adding one!</Text>
+          )}
 
           <Text style={[styles.sectionTitle, { marginTop: 32 }]}>All Entries</Text>
-          {dummyEntries.map(item => <EntryListItem key={item.id} item={item} />)}
+          {entries.map(item => <EntryListItem key={item.id} item={item} />)}
         </View>
       </ScrollView>
 
@@ -104,9 +113,11 @@ const getStyles = (colors) => StyleSheet.create({
   statsRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, },
   statsLabel: { color: 'rgba(255, 255, 255, 0.9)', fontSize: 14, },
   statsValue: { color: 'white', fontSize: 14, fontWeight: '600', },
-  feelingsDistribution: { flexDirection: 'row', justifyContent: 'space-between', gap: 8, },
-  feelingStatItem: { flex: 1, backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 8, padding: 8, alignItems: 'center', gap: 4, },
-  feelingStatText: { color: 'white', fontSize: 12, },
+  statsValue: { color: 'white', fontSize: 14, fontWeight: '600', },
+  feelingsScroll: { gap: 12, paddingRight: 16 },
+  feelingStatItem: { backgroundColor: 'rgba(255, 255, 255, 0.3)', borderRadius: 12, padding: 12, alignItems: 'center', justifyContent: 'center', minWidth: 80, gap: 4 },
+  feelingStatPercentage: { color: 'white', fontSize: 16, fontWeight: '600', marginTop: 4 },
+  feelingStatName: { color: 'rgba(255, 255, 255, 0.9)', fontSize: 12, fontWeight: '500' },
   contentArea: { paddingBottom: 120, padding: 24, },
   sectionTitle: { fontSize: 20, fontWeight: '500', color: colors.text, marginBottom: 16, },
   recentEntryCard: { backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.18, shadowRadius: 1.00, elevation: 1, },
@@ -116,5 +127,5 @@ const getStyles = (colors) => StyleSheet.create({
   entryDate: { fontSize: 12, color: colors.secondaryText, },
   fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
 });
- 
+
 export default EntriesListScreen;

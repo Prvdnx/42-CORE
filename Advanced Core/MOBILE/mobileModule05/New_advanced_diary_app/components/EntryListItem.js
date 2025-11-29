@@ -5,19 +5,20 @@ import FeelingIcon from './FeelingIcon';
 import EntryDetailScreen from '../screens/EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
+import { useEntries } from '../context/EntriesContext';
 
 const EntryListItem = ({ item, showDate = true }) => {
   const { colors } = useTheme();
   const { showOverlay } = useOverlay();
+  const { deleteEntry } = useEntries();
   const styles = getStyles(colors);
 
   const handlePress = () => {
     showOverlay(<EntryDetailScreen entry={item} />);
   };
 
-  const handleDelete = () => {
-    // In a real app, this would dispatch an action to delete the item from the database
-    console.log('Delete item:', item.id);
+  const handleDelete = async () => {
+    await deleteEntry(item.id);
   };
 
   return (

@@ -1,14 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Modal, Alert } from 'react-native';
 import { X, Trash2 } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
+import { useEntries } from '../context/EntriesContext';
 
 const EntryDetailScreen = ({ entry }) => {
   const { colors } = useTheme();
   const { hideOverlay } = useOverlay();
+  const { deleteEntry } = useEntries();
   const styles = getStyles(colors, entry.feeling);
+
+  const handleDelete = async () => {
+    Alert.alert(
+      "Delete Entry",
+      "Are you sure you want to delete this entry?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            await deleteEntry(entry.id);
+            hideOverlay();
+          }
+        }
+      ]
+    );
+  };
 
   return (
     <Modal animationType="fade" transparent={true} visible={true} onRequestClose={hideOverlay} >
@@ -40,7 +60,7 @@ const EntryDetailScreen = ({ entry }) => {
 
           {/* Actions */}
           <View style={styles.actions}>
-            <TouchableOpacity style={styles.deleteButton}>
+            <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
               <Trash2 color="#FF6B6B" size={16} />
               <Text style={styles.deleteButtonText}>Delete Entry</Text>
             </TouchableOpacity>
@@ -60,22 +80,22 @@ const getStyles = (colors) => StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, },
   headerTitle: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, },
   feelingBadge: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', },
-  closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
+  closeButton: {width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
               alignItems: 'center', },
   title: { fontSize: 24, fontWeight: '500', color: colors.text, },
-  feelingLabel: {fontSize: 14, color: colors.secondaryText, },
+  feelingLabel: { fontSize: 14, color: colors.secondaryText, },
   scrollContainer: { flex: 1 },
   date: { fontSize: 14, color: colors.secondaryText, marginBottom: 16, },
   contentCard: { backgroundColor: colors.background, borderRadius: 16, padding: 16, },
   content: { fontSize: 16, color: colors.text, lineHeight: 26, },
   actions: { flexDirection: 'row', gap: 12, paddingTop: 16, marginTop: 24, borderTopWidth: 1,
           borderColor: colors.border, },
-  deleteButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)', flexDirection: 'row',
+  deleteButton: {flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)', flexDirection: 'row',
               justifyContent: 'center', alignItems: 'center', gap: 8, },
   deleteButtonText: { color: '#FF6B6B', fontWeight: '500', },
   primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center',
-              alignItems: 'center', },
+                alignItems: 'center', },
   primaryButtonText: { color: 'white', fontWeight: '500', },
 });
- 
+
 export default EntryDetailScreen;

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Modal } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Modal, Alert } from 'react-native';
 import { X } from 'lucide-react-native';
 import FeelingIcon from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
+import { useEntries } from '../context/EntriesContext';
 
 const NewEntryScreen = () => {
   const [title, setTitle] = useState('');
@@ -11,11 +12,22 @@ const NewEntryScreen = () => {
   const [feeling, setFeeling] = useState('');
   const { colors } = useTheme();
   const { hideOverlay } = useOverlay();
+  const { addEntry } = useEntries();
   const styles = getStyles(colors);
 
-  const saveEntry = () => {
-    console.log('Saving entry:', { title, content, feeling });
-    hideOverlay();
+  const saveEntry = async () => {
+    if (!title.trim() || !content.trim() || !feeling) {
+      Alert.alert("Missing Information", "Please fill in all fields and select a feeling.");
+      return;
+    }
+
+    try {
+      await addEntry({ title, content, feeling });
+      hideOverlay();
+    } catch (error) {
+      console.error("Error saving entry:", error);
+      Alert.alert("Error", "Failed to save entry. Please try again.");
+    }
   };
 
   return (
@@ -37,7 +49,7 @@ const NewEntryScreen = () => {
             <View style={styles.feelingSelector}>
               {['Happy', 'Sad', 'Excited', 'Calm', 'Anxious', 'Angry', 'Annoyed'].map(f => (
                 <TouchableOpacity key={f} style={[styles.feelingButton,
-                  feeling === f && styles.feelingSelected]} onPress={() => setFeeling(f)}
+                feeling === f && styles.feelingSelected]} onPress={() => setFeeling(f)}
                 >
                   <FeelingIcon feeling={f} size={16} color={feeling === f ? 'white' : colors.text} />
                   <Text style={[styles.feelingText, feeling === f && styles.feelingTextSelected]}>{f}</Text>
@@ -68,22 +80,30 @@ const getStyles = (colors) => StyleSheet.create({
   panel: { width: '90%', maxHeight: '85%', backgroundColor: colors.card, borderRadius: 24, padding: 24, flex: 1 },
   scrollContent: { flexGrow: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, },
-  closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
-              alignItems: 'center', },
+  closeButton: {
+    width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
+    alignItems: 'center',
+  },
   title: { fontSize: 24, fontWeight: '500', color: colors.text, },
   label: { fontSize: 14, color: colors.secondaryText, marginBottom: 8, marginTop: 16, },
-  input: { width: '100%', padding: 16, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
-        borderRadius: 12, fontSize: 16, color: colors.text, },
+  input: {
+    width: '100%', padding: 16, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
+    borderRadius: 12, fontSize: 16, color: colors.text,
+  },
   multilineInput: { height: 120, textAlignVertical: 'top', },
   feelingSelector: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, },
-  feelingButton: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 16,
-                borderRadius: 12, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border, },
+  feelingButton: {
+    flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 16,
+    borderRadius: 12, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
+  },
   feelingSelected: { backgroundColor: '#5B8CFF', borderColor: '#5B8CFF', },
   feelingText: { color: colors.text, fontSize: 14 },
   feelingTextSelected: { color: 'white' },
-  actions: { flexDirection: 'row', gap: 12, marginTop: 32, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border,},
-  secondaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center',
-                  borderWidth: 1, borderColor: colors.border },
+  actions: { flexDirection: 'row', gap: 12, marginTop: 32, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border, },
+  secondaryButton: {
+    flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center',
+    borderWidth: 1, borderColor: colors.border
+  },
   secondaryButtonText: { color: colors.text, fontWeight: '500' },
   primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center' },
   primaryButtonText: { color: 'white', fontWeight: '500' },
