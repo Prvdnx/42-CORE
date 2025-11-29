@@ -19,7 +19,7 @@ const EntriesListScreen = () => {
   const { showOverlay } = useOverlay();
   const { signOut } = useAuth();
   const { user } = useUser();
-  const { entries, loading } = useEntries();
+  const { entries, loading, addEntry } = useEntries();
   const styles = getStyles(colors, fontFamily);
 
   // calculate stats
@@ -51,6 +51,7 @@ const EntriesListScreen = () => {
               </View>
             </View>
             <View style={styles.headerActions}>
+
               <TouchableOpacity style={styles.headerButton} onPress={toggleTheme}>
                 {theme === 'light' ? <Moon color="white" size={20} /> : <Sun color="white" size={20} />}
               </TouchableOpacity>

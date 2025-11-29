@@ -48,8 +48,8 @@ const AgendaScreen = ({ navigation }) => {
             customDatesStyles={markedDates.map(date => ({
               date, style: { backgroundColor: 'rgba(255, 255, 255, 0.2)' }, textStyle: { color: '#FFFFFF' }
             }))}
-            previousComponent={<View style={styles.monthNavButton}><ChevronLeft color="white" size={20} /> </View>}
-            nextComponent={<View style={styles.monthNavButton}> <ChevronRight color="white" size={20} /> </View>}
+            previousComponent={<View style={styles.monthNavButton}><ChevronLeft color="white" size={20} /></View>}
+            nextComponent={<View style={styles.monthNavButton}><ChevronRight color="white" size={20} /></View>}
             width={isLandscape ? 600 : 350} scaleFactor={375}
           />
         </LinearGradient>

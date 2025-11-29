@@ -39,13 +39,19 @@ export const EntriesProvider = ({ children }) => {
     const userEmail = user?.primaryEmailAddress?.emailAddress;
     if (!userEmail) return;
 
-    await addDoc(collection(db, 'entries'), {
-      userEmail,
-      title: sanitizeString(title),
-      content: sanitizeString(content),
-      feeling: feeling || '',
-      date: serverTimestamp(),
-    });
+    try {
+      await addDoc(collection(db, 'entries'), {
+        userEmail,
+        title: sanitizeString(title),
+        content: sanitizeString(content),
+        feeling: feeling || '',
+        date: date || serverTimestamp(),
+      });
+      console.log('Entry added successfully');
+    } catch (error) {
+      console.error('Error adding entry: ', error);
+      throw error;
+    }
   };
 
   const deleteEntry = async (id) => { if (!id) return; await deleteDoc(doc(db, 'entries', id)); };
