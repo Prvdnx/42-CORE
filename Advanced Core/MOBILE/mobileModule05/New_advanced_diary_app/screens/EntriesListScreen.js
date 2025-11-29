@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
 
@@ -34,7 +34,9 @@ const EntriesListScreen = () => {
         <LinearGradient colors={['#5B8CFF', '#4A7AE8']} style={styles.header} >
           <View style={styles.profileRow}>
             <View style={styles.userInfo}>
-              <View style={styles.avatar}><Text>👤</Text></View>
+              <View style={styles.avatar}>
+                {user?.imageUrl ? (<Image source={{ uri: user.imageUrl }} style={styles.avatarImage} />) : (<Text>👤</Text>) }
+              </View>
               <View>
                 <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
                 {/* <Text style={styles.userEmail}>{user?.primaryEmailAddress?.emailAddress}</Text> */}
@@ -58,7 +60,7 @@ const EntriesListScreen = () => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.feelingsScroll}>
               {feelingKeys.map(f => {
                 const count = feelingCounts[f] || 0;
-                const percentage = totalEntries > 0 ? Math.round((count / totalEntries) * 100) : 0;                
+                const percentage = totalEntries > 0 ? Math.round((count / totalEntries) * 100) : 0;
                 const displayName = f.charAt(0).toUpperCase() + f.slice(1); // capitalize first letter for display
                 return (
                   <View key={f} style={styles.feelingStatItem}>
@@ -104,7 +106,8 @@ const getStyles = (colors) => StyleSheet.create({
   header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 16, },
-  avatar: { width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', },
+  avatar: { width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
+  avatarImage: { width: '100%', height: '100%' },
   userName: { fontSize: 24, fontWeight: '500', color: '#FFFFFF', marginBottom: 4 },
   userEmail: { fontSize: 14, color: 'rgba(255, 255, 255, 0.8)' },
   headerActions: { flexDirection: 'row', gap: 8, },
