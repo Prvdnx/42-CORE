@@ -6,15 +6,7 @@ import EntryDetailScreen from '../screens/EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useEntries } from '../context/EntriesContext';
-
-const formatDate = (date) => {
-  if (!date) return '';
-  const d = date?.toDate ? date.toDate() : new Date(date);
-  return d.toLocaleString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric',
-    hour: '2-digit', minute: '2-digit', second: '2-digit'
-  }).replace(',', ' at');
-};
+import { formatDate } from '../utils/appUtils';
 
 const EntryListItem = ({ item, showDate = true }) => {
   const { colors } = useTheme();
@@ -42,8 +34,10 @@ const EntryListItem = ({ item, showDate = true }) => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  card: { flexDirection: 'row', backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 1, elevation: 2, alignItems: 'center',},
+  card: {
+    flexDirection: 'row', backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 1, elevation: 2, alignItems: 'center',
+  },
   clickableArea: { flex: 1, },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, },
   title: { fontSize: 16, fontWeight: '500', color: colors.text, },

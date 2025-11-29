@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Modal, Alert } from 'react-native';
 import { X } from 'lucide-react-native';
-import FeelingIcon from '../components/FeelingIcon';
+import FeelingIcon, { feelingKeys } from '../components/FeelingIcon';
 import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useEntries } from '../context/EntriesContext';
+import { capitalize } from '../utils/appUtils';
 
 const NewEntryScreen = () => {
   const [title, setTitle] = useState('');
@@ -47,12 +48,12 @@ const NewEntryScreen = () => {
             />
             <Text style={styles.label}>How are you feeling?</Text>
             <View style={styles.feelingSelector}>
-              {['Happy', 'Sad', 'Excited', 'Calm', 'Anxious', 'Angry', 'Annoyed'].map(f => (
+              {feelingKeys.map(f => (
                 <TouchableOpacity key={f} style={[styles.feelingButton,
                 feeling === f && styles.feelingSelected]} onPress={() => setFeeling(f)}
                 >
                   <FeelingIcon feeling={f} size={16} color={feeling === f ? 'white' : colors.text} />
-                  <Text style={[styles.feelingText, feeling === f && styles.feelingTextSelected]}>{f}</Text>
+                  <Text style={[styles.feelingText, feeling === f && styles.feelingTextSelected]}>{capitalize(f)}</Text>
                 </TouchableOpacity>
               ))}
             </View>

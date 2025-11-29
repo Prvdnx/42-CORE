@@ -7,20 +7,13 @@ import FeelingIcon from '../components/FeelingIcon';
 import EntryListItem from '../components/EntryListItem';
 import { useTheme } from '../context/ThemeContext';
 import { useEntries } from '../context/EntriesContext';
+import { getCalendarDate } from '../utils/appUtils';
 
 const AgendaScreen = ({ navigation }) => {
   const { colors } = useTheme();
   const styles = getStyles(colors);
   const { entries } = useEntries();
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-
-  const getCalendarDate = (date) => {
-    if (!date) return '';
-    try {
-      const d = date?.toDate ? date.toDate() : new Date(date);
-      return d.toISOString().split('T')[0];
-    } catch { return ''; }
-  };
 
   const entriesForSelectedDate = useMemo(() =>
     entries.filter(entry => getCalendarDate(entry.date) === selectedDate),
@@ -88,7 +81,7 @@ const AgendaScreen = ({ navigation }) => {
 
 const getStyles = (colors) => StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },
-  container: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1, backgroundColor: colors.background, paddingBottom: 24 },
   header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   headerTitle: { fontSize: 28, fontWeight: '500', color: '#FFFFFF', marginBottom: 24 },
   monthNavButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center', alignItems: 'center' },

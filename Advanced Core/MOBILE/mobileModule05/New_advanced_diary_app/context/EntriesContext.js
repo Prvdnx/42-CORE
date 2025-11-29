@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useUser } from '@clerk/clerk-expo';
 import { db } from '../services/firebase';
 import { collection, query, where, onSnapshot, orderBy, addDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
+import { sanitizeString } from '../utils/appUtils';
 
 const EntriesContext = createContext();
 
@@ -40,8 +41,8 @@ export const EntriesProvider = ({ children }) => {
 
     await addDoc(collection(db, 'entries'), {
       userEmail,
-      title: title?.trim() || '',
-      content: content?.trim() || '',
+      title: sanitizeString(title),
+      content: sanitizeString(content),
       feeling: feeling || '',
       date: serverTimestamp(),
     });

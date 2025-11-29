@@ -11,15 +11,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useOverlay } from '../context/OverlayContext';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { useEntries } from '../context/EntriesContext';
-
-const formatDate = (date) => {
-  if (!date) return '';
-  const d = date?.toDate ? date.toDate() : new Date(date);
-  return d.toLocaleString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric',
-    hour: '2-digit', minute: '2-digit', second: '2-digit'
-  }).replace(',', ' at');
-};
+import { formatDate, capitalize } from '../utils/appUtils';
 
 const EntriesListScreen = () => {
   const { theme, toggleTheme, colors } = useTheme();
@@ -70,7 +62,7 @@ const EntriesListScreen = () => {
               {feelingKeys.map(f => {
                 const count = feelingCounts[f] || 0;
                 const percentage = totalEntries > 0 ? Math.round((count / totalEntries) * 100) : 0;
-                const displayName = f.charAt(0).toUpperCase() + f.slice(1); // capitalize first letter for display
+                const displayName = capitalize(f); // capitalize first letter for display
                 return (
                   <View key={f} style={styles.feelingStatItem}>
                     <FeelingIcon feeling={f} size={24} color="white" />
