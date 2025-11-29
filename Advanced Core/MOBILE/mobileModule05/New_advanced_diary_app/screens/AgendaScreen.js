@@ -67,11 +67,11 @@ const AgendaScreen = ({ navigation }) => {
   );
 };
 
-const getStyles = (colors, fontFamily) => StyleSheet.create({
+const getStyles = (colors, fontFamily, isLandscape) => StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background, overflow: 'hidden' },
   container: { flex: 1, backgroundColor: colors.background, },
   header: { paddingTop: 15, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
-  headerTitle: { fontSize: 35, textAlign: 'center', fontWeight: '500', color: '#FFFFFF', marginBottom: 20, marginTop: 5, fontFamily },
+  headerTitle: { fontSize: 35, textAlign: 'center', fontWeight: '500', color: '#FFFFFF', marginBottom: 20, marginTop: isLandscape ? 0 : 15, fontFamily },
   monthNavButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: 'rgba(255, 255, 255, 0.2)', justifyContent: 'center', alignItems: 'center' },
   contentArea: { padding: 24, marginBottom: 70 },
   sectionTitle: { fontSize: 25, fontWeight: '500', color: colors.text, marginBottom: 16, fontFamily },
