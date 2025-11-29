@@ -12,6 +12,15 @@ import { useOverlay } from '../context/OverlayContext';
 import { useAuth, useUser } from '@clerk/clerk-expo';
 import { useEntries } from '../context/EntriesContext';
 
+const formatDate = (date) => {
+  if (!date) return '';
+  const d = date?.toDate ? date.toDate() : new Date(date);
+  return d.toLocaleString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit'
+  }).replace(',', ' at');
+};
+
 const EntriesListScreen = () => {
   const { theme, toggleTheme, colors } = useTheme();
   const { showOverlay } = useOverlay();
@@ -35,7 +44,7 @@ const EntriesListScreen = () => {
           <View style={styles.profileRow}>
             <View style={styles.userInfo}>
               <View style={styles.avatar}>
-                {user?.imageUrl ? (<Image source={{ uri: user.imageUrl }} style={styles.avatarImage} />) : (<Text>👤</Text>) }
+                {user?.imageUrl ? (<Image source={{ uri: user.imageUrl }} style={styles.avatarImage} />) : (<Text>👤</Text>)}
               </View>
               <View>
                 <Text style={styles.userName}>{user?.fullName || 'User'}</Text>
@@ -81,7 +90,7 @@ const EntriesListScreen = () => {
               <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
                 <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
                 <Text style={styles.entryContent} numberOfLines={2}>{item.content}</Text>
-                <Text style={styles.entryDate}>{item.date}</Text>
+                <Text style={styles.entryDate}>{formatDate(item.date)}</Text>
               </TouchableOpacity>
             ))
           ) : (

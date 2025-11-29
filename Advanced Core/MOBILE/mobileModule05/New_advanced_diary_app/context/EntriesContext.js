@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useUser } from '@clerk/clerk-expo';
 import { db } from '../services/firebase';
-import { collection, query, where, onSnapshot, orderBy, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, query, where, onSnapshot, orderBy, addDoc, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 
 const EntriesContext = createContext();
 
@@ -25,15 +25,8 @@ export const EntriesProvider = ({ children }) => {
       orderBy('date', 'desc')
     );
 
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const userEntries = [];
-      querySnapshot.forEach((d) => {
-        const data = d.data();
-        const date = data.date?.seconds
-          ? new Date(data.date.seconds * 1000).toISOString().split('T')[0]
-          : data.date;
-        userEntries.push({ id: d.id, ...data, date });
-      });
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const userEntries = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setEntries(userEntries);
       setLoading(false);
     });
@@ -44,15 +37,14 @@ export const EntriesProvider = ({ children }) => {
   const addEntry = async ({ title, content, date, feeling }) => {
     const userEmail = user?.primaryEmailAddress?.emailAddress;
     if (!userEmail) return;
-    const payload = {
+
+    await addDoc(collection(db, 'entries'), {
       userEmail,
       title: title?.trim() || '',
       content: content?.trim() || '',
       feeling: feeling || '',
-      // normalize to YYYY-MM-DD for consistent UI filtering & ordering
-      date: date || new Date().toISOString().split('T')[0],
-    };
-    await addDoc(collection(db, 'entries'), payload);
+      date: serverTimestamp(),
+    });
   };
 
   const deleteEntry = async (id) => { if (!id) return; await deleteDoc(doc(db, 'entries', id)); };

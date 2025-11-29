@@ -14,13 +14,22 @@ const AgendaScreen = ({ navigation }) => {
   const { entries } = useEntries();
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
-  const entriesForSelectedDate = useMemo(() => {
-    return entries.filter(entry => entry.date === selectedDate);
-  }, [entries, selectedDate]);
+  const getCalendarDate = (date) => {
+    if (!date) return '';
+    try {
+      const d = date?.toDate ? date.toDate() : new Date(date);
+      return d.toISOString().split('T')[0];
+    } catch { return ''; }
+  };
+
+  const entriesForSelectedDate = useMemo(() =>
+    entries.filter(entry => getCalendarDate(entry.date) === selectedDate),
+    [entries, selectedDate]);
 
   const markedDates = useMemo(() => {
     const marks = entries.reduce((acc, entry) => {
-      acc[entry.date] = { marked: true, dotColor: 'white' };
+      const date = getCalendarDate(entry.date);
+      if (date) acc[date] = { marked: true, dotColor: 'white' };
       return acc;
     }, {});
 

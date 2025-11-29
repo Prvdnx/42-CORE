@@ -7,9 +7,9 @@ const feelingMap = {
   happy: { Icon: Smile, defaultColor: '#FFD60A' },
   sad: { Icon: Frown, defaultColor: '#FF6B6B' },
   excited: { Icon: Zap, defaultColor: '#FF9500' },
+  angry: { Icon: Angry, defaultColor: '#FF3B30' },
   calm: { Icon: Wind, defaultColor: '#64D2FF' },
   anxious: { Icon: AlertCircle, defaultColor: '#BF5AF2' },
-  angry: { Icon: Angry, defaultColor: '#FF3B30' },
   annoyed: { Icon: Annoyed, defaultColor: '#A0A0A0' }
 };
 
