@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
 
 import FeelingIcon, { feelingKeys } from '../components/FeelingIcon';
 import EntryListItem from '../components/EntryListItem';
+import LoadingSpinner from '../components/LoadingSpinner';
 import NewEntryScreen from './NewEntryScreen';
 import EntryDetailScreen from './EntryDetailScreen';
 import { useTheme } from '../context/ThemeContext';
@@ -18,7 +19,7 @@ const EntriesListScreen = () => {
   const { showOverlay } = useOverlay();
   const { signOut } = useAuth();
   const { user } = useUser();
-  const { entries } = useEntries();
+  const { entries, loading } = useEntries();
   const styles = getStyles(colors);
 
   // calculate stats
@@ -31,6 +32,7 @@ const EntriesListScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="light-content" backgroundColor="#5B8CFF" translucent={false} />
       <ScrollView style={styles.container}>
         <LinearGradient colors={['#5B8CFF', '#4A7AE8']} style={styles.header} >
           <View style={styles.profileRow}>
@@ -77,7 +79,7 @@ const EntriesListScreen = () => {
 
         <View style={styles.contentArea} >
           <Text style={styles.sectionTitle}>Your last diary entries</Text>
-          {entries.length > 0 ? (
+          {loading ? <LoadingSpinner /> : entries.length > 0 ? (
             entries.slice(0, 2).map(item => (
               <TouchableOpacity key={item.id} style={styles.recentEntryCard} onPress={() => showOverlay(<EntryDetailScreen entry={item} />)}>
                 <View style={styles.cardHeader}><Text style={styles.entryTitle}>{item.title}</Text><FeelingIcon feeling={item.feeling} /></View>
@@ -102,9 +104,9 @@ const EntriesListScreen = () => {
 };
 
 const getStyles = (colors) => StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: colors.background, },
+  safeArea: { flex: 1, backgroundColor: colors.background, overflow: 'hidden' },
   container: { flex: 1, backgroundColor: colors.background, },
-  header: { paddingTop: 56, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
+  header: { paddingTop: 15, paddingHorizontal: 24, paddingBottom: 30, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 16, },
   avatar: { width: 70, height: 70, borderRadius: 35, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },

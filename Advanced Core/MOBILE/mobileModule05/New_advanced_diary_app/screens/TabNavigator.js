@@ -9,14 +9,17 @@ import AgendaScreen from '../screens/AgendaScreen';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const { colors } = useTheme();
+  const { colors, isLandscape } = useTheme();
 
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.secondaryText,
-                tabBarStyle: { backgroundColor: colors.card, borderTopWidth: 1, borderTopColor: colors.border,
-                borderTopLeftRadius: 32, borderTopRightRadius: 32, position: 'absolute', height: 80, paddingBottom: 10, paddingTop: 10, },
-                tabBarLabelStyle: { fontSize: 12, fontWeight: '500', },
+      screenOptions={{
+        headerShown: false, tabBarActiveTintColor: colors.primary, tabBarInactiveTintColor: colors.secondaryText,
+        tabBarStyle: {
+          backgroundColor: colors.card, borderTopWidth: 1, borderTopColor: colors.border,
+          borderTopLeftRadius: 32, borderTopRightRadius: 32, position: 'absolute', height: isLandscape ? 50 : 70, paddingBottom: 10, paddingTop: 10,
+        },
+        tabBarLabelStyle: { fontSize: 12, fontWeight: '500', },
       }} >
 
       <Tab.Screen name="Profile" component={EntriesListScreen}
