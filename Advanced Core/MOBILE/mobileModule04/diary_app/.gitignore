@@ -1,0 +1,45 @@
+# Ignore Expo-specific files
+.expo/
+npm-debug.log
+yarn-error.log
+
+# Ignore node_modules
+node_modules/
+package-lock.json
+
+# Ignore sensitive information
+.env
+secrets.js
+
+# Ignore build artifacts
+/android
+/ios
+dist/
+build/
+.idea/
+
+# Ignore miscellaneous
+.DS_Store
+*.pem
+*.cer
+*.p12
+*.pfx
+*.keystore
+
+# Ignore temporary files
+*.log
+*.lock
+
+# Ignore local user settings
+.expo-shared/
+.vscode/
+
+# Ignore test reports
+coverage/
+.nyc_output/
+junit.xml
+
+# Ignore system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
