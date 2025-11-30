@@ -12,7 +12,8 @@ const WelcomeScreen = () => {
 
 
   return (
-    <ImageBackground source={require('../assets/images/pexels-ken-cheung.jpg')} style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <Image source={require('../assets/images/pexels-ken-cheung.jpg')} style={StyleSheet.absoluteFill} contentFit="cover" />
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
           <View style={{ alignItems: 'center', marginBottom: 32 }}>
@@ -26,7 +27,7 @@ const WelcomeScreen = () => {
           </TouchableOpacity>
         </View>
       </SafeAreaView>
-    </ImageBackground>
+    </View>
   );
 };
 
