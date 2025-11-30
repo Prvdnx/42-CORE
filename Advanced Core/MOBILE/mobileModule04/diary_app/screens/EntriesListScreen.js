@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
 
@@ -60,6 +61,7 @@ const EntriesListScreen = () => {
               </TouchableOpacity>
             </View>
           </View>
+        </LinearGradient>
 
           <View style={styles.contentArea} >
             {loading ? <LoadingSpinner /> : entries.length > 0 ? (
@@ -80,7 +82,7 @@ const EntriesListScreen = () => {
 const getStyles = (colors, fontFamily, isLandscape) => StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background, overflow: 'hidden' },
   container: { flex: 1, backgroundColor: colors.background, },
-  header: { paddingTop: isLandscape ? 0 : 24, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
+  header: { paddingTop: isLandscape ? 20 : 24, paddingHorizontal: 24, paddingBottom: 24, borderBottomLeftRadius: 32, borderBottomRightRadius: 32, },
   profileRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', },
   userInfo: { flexDirection: 'row', alignItems: 'center', gap: 9, },
   avatar: { width: 60, height: 60, borderRadius: 30, backgroundColor: 'rgba(255, 255, 255, 0.2)', borderWidth: 2, borderColor: 'rgba(255, 255, 255, 0.3)', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
@@ -104,10 +106,8 @@ const getStyles = (colors, fontFamily, isLandscape) => StyleSheet.create({
   entryTitle: { fontSize: 22, fontWeight: '500', color: colors.text, fontFamily },
   entryContent: { fontSize: 18, color: colors.secondaryText, marginBottom: 8, lineHeight: 26, fontFamily },
   entryDate: { fontSize: 16, color: colors.secondaryText, fontFamily },
-  fab: {
-    position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
-  },
+  fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
 });
 
 export default EntriesListScreen;

@@ -63,29 +63,21 @@ const getStyles = (colors, fontFamily) => StyleSheet.create({
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, },
   headerTitle: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, },
   feelingBadge: { width: 36, height: 36, borderRadius: 12, justifyContent: 'center', alignItems: 'center', },
-  closeButton: {
-    width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
-    alignItems: 'center',
-  },
+  closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
+              alignItems: 'center', },
   title: { fontSize: 28, fontWeight: '500', color: colors.text, fontFamily },
   feelingLabel: { fontSize: 18, color: colors.secondaryText, fontFamily },
   scrollContainer: { flex: 1 },
   date: { fontSize: 18, color: colors.secondaryText, marginBottom: 16, fontFamily },
   contentCard: { backgroundColor: colors.background, borderRadius: 16, padding: 16, },
   content: { fontSize: 20, color: colors.text, lineHeight: 30, fontFamily },
-  actions: {
-    flexDirection: 'row', gap: 12, paddingTop: 16, marginTop: 24, borderTopWidth: 1,
-    borderColor: colors.border,
-  },
-  deleteButton: {
-    flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)', flexDirection: 'row',
-    justifyContent: 'center', alignItems: 'center', gap: 8,
-  },
+  actions: { flexDirection: 'row', gap: 12, paddingTop: 16, marginTop: 24, borderTopWidth: 1,
+            borderColor: colors.border, },
+  deleteButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 8, },
   deleteButtonText: { color: '#FF6B6B', fontWeight: '500', },
-  primaryButton: {
-    flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center',
-    alignItems: 'center',
-  },
+  primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center',
+                alignItems: 'center', },
   primaryButtonText: { color: 'white', fontWeight: '500', },
 });
 

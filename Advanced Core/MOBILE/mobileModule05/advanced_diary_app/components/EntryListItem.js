@@ -33,10 +33,8 @@ const EntryListItem = ({ item, showDate = true }) => {
 };
 
 const getStyles = (colors, fontFamily) => StyleSheet.create({
-  card: {
-    flexDirection: 'row', backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 1, elevation: 2, alignItems: 'center',
-  },
+  card: { flexDirection: 'row', backgroundColor: colors.card, borderRadius: 16, padding: 16, marginBottom: 12, shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 1, elevation: 2, alignItems: 'center', },
   clickableArea: { flex: 1, },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12, },
   title: { fontSize: 20, fontWeight: '500', color: colors.text, fontFamily },

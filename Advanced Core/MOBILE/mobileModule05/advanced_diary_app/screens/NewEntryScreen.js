@@ -42,7 +42,7 @@ const NewEntryScreen = () => {
                 <X color={colors.secondaryText} size={20} />
               </TouchableOpacity>
             </View>
-            <Text style={styles.label}>Title</Text>
+            <Text style={[styles.label, {marginTop: 0}]}>Title</Text>
             <TextInput style={styles.input} placeholder="Enter a title"
               placeholderTextColor={colors.secondaryText} value={title} onChangeText={setTitle}
             />
@@ -81,30 +81,22 @@ const getStyles = (colors, fontFamily) => StyleSheet.create({
   panel: { width: '90%', maxHeight: '85%', backgroundColor: colors.card, borderRadius: 24, padding: 24, flex: 1 },
   scrollContent: { flexGrow: 1 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, },
-  closeButton: {
-    width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
-    alignItems: 'center',
-  },
+  closeButton: { width: 36, height: 36, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center',
+                alignItems: 'center', },
   title: { fontSize: 28, fontWeight: '500', color: colors.text, fontFamily },
   label: { fontSize: 18, color: colors.secondaryText, marginBottom: 8, marginTop: 16, fontFamily },
-  input: {
-    width: '100%', padding: 16, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
-    borderRadius: 12, fontSize: 20, color: colors.text, fontFamily,
-  },
+  input: { width: '100%', padding: 16, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
+          borderRadius: 12, fontSize: 20, color: colors.text, fontFamily, },
   multilineInput: { height: 120, textAlignVertical: 'top', },
   feelingSelector: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, },
-  feelingButton: {
-    flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 16,
-    borderRadius: 12, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border,
-  },
+  feelingButton: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 16,
+                borderRadius: 12, backgroundColor: colors.background, borderWidth: 1, borderColor: colors.border, },
   feelingSelected: { backgroundColor: '#5B8CFF', borderColor: '#5B8CFF', },
   feelingText: { color: colors.text, fontSize: 18, fontFamily },
   feelingTextSelected: { color: 'white' },
-  actions: { flexDirection: 'row', gap: 12, marginTop: 32, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border, },
-  secondaryButton: {
-    flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center',
-    borderWidth: 1, borderColor: colors.border
-  },
+  actions: { flexDirection: 'row', gap: 12, marginTop: 28, paddingTop: 16, borderTopWidth: 1, borderColor: colors.border, },
+  secondaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: colors.background, justifyContent: 'center', alignItems: 'center',
+                  borderWidth: 1, borderColor: colors.border },
   secondaryButtonText: { color: colors.text, fontWeight: '500' },
   primaryButton: { flex: 1, height: 48, borderRadius: 12, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center' },
   primaryButtonText: { color: 'white', fontWeight: '500' },

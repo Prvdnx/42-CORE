@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, StatusBar } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Plus, LogOut, Sun, Moon } from 'lucide-react-native';
 
@@ -136,10 +137,8 @@ const getStyles = (colors, fontFamily, isLandscape) => StyleSheet.create({
   entryTitle: { fontSize: 22, fontWeight: '500', color: colors.text, fontFamily },
   entryContent: { fontSize: 18, color: colors.secondaryText, marginBottom: 8, lineHeight: 26, fontFamily },
   entryDate: { fontSize: 16, color: colors.secondaryText, fontFamily },
-  fab: {
-    position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8,
-  },
+  fab: { position: 'absolute', right: 24, bottom: 96, width: 56, height: 56, borderRadius: 28, backgroundColor: '#5B8CFF', justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.30, shadowRadius: 4.65, elevation: 8, },
 });
 
 export default EntriesListScreen;

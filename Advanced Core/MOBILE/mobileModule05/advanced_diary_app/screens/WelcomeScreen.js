@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -32,14 +33,12 @@ const WelcomeScreen = () => {
 };
 
 const getStyles = (colors, isLandscape, fontFamily) => StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)' },
+  safeArea: { flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)', color: 'transparent' },
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 24, paddingBottom: !isLandscape ? 60 : 0, backgroundColor: 'transparent' },
   gif: { width: 130, height: 140, elevation: 8 },
   title: { fontSize: 52, fontWeight: '500', textAlign: 'center', color: colors.text, letterSpacing: -0.5, fontFamily },
-  button: {
-    width: '35%', height: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', flexDirection: 'row',
-    marginTop: !isLandscape ? 122 : 0, maxWidth: 320,
-  },
+  button: { width: '35%', height: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', flexDirection: 'row',
+          marginTop: !isLandscape ? 122 : 0, maxWidth: 320, },
   primaryButton: { backgroundColor: '#2d76f461', borderWidth: 2, borderColor: '#a8adb4ff', elevation: 5 },
   primaryButtonText: { color: 'white', fontSize: 20, fontWeight: '500' },
 });
