@@ -80,18 +80,17 @@ const tokenCache = {
   },
 };
 
+import { useAssets } from 'expo-asset';
+
 export default function App() {
   const [fontsLoaded] = useFonts({ Kalam_400Regular });
+  const [assets] = useAssets([require('./assets/images/pexels-ken-cheung.jpg')]);
 
   React.useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
+    if (fontsLoaded && assets) { SplashScreen.hideAsync(); }
+  }, [fontsLoaded, assets]);
 
-  if (!fontsLoaded) {
-    return null;
-  }
+  if (!fontsLoaded || !assets) { return null; }
 
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
