@@ -34,3 +34,6 @@
 [submodule "Common Core/FdF"]
 	path = Common Core/FdF
 	url = https://github.com/Prvdnx/42-FdF.git
+[submodule "Common Core/Philosophers"]
+	path = Common Core/Philosophers
+	url = https://github.com/Prvdnx/42-Philosophers.git
