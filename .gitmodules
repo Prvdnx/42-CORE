@@ -1,3 +1,36 @@
 [submodule "Common Core/Inception"]
 	path = Common Core/Inception
 	url = https://github.com/Prvdnx/42_Inception.git
+[submodule "Common Core/CPP Modules"]
+	path = Common Core/CPP Modules
+	url = https://github.com/Prvdnx/42-CPP_MODULES.git
+[submodule "Common Core/miniRT"]
+	path = Common Core/miniRT
+	url = https://github.com/gs313/miniRT.git
+[submodule "Common Core/NetPractice"]
+	path = Common Core/NetPractice
+	url = https://github.com/Prvdnx/42-NetPractice.git
+[submodule "Common Core/ft_irc"]
+	path = Common Core/ft_irc
+	url = https://github.com/TanawatJukmongkol/ft_irc.git
+[submodule "Common Core/transcendence"]
+	path = Common Core/transcendence
+	url = https://github.com/bpassael/transcendence.git
+[submodule "Common Core/get_next_line"]
+	path = Common Core/get_next_line
+	url = https://github.com/Prvdnx/42-get_next_line.git
+[submodule "Common Core/ft_printf"]
+	path = Common Core/ft_printf
+	url = https://github.com/Prvdnx/42-ft_printf.git
+[submodule "Common Core/ft_libft"]
+	path = Common Core/ft_libft
+	url = https://github.com/Prvdnx/42-ft_libft.git
+[submodule "Common Core/push_swap"]
+	path = Common Core/push_swap
+	url = https://github.com/Prvdnx/42-push_swap.git
+[submodule "Common Core/minitalk"]
+	path = Common Core/minitalk
+	url = https://github.com/Prvdnx/42-minitalk.git
+[submodule "Common Core/FdF"]
+	path = Common Core/FdF
+	url = https://github.com/Prvdnx/42-FdF.git
