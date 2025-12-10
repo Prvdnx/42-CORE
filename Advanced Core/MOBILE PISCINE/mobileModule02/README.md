@@ -1,26 +1,35 @@
 # Mobile Module 02
 
-State management and data persistence in Flutter applications.
+Enhanced weather application with additional features.
 
 ## Overview
-This module explores different state management approaches and data persistence techniques in Flutter.
+This module builds upon Module 01 with a more advanced weather application implementation.
+
+## Project
+
+### Medium Weather App
+An enhanced weather application featuring:
+- More detailed weather information
+- Improved UI/UX
+- Additional weather data visualization
+- Better state management
 
 ## Topics Covered
-- State management patterns (setState, Provider, etc.)
-- Local data storage
-- Shared Preferences
-- File I/O operations
-- JSON serialization/deserialization
-- Managing app state across screens
+- Advanced React Native components
+- Enhanced state management
+- Improved data handling
+- UI/UX best practices
+- Component composition
 
 ## Technologies
-- **Flutter**: Cross-platform mobile development framework
-- **Dart**: Programming language
-- **Provider**: State management solution
-- **Shared Preferences**: Local storage
+- **React Native**: Cross-platform mobile development framework
+- **Expo**: Development toolchain
+- **React**: JavaScript library
+- **JavaScript/ES6**: Programming language
 
 ## Usage
-Navigate to exercise directories and run:
+Navigate to the medium_weather_app directory and run:
 ```bash
-flutter run
+npm install
+npm start
 ```

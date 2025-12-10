@@ -1,9 +1,9 @@
 # Mobile Module 03
 
-API integration and network requests in Flutter.
+API integration and advanced weather application.
 
 ## Overview
-This module focuses on integrating external APIs, handling network requests, and building data-driven applications.
+This module focuses on integrating external APIs and building a feature-rich weather application with React Native.
 
 ## Projects
 
@@ -26,14 +26,15 @@ A comprehensive weather application featuring:
 - Theme switching (light/dark mode)
 
 ## Technologies
-- **Flutter**: Cross-platform mobile development framework
-- **Dart**: Programming language
-- **HTTP package**: Network requests
+- **React Native**: Cross-platform mobile development framework
+- **Expo**: Development toolchain
+- **React**: JavaScript library
+- **JavaScript/ES6**: Programming language
 - **Weather API**: External data source
-- **Geolocator**: Location services
 
 ## Usage
 Navigate to the weather app directory and run:
 ```bash
-flutter run
+npm install
+npm start
 ```
