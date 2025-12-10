@@ -3,7 +3,7 @@
 Building a weather application with React Native.
 
 ## Overview
-This module focuses on creating a weather app, introducing API integration and data display in React Native.
+This module focuses on building a weather app UI skeleton with navigation and search functionality.
 
 ## Project
 

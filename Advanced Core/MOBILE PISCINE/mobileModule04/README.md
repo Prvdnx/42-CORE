@@ -32,7 +32,9 @@ A diary application with authentication:
 - **React Native**: Cross-platform mobile development framework
 - **Expo**: Development toolchain
 - **React**: JavaScript library
-- **AsyncStorage**: Local data persistence
+- **Clerk**: Authentication service
+- **Firebase Firestore**: Cloud database for diary entries
+- **SecureStore**: Secure token storage
 - **JavaScript/ES6**: Programming language
 
 ## Usage
