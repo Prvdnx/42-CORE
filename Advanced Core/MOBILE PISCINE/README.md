@@ -58,8 +58,8 @@ Diary app with user authentication.
 Enhanced diary with tab navigation and calendar views.
 - **Project**: advanced_diary_app
 - **Focus**: Tab navigation, calendar/agenda views
-- **Key Topics**: TabNavigator, complex navigation hierarchies (Stack + Tab)
-- **Screens**: All Module 04 screens + TabNavigator + AgendaScreen (7 total)
+- **Key Topics**: TabNavigator component, complex navigation hierarchies (Stack + Tab)
+- **Screens**: All Module 04 screens + AgendaScreen (6 total)
 - **New Feature**: Calendar-based entry organization
 
 ## Running Projects

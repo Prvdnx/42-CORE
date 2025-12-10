@@ -9,11 +9,11 @@ This module builds upon Module 04 with an advanced diary application featuring m
 
 ### Advanced Diary App
 Enhanced diary with tab navigation:
-- **TabNavigator**: Bottom tab navigation for multiple views
+- **TabNavigator**: Bottom tab navigation component for multiple views
 - **AgendaScreen**: Calendar/agenda view for entries (new screen)
-- **7 screens total**: WelcomeScreen, AuthOptionsScreen, EntriesListScreen, EntryDetailScreen, NewEntryScreen, TabNavigator, AgendaScreen
+- **6 screens total**: WelcomeScreen, AuthOptionsScreen, EntriesListScreen, EntryDetailScreen, NewEntryScreen, AgendaScreen
 - All authentication and theming features from Module 04
-- More complex navigation structure
+- More complex navigation structure (Stack + Tab navigators)
 - Calendar-based entry organization
 
 ## Topics Covered
