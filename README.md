@@ -24,6 +24,8 @@ Foundational projects of the 42 curriculum.
 - **[push_swap:](https://github.com/Prvdnx/42-push_swap)** Stack sorting algorithm.
 - **[transcendence:](https://github.com/bpassael/transcendence)** Real-time multiplayer Pong web application.
 
+> **Note:** Some code may need to be refactored and updated.
+
 ### 2. Advanced Core
 Advanced specialization projects.
 
@@ -31,6 +33,8 @@ Advanced specialization projects.
 - **[Mobile Piscine:](<Advanced Core/MOBILE PISCINE/>)** Developing mobile applications.
 - **[ft_hangouts:](<Advanced Core/ft_hangouts/>)** An Android SMS and contact management application.
 - **[ft_linear_regression:](<Advanced Core/ft_linear_regression/>)** Introduction to machine learning concepts.
+
+> **Note:** Some code may need to be refactored and updated.
 
 ---
 *Created by prvdnx*
