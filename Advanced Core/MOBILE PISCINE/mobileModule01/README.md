@@ -28,6 +28,12 @@ A weather application featuring:
 ## Usage
 Navigate to the weather_app directory and run:
 ```bash
+# Using the run script (recommended)
+./run rebuild  # Clean, install, and start with tunnel
+./run start    # Start the development server
+./run clean    # Clean project artifacts
+
+# Or manually
 npm install
-npm start
+npx expo start
 ```

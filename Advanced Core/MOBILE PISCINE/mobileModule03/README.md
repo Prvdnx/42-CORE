@@ -33,8 +33,14 @@ A comprehensive weather application featuring:
 - **Weather API**: External data source
 
 ## Usage
-Navigate to the weather app directory and run:
+Navigate to the advanced_weather_app directory and run:
 ```bash
+# Using the run script (recommended)
+./run rebuild  # Clean, install, and start with tunnel
+./run start    # Start the development server
+./run clean    # Clean project artifacts
+
+# Or manually
 npm install
-npm start
+npx expo start
 ```
