@@ -18,7 +18,6 @@ This project implements a linear regression algorithm from scratch to predict ca
 - `data.csv`: Training dataset (mileage, price)
 - `theta.json`: Saved model parameters
 - `regression.png`: Visualization of the regression line
-- `DEEP_MATHEMATICS_MECHANICS.md`: Detailed mathematical explanations
 - `requirements.txt`: Python dependencies
 
 ## Technologies
@@ -47,7 +46,7 @@ The project implements the linear regression formula:
 price = θ₀ + θ₁ × mileage
 ```
 
-Using gradient descent to minimize the cost function and find optimal θ values. See `DEEP_MATHEMATICS_MECHANICS.md` for detailed mathematical explanations.
+Using gradient descent to minimize the cost function and find optimal θ values.
 
 ## Learning Objectives
 - Understanding linear regression fundamentals
