@@ -1,4 +1,0 @@
-
-git submodule add <repository_url> "Common Core/<project_name>"
-
-e.g. git submodule add https://github.com/prvdnx/libft.git "Common Core/libft"
