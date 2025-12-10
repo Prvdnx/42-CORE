@@ -44,7 +44,9 @@ Advanced specialization projects.
 
 #### Projects in Advanced Core:
 - **Mobile Piscine**: Developing mobile applications.
+  - [MOBILE PISCINE/](<Advanced Core/MOBILE PISCINE/>)
 - **ft_hangouts**: An Android SMS and contact management application.
+  - [ft_hangouts/](<Advanced Core/ft_hangouts/>)
 - **ft_linear_regression**: Introduction to machine learning concepts.
   - [ft_linear_regression/](<Advanced Core/ft_linear_regression/>)
 
