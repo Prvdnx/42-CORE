@@ -8,21 +8,22 @@ This module builds upon Module 04 with an advanced diary application featuring m
 ## Project
 
 ### Advanced Diary App
-An enhanced diary application featuring:
-- All features from Module 04
-- Advanced data management
-- Improved UI/UX
-- Additional features (search, categories, tags, etc.)
-- Better performance optimization
-- Enhanced user experience
+Enhanced diary with tab navigation:
+- **TabNavigator**: Bottom tab navigation for multiple views
+- **AgendaScreen**: Calendar/agenda view for entries (new screen)
+- **7 screens total**: WelcomeScreen, AuthOptionsScreen, EntriesListScreen, EntryDetailScreen, NewEntryScreen, TabNavigator, AgendaScreen
+- All authentication and theming features from Module 04
+- More complex navigation structure
+- Calendar-based entry organization
 
 ## Topics Covered
-- Advanced data persistence strategies
-- Complex state management patterns
-- Search and filter functionality
-- Performance optimization techniques
-- Advanced UI patterns
-- Code architecture and best practices
+- Tab navigation with React Navigation
+- Calendar/agenda views for date-based data
+- Complex navigation hierarchies (Stack + Tab)
+- All Module 04 topics plus:
+  - Multiple navigation patterns
+  - Calendar UI components
+  - Date-based data organization
 
 ## Technologies
 - **React Native**: Cross-platform mobile development framework

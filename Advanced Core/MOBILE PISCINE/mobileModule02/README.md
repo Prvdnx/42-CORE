@@ -8,18 +8,25 @@ This module builds upon Module 01 with a more advanced weather application imple
 ## Project
 
 ### Medium Weather App
-An enhanced weather application featuring:
-- More detailed weather information
-- Improved UI/UX
-- Additional weather data visualization
-- Better state management
+A functional weather application with real API integration:
+- **WeatherService**: Fetches current weather, today's forecast, and weekly forecast
+- **LocationService**: Gets user's current GPS coordinates
+- **GeocodingService**: Converts coordinates to location names
+- Three separate screens: CurrentlyScreen, TodayScreen, WeeklyScreen
+- Automatic geolocation on app launch
+- City search with location selection
+- Loading states and error handling
+- Parallel API calls with Promise.all
 
 ## Topics Covered
-- Advanced React Native components
-- Enhanced state management
-- Improved data handling
-- UI/UX best practices
-- Component composition
+- Real API integration with weather services
+- Geolocation and geocoding APIs
+- Async/await and Promise.all for parallel requests
+- Component-based architecture (separate screens)
+- useCallback for memoized functions
+- useEffect for side effects (initial geolocation)
+- Error handling and loading states
+- Passing data between components via props
 
 ## Technologies
 - **React Native**: Cross-platform mobile development framework

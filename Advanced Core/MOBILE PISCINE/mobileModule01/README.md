@@ -8,16 +8,21 @@ This module focuses on creating a weather app, introducing API integration and d
 ## Project
 
 ### Weather App
-A weather application featuring:
-- Weather data display
-- Basic UI components
-- Introduction to external data handling
+A weather app UI skeleton featuring:
+- Search bar with city search functionality
+- Geolocation button for current location
+- Three tab navigation (Currently, Today, Weekly)
+- PagerView for swipeable screens
+- Basic state management with React hooks
+- No actual weather API integration yet (displays search text and geolocation status)
 
 ## Topics Covered
-- React Native components and layouts
-- Working with external data
-- Styling React Native applications
-- Basic state management
+- React Native core components (View, Text, TouchableOpacity, TextInput)
+- PagerView for swipeable tabs
+- SafeAreaView for notch/status bar handling
+- State management with useState and useRef
+- Ionicons for icons
+- KeyboardAvoidingView for iOS keyboard handling
 
 ## Technologies
 - **React Native**: Cross-platform mobile development framework

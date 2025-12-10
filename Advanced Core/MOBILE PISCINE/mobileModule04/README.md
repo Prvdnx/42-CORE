@@ -8,20 +8,25 @@ This module focuses on creating a diary/journal application, introducing data pe
 ## Project
 
 ### Diary App
-A personal diary application featuring:
-- Create and manage diary entries
-- Data persistence (local storage)
-- Date-based organization
-- Entry editing and deletion
-- User-friendly interface
+A diary application with authentication:
+- **Clerk authentication**: Sign in/sign up with secure token storage
+- **5 screens**: WelcomeScreen, AuthOptionsScreen, EntriesListScreen, EntryDetailScreen, NewEntryScreen
+- **Context API**: ThemeContext, OverlayContext, EntriesContext
+- **Theme switching**: Light/dark mode with custom themes
+- **SecureStore**: Secure token caching with expo-secure-store
+- **Custom font**: Kalam_400Regular from Google Fonts
+- **Navigation**: React Navigation with Stack Navigator
+- **Conditional rendering**: SignedIn/SignedOut components
 
 ## Topics Covered
-- Local data storage and persistence
-- CRUD operations (Create, Read, Update, Delete)
-- Date and time handling
-- Form handling and validation
-- Advanced state management
-- Component lifecycle
+- Authentication with Clerk
+- Secure token storage with SecureStore
+- Context API for global state (Theme, Overlay, Entries)
+- React Navigation (Stack Navigator)
+- Conditional rendering based on auth state
+- Custom fonts with expo-google-fonts
+- SplashScreen handling
+- Asset preloading with useAssets
 
 ## Technologies
 - **React Native**: Cross-platform mobile development framework

@@ -8,22 +8,24 @@ This module focuses on integrating external APIs and building a feature-rich wea
 ## Projects
 
 ### Advanced Weather App
-A comprehensive weather application featuring:
-- Real-time weather data from external API
-- Location-based weather information
-- Multi-day forecasts
-- Weather condition visualization
-- Light and dark mode support
-- Responsive UI design
+A polished weather application with advanced features:
+- **WeatherBackground component**: Dynamic background based on weather conditions
+- **Dark theme**: Dark UI with custom colors (#121212 background, #0A84FF accents)
+- **Landscape support**: Responsive layout using useWindowDimensions
+- **Advanced error handling**: Separate error types (weather, location, connection, cityNotFound)
+- **StatusBar**: Light content for dark theme
+- **Complex state management**: Consolidated appState object
+- All features from Module 02 plus visual polish
 
 ## Topics Covered
-- HTTP requests and REST APIs
-- JSON parsing and data models
-- Asynchronous programming (async/await)
-- Error handling for network operations
-- API key management
-- Geolocation services
-- Theme switching (light/dark mode)
+- Custom background components
+- Dark theme implementation
+- Responsive design with useWindowDimensions
+- Advanced error handling patterns
+- StatusBar customization
+- Complex state management (multiple loading/error states)
+- Dynamic styling based on orientation
+- Component composition and prop drilling
 
 ## Technologies
 - **React Native**: Cross-platform mobile development framework
