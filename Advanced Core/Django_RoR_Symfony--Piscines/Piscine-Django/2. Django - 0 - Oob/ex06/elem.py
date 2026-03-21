@@ -7,30 +7,23 @@ class Text(str):
     """
     def __str__(self):
         """
-        Custom string representation that escapes newlines into HTML <br /> tags.
+        Do you really need a comment to understand this method?..
         """
         return super().__str__().replace('\n', '\n<br />\n')
 
 
 class Elem:
     """
-    Elem will permit us to represent our HTML elements as objects.
-    It handles tags, attributes, and nested content.
+    Elem will permit us to represent our HTML elements.
     """
     class ValidationError(Exception):
-        """Custom exception raised when an invalid content type is added."""
         def __init__(self):
             super().__init__("Invalid content type.")
 
     def __init__(self, tag='div', attr={}, content=None, tag_type='double'):
         """
-        Initializes an Elem instance.
-        
-        Args:
-            tag (str): The HTML tag name (e.g., 'div', 'p').
-            attr (dict): Dictionary of HTML attributes (e.g., {'class': 'foo'}).
-            content (Elem, Text, or list): The inner content of the tag.
-            tag_type (str): 'double' for tags with closing tags, 'simple' for self-closing.
+        __init__() method.
+        Obviously.
         """
         self.tag = tag
         self.attr = attr
@@ -41,8 +34,10 @@ class Elem:
 
     def __str__(self):
         """
-        Returns the HTML string representation of the element, 
-        including attributes and recursive content rendering.
+        The __str__() method will permit us to make a plain HTML representation
+        of our elements.
+        Make sure it renders everything (tag, attributes, embedded
+        elements...).
         """
         attr_str = self.__make_attr()
         if self.tag_type == 'double':
@@ -54,7 +49,7 @@ class Elem:
 
     def __make_attr(self):
         """
-        Private helper to format the attributes dictionary into an HTML string.
+        Here is a function to render our elements attributes.
         """
         result = ''
         for pair in sorted(self.attr.items()):
@@ -63,22 +58,18 @@ class Elem:
 
     def __make_content(self):
         """
-        Private helper to render the child content with proper indentation.
+        Here is a method to render the content, including embedded elements.
         """
         if len(self.content) == 0:
             return ''
         result = '\n'
         for elem in self.content:
             res = str(elem)
-            # Indent content by 2 spaces for readability
+            # Indent content
             result += "  " + res.replace("\n", "\n  ") + "\n"
         return result
 
     def add_content(self, content):
-        """
-        Adds new content (Elem or Text) to the element.
-        Raises ValidationError if the type is incorrect.
-        """
         if not Elem.check_type(content):
             raise Elem.ValidationError
         if type(content) == list:
@@ -89,8 +80,8 @@ class Elem:
     @staticmethod
     def check_type(content):
         """
-        Validates that the content is a Text instance, an Elem instance,
-        or a list containing only these types.
+        Is this object a HTML-compatible Text instance or a Elem, or even a
+        list of both?
         """
         return (isinstance(content, Elem) or type(content) == Text or
                 (type(content) == list and all([type(elem) == Text or

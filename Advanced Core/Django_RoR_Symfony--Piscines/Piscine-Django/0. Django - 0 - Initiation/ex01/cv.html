@@ -1,0 +1,70 @@
+<!-- This file represents a basic resume (CV) implemented in HTML for the Initiation module. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Résumé</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        /* Style for the lowest right cell of a table */
+        tr:last-child td:last-child {
+            border-color: #424242;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Jane Doe</h1>
+    <p>Software Engineer</p>
+
+    <h2>Skills</h2>
+    <ul>
+        <li>Python</li>
+        <li>Django</li>
+        <li>Web Development</li>
+    </ul>
+
+    <h2>Career Path</h2>
+    <ol>
+        <li>Lead Developer at AI Solutions (2020-Present)</li>
+        <li>Junior Dev at WebDesign (2018-2020)</li>
+    </ol>
+
+    <h2>Experience</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Company</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2020</td>
+                <td>AI Solutions</td>
+                <td>Senior Dev</td>
+            </tr>
+            <tr>
+                <td>2018</td>
+                <td>WebDesign</td>
+                <!-- Using inline style for the second bureaucratic requirement -->
+                <td style="background-color: #f0f0f0;">Junior Dev</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
