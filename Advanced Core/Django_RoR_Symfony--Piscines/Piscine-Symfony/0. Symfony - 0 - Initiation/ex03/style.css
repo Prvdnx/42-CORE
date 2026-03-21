@@ -8,6 +8,7 @@
     box-sizing: border-box;
 }
 
+/* This stylesheet provides detailed styling for the resume and webpage replication exercises. */
 body {
     margin: 50px auto 0;
     max-width: 800px;
@@ -35,11 +36,8 @@ h2 {
     padding: 0 0 .25em;
 }
 
-/* Styling an indeterminate progress bar */
-
-progress:not(value) {
-    /* Add your styles here. As part of this walkthrough we will focus only on determinate progress bars. */
-}
+/* Styling an indeterminate progress bar (Currently unused) */
+/* progress:not(value) { } */
 
 /* Styling the determinate progress element */
 
@@ -235,40 +233,39 @@ p[data-value]:after {
 
 .css3::-moz-progress-bar,
 .php::-moz-progress-bar {
-        {
-        /* Gradient background with Stripes */
-        background-image:
-            -moz-linear-gradient(135deg,
-                transparent,
-                transparent 33%,
-                rgba(0, 0, 0, .1) 33%,
-                rgba(0, 0, 0, .1) 66%,
-                transparent 66%),
-            -moz-linear-gradient(top,
-                rgba(255, 255, 255, .25),
-                rgba(0, 0, 0, .2)),
-            -moz-linear-gradient(left, #09c, #ff0);
-    }
+    /* Gradient background with Stripes */
+    background-image:
+        -moz-linear-gradient(135deg,
+            transparent,
+            transparent 33%,
+            rgba(0, 0, 0, .1) 33%,
+            rgba(0, 0, 0, .1) 66%,
+            transparent 66%),
+        -moz-linear-gradient(top,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .2)),
+        -moz-linear-gradient(left, #09c, #ff0);
+}
 
-    .jquery::-moz-progress-bar,
-    .node-js::-moz-progress-bar {
-        /* Gradient background with Stripes */
-        background-image:
-            -moz-linear-gradient(135deg,
-                transparent,
-                transparent 33%,
-                rgba(0, 0, 0, .1) 33%,
-                rgba(0, 0, 0, .1) 66%,
-                transparent 66%),
-            -moz-linear-gradient(top,
-                rgba(255, 255, 255, .25),
-                rgba(0, 0, 0, .2)),
-            -moz-linear-gradient(left, #09c, #690);
-    }
-
+.jquery::-moz-progress-bar,
+.node-js::-moz-progress-bar {
+    /* Gradient background with Stripes */
+    background-image:
+        -moz-linear-gradient(135deg,
+            transparent,
+            transparent 33%,
+            rgba(0, 0, 0, .1) 33%,
+            rgba(0, 0, 0, .1) 66%,
+            transparent 66%),
+        -moz-linear-gradient(top,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .2)),
+        -moz-linear-gradient(left, #09c, #690);
+}
 
 
-    /* Now we are good to duplicate html code for other skills and then add the css code for the new skill based on data-skill */
+
+/* Now we are good to duplicate html code for other skills and then add the css code for the new skill based on data-skill */
 
 
-    /* THE END */
+/* THE END */
