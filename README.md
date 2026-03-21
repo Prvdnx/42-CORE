@@ -31,6 +31,9 @@ Advanced specialization projects.
 
 #### Projects in Advanced Core:
 - **[Mobile Piscine:](<Advanced Core/MOBILE PISCINE/>)** Developing mobile applications.
+- **[Piscine Django:](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-Django/>)** Web development with Python and Django.
+- **[Piscine RoR:](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-RoR/>)** Web development with Ruby on Rails.
+- **[Piscine Symfony:](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-Symfony/>)** Web development with PHP and Symfony.
 - **[ft_hangouts:](<Advanced Core/ft_hangouts/>)** An Android SMS and contact management application.
 - **[ft_linear_regression:](<Advanced Core/ft_linear_regression/>)** Introduction to machine learning concepts.
 
