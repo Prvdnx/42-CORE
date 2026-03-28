@@ -31,10 +31,10 @@ Advanced specialization projects.
 
 #### Projects in Advanced Core:
 - **[Mobile Piscine:](<Advanced Core/MOBILE PISCINE/>)** Developing mobile applications.
-- **[Piscine Django:](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-Django/>)** Web development with Python and Django.
-- **[ft_hangouts:](<Advanced Core/ft_hangouts/>)** An Android SMS and contact management application.
 - **[ft_linear_regression:](<Advanced Core/ft_linear_regression/>)** Introduction to machine learning concepts.
+- **[ft_hangouts:](<Advanced Core/ft_hangouts/>)** An Android SMS and contact management application.
 - **[Tokenizer:](<Advanced Core/Tokenizer/>)** A Web3 exercise to create a custom token on a blockchain, adhering to the standard BEP-20 requirements for the BNB chain.
+- **[Piscine Django:](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-Django/>)** Web development with Python and Django.
 
 > **Note:** Some code may need to be refactored and updated.
 
