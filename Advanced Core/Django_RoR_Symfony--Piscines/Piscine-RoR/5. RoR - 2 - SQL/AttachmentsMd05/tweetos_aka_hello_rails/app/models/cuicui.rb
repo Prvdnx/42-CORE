@@ -1,2 +1,0 @@
-class Cuicui < ApplicationRecord
-end
