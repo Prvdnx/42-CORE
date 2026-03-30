@@ -13,7 +13,7 @@ In order to keep the implementation **simple**, **concise**, and highly **secure
 - **Name**: Token 42 (As required, it contains "42").
 - **Symbol**: T42
 - **Network Used**: BSC Testnet (Chain ID: 97)
-- **Smart Contract Address**: *(To be filled after deployment)*
+- **Smart Contract Address**: `0x0249bdBF64D6E8ab5277EaBB485D3b4913D550c5`
 
 ## Directory Structure
 - `code/`: Contains the Solidity smart contract.

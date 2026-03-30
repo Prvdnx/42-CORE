@@ -15,6 +15,28 @@ if [ "$1" == "clean" ]; then
     exit 0
 fi
 
+# If "dp" is passed, deploy to BSC Testnet (public)
+if [ "$1" == "dp" ]; then
+    echo "--- Deploying Token 42 to BSC Testnet ---"
+
+    # Check for PRIVATE_KEY
+    if [ ! -f .env ] || ! grep -q "PRIVATE_KEY=.\+" .env; then
+        echo "Error: No PRIVATE_KEY found in .env file."
+        echo "1. Copy the example:  cp .env-example .env"
+        echo "2. Add your key:      PRIVATE_KEY=your_key_here"
+        exit 1
+    fi
+
+    npm install --legacy-peer-deps
+    npx hardhat compile
+    echo "Deploying to BSC Testnet..."
+    npx hardhat run deployment/deploy.js --network bscTestnet
+
+    echo "--- Deployment Complete ---"
+    echo "Verify at: https://testnet.bscscan.com/"
+    exit 0
+fi
+
 echo "--- Tokenizer: Token 42 ---"
 
 # 1. Install dependencies
@@ -30,5 +52,5 @@ echo "Running local deployment test..."
 npx hardhat run deployment/deploy.js
 
 echo "--- Setup Complete ---"
-echo "To deploy to BSC Testnet, see documentation/usage.md"
-echo "To clean the project, run: ./run.sh clean"
+echo "To deploy to BSC Testnet: ./run.sh dp"
+echo "To clean the project:     ./run.sh clean"

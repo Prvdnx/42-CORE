@@ -33,14 +33,14 @@ Hardhat allows testing locally without real network costs.
 1. Install the [MetaMask](https://metamask.io/) browser extension.
 2. Create a wallet (or import an existing one).
 3. Add the **BSC Testnet** network to MetaMask:
-   - Network Name: `BSC Testnet`
+   - Network Name: `BSC Testnet` or `BNB Smart Chain Testnet`
    - RPC URL: `https://data-seed-prebsc-1-s1.binance.org:8545`
    - Chain ID: `97`
    - Currency Symbol: `tBNB`
    - Block Explorer: `https://testnet.bscscan.com/`
 
 ### Step 2: Get Test BNB
-1. Go to the [BNB Chain Faucet](https://testnet.bnbchain.org/faucet-smart).
+1. Go to the [BNB Chain Faucet](https://testnet.bnbchain.org/faucet-smart) or any other alternative.
 2. Paste your MetaMask wallet address.
 3. Request tBNB (you only need ~0.01 tBNB for gas fees).
 
@@ -49,7 +49,7 @@ Hardhat allows testing locally without real network costs.
 2. Enter your password and copy the key.
 
 ### Step 4: Deploy
-1. Set your private key as an environment variable:
+1. Set your private key as an environment variable in a .env or with an export:
    ```bash
    export PRIVATE_KEY="your-private-key-here"
    ```
