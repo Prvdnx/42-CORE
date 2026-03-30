@@ -37,6 +37,26 @@ if [ "$1" == "dp" ]; then
     exit 0
 fi
 
+# If "vfy" is passed, verify the contract on BscScan
+if [ "$1" == "vfy" ]; then
+    if [ -z "$2" ]; then
+        echo "Error: Please provide the contract address to verify."
+        echo "Usage: ./run.sh vfy <CONTRACT_ADDRESS>"
+        exit 1
+    fi
+
+    # Check for BSCSCAN_API_KEY
+    if [ ! -f .env ] || ! grep -q "BSCSCAN_API_KEY=.\+" .env; then
+        echo "Error: No BSCSCAN_API_KEY found in .env file."
+        echo "Please add your BscScan API key to .env to verify: BSCSCAN_API_KEY=your_api_key_here"
+        exit 1
+    fi
+
+    echo "--- Verifying Token 42 on BscScan ---"
+    npx hardhat verify --network bscTestnet "$2"
+    exit 0
+fi
+
 echo "--- Tokenizer: Token 42 ---"
 
 # 1. Install dependencies
@@ -53,4 +73,5 @@ npx hardhat run deployment/deploy.js
 
 echo "--- Setup Complete ---"
 echo "To deploy to BSC Testnet: ./run.sh dp"
+echo "To verify on BSC Testnet: ./run.sh vfy <CONTRACT_ADDRESS>"
 echo "To clean the project:     ./run.sh clean"
