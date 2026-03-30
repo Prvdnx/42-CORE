@@ -62,21 +62,35 @@ Hardhat allows testing locally without real network costs.
 
 ## Verifying on BscScan
 
-1. Go to [testnet.bscscan.com](https://testnet.bscscan.com/).
-2. Search for your contract address.
-3. You should see:
-   - The contract creation transaction
+Verification publishes your contract source code to the block explorer so others can verify your implementation and interact with it easily.
+
+1. Get an API key from [BscScan](https://bscscan.com/myapikey).
+2. Add your key to your `.env` file: `BSCSCAN_API_KEY=your_api_key_here`
+3. Run the hardhat verify command with your deployed contract address:
+   ```bash
+   npx hardhat verify --network bscTestnet <YOUR_CONTRACT_ADDRESS>
+   ```
+   Or use the provided run script:
+   ```bash
+   ./run.sh vfy <YOUR_CONTRACT_ADDRESS>
+   ```
+
+4. Go to [testnet.bscscan.com](https://testnet.bscscan.com/).
+5. Search for your contract address.
+6. You should see a green checkmark indicating the code is verified!
    - Token name: **Token 42**
    - Symbol: **T42**
    - Total supply: **1,000,000**
-4. Under "Read Contract", call `owner()` to verify the contract owner.
+7. Under "Read Contract" or "Write Contract", you can now call functions like `owner()` or `transfer()` by clicking "Connect to Web3".
 
 ## Adding the Token to MetaMask
 
-1. In MetaMask, click **Import Tokens**.
-2. Paste your contract address.
-3. MetaMask will auto-detect the token name (Token 42) and symbol (T42).
-4. Your balance of 1,000,000 T42 will appear in your wallet.
+1. Open MetaMask and make sure you are on the **BNB Smart Chain Testnet**.
+2. Click on **Tokens** -> **Import tokens** (usually at the bottom).
+3. Paste your contract address: `0x0249bdBF64D6E8ab5277EaBB485D3b4913D550c5`
+4. MetaMask should instantly auto-fill the Token Symbol (`T42`) and Decimals (`18`).
+5. Click **Next** and **Import**. You should immediately see your balance of `1,000,000 T42`!
+
 
 ## Transferring Tokens
 
