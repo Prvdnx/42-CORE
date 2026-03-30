@@ -91,7 +91,6 @@ Verification publishes your contract source code to the block explorer so others
 4. MetaMask should instantly auto-fill the Token Symbol (`T42`) and Decimals (`18`).
 5. Click **Next** and **Import**. You should immediately see your balance of `1,000,000 T42`!
 
-
 ## Transferring Tokens
 
 Since this adheres to the BEP-20 (ERC20) standard, any standard web3 wallet like MetaMask, or blockchain explorer like BscScan, can interface with this token contract.

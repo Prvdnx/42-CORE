@@ -75,3 +75,4 @@ echo "--- Setup Complete ---"
 echo "To deploy to BSC Testnet: ./run.sh dp"
 echo "To verify on BSC Testnet: ./run.sh vfy <CONTRACT_ADDRESS>"
 echo "To clean the project:     ./run.sh clean"
+
