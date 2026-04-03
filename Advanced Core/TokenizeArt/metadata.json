@@ -1,0 +1,10 @@
+{
+  "name": "TokenizeArt 42",
+  "description": "A unique pixel art NFT from the TokenizeArt 42 collection on the BNB Smart Chain.",
+  "image": "ipfs://bafybeief2xyta3pivzwln77nxcsunsfhyayjiqpmrvczzpdl7arra7sr2q",
+  "attributes": [
+    { "trait_type": "Style", "value": "Pixel Art" },
+    { "trait_type": "Collection", "value": "TokenizeArt 42" },
+    { "trait_type": "Network", "value": "BNB Smart Chain Testnet" }
+  ]
+}

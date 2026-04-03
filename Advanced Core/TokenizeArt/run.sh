@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+# Cleanup function
+clean() {
+    echo "Cleaning up artifacts, cache, and dependencies..."
+    rm -rf artifacts cache node_modules package-lock.json .tmp .pip_cache
+}
+
+# If "clean" is passed as an argument, just clean and exit
+if [ "$1" == "clean" ]; then
+    clean
+    exit 0
+fi
+
+# If "dp" is passed, deploy and mint on BSC Testnet (public)
+if [ "$1" == "dp" ]; then
+    echo "--- Deploying TokenizeArt 42 to BSC Testnet ---"
+
+    # Check for PRIVATE_KEY
+    if [ ! -f .env ] || ! grep -q "PRIVATE_KEY=.\+" .env; then
+        echo "Error: No PRIVATE_KEY found in .env file."
+        echo "1. Copy the example:  cp .env-example .env"
+        echo "2. Add your key:      PRIVATE_KEY=your_key_here"
+        exit 1
+    fi
+
+    npm install --legacy-peer-deps
+    npx hardhat compile
+    echo "Deploying to BSC Testnet..."
+    npx hardhat run deployment/deploy.js --network bscTestnet
+
+    echo ""
+    echo "Minting NFT on BSC Testnet..."
+    npx hardhat run mint/mint.js --network bscTestnet
+
+    echo "--- Deployment Complete ---"
+    echo "Verify at: https://testnet.bscscan.com/"
+    exit 0
+fi
+
+echo "--- TokenizeArt: TokenizeArt 42 ---"
+
+# 1. Install dependencies
+echo "Installing dependencies..."
+npm install --legacy-peer-deps
+
+# 2. Compile the smart contract
+echo "Compiling the smart contract..."
+npx hardhat compile
+
+# 3. Local Deployment + Mint Test
+echo "Running local deployment test..."
+npx hardhat run deployment/deploy.js
+
+echo ""
+echo "Running local mint test..."
+npx hardhat run mint/mint.js
+
+echo "--- Setup Complete ---"
+echo "To deploy to BSC Testnet: ./run.sh dp"
+echo "To clean the project:     ./run.sh clean"
