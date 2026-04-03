@@ -1,6 +1,5 @@
 const hre = require("hardhat");
 
-// Replace this with your actual IPFS metadata URI after uploading
 const METADATA_URI = "ipfs://<YOUR_METADATA_CID>/metadata.json";
 
 async function main() {
