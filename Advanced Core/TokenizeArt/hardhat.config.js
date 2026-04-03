@@ -20,5 +20,8 @@ module.exports = {
       gasPrice: 20000000000,
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     }
+  },
+  etherscan: {
+    apiKey: process.env.BSCSCAN_API_KEY
   }
 };
