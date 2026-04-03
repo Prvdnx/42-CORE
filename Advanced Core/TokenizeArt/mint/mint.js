@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 
-const METADATA_URI = "ipfs://<YOUR_METADATA_CID>/metadata.json";
+const METADATA_URI = "ipfs://bafkreifu7moc4pvs265yxxxx65vfznkxmvndbesrpgtyurzonwxbi77t6q";
 
 async function main() {
   // get the deployed contract address (replace after deployment)
