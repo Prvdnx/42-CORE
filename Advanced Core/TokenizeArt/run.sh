@@ -15,7 +15,7 @@ if [ "$1" == "clean" ]; then
     exit 0
 fi
 
-# If "dp" is passed, deploy and mint on BSC Testnet (public)
+# If "dp" is passed, deploy on BSC Testnet (public)
 if [ "$1" == "dp" ]; then
     echo "--- Deploying TokenizeArt 42 to BSC Testnet ---"
 
@@ -32,12 +32,54 @@ if [ "$1" == "dp" ]; then
     echo "Deploying to BSC Testnet..."
     npx hardhat run deployment/deploy.js --network bscTestnet
 
-    echo ""
-    echo "Minting NFT on BSC Testnet..."
+    echo "--- Deployment Complete ---"
+    echo "1. Copy the address above."
+    echo "2. Add it to .env:  CONTRACT_ADDRESS=\"0x...\""
+    echo "3. Then run:        ./run.sh mint"
+    exit 0
+fi
+
+# If "mint" is passed, mint on BSC Testnet (public)
+if [ "$1" == "mint" ]; then
+    echo "--- Minting NFT on BSC Testnet ---"
+
+    # Check for CONTRACT_ADDRESS
+    if [ ! -f .env ] || ! grep -q "CONTRACT_ADDRESS=.\+" .env; then
+        echo "Error: No CONTRACT_ADDRESS found in .env file."
+        echo "Please deploy first and add the address to your .env file."
+        exit 1
+    fi
+
+    echo "Minting..."
     npx hardhat run mint/mint.js --network bscTestnet
 
-    echo "--- Deployment Complete ---"
+    echo "--- Minting Complete ---"
     echo "Verify at: https://testnet.bscscan.com/"
+    exit 0
+fi
+
+# If "vfy" is passed, verify on BSC Testnet (public)
+if [ "$1" == "vfy" ]; then
+    echo "--- Verifying Contract on BscScan ---"
+
+    # Check for requirements
+    if [ ! -f .env ]; then
+        echo "Error: .env file missing."
+        exit 1
+    fi
+
+    # Extract CONTRACT_ADDRESS from .env
+    ADDR=$(grep "^CONTRACT_ADDRESS=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+    
+    if [ -z "$ADDR" ]; then
+        echo "Error: CONTRACT_ADDRESS not found in .env."
+        exit 1
+    fi
+
+    echo "Verifying contract at $ADDR..."
+    npx hardhat verify --network bscTestnet "$ADDR"
+
+    echo "--- Verification Complete ---"
     exit 0
 fi
 
@@ -61,4 +103,6 @@ npx hardhat run mint/mint.js
 
 echo "--- Setup Complete ---"
 echo "To deploy to BSC Testnet: ./run.sh dp"
+echo "To mint on BSC Testnet:   ./run.sh mint"
+echo "To verify on BscScan:     ./run.sh vfy"
 echo "To clean the project:     ./run.sh clean"
