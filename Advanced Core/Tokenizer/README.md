@@ -1,30 +1,25 @@
-# Tokenizer: Token 42
+# TokenizeArt: TokenizeArt 42
 
-This project is a Web3 exercise designed to create a custom token on a blockchain, adhering to the standard BEP-20 requirements for the BNB chain.
+This project is a Web3 exercise designed to create and deploy a non-fungible token (NFT) on the blockchain, adhering to the BEP-721 (ERC-721) standard for the BNB Smart Chain.
 
 ## Technology Choices
 
 In order to keep the implementation **simple**, **concise**, and highly **secure**:
 - **Solidity**: The standard programming language for BNB chain and Ethereum smart contracts.
-- **OpenZeppelin Contracts**: The industry-standard, heavily audited OpenZeppelin ERC20 library. BEP-20 is fully compatible with ERC20, which minimizes the risk of introducing vulnerabilities.
+- **OpenZeppelin Contracts**: We utilized the industry-standard, heavily audited OpenZeppelin ERC721 and ERC721URIStorage libraries. BEP-721 is fully compatible with ERC-721, minimizing the risk of introducing vulnerabilities.
 - **Hardhat**: The premier development environment used for testing and deployment. Hardhat is easy to set up and runs a local network for quick testing.
-- **BscScan (Testnet)**: The block explorer used to publicly verify the smart contract source code, enabling transparent interaction directly from the web interface.
+- **IPFS**: The NFT image and metadata are stored on IPFS (InterPlanetary File System), a decentralized storage network, ensuring the content is permanent and tamper-proof.
 
-## Installed Dependencies
-To run this project, the following `npm` packages were critical:
-- **`hardhat`**: The core framework and compile engine.
-- **`@nomicfoundation/hardhat-toolbox`**: A bundle of utilities including Ethers.js for blockchain communication and Hardhat Verify for BscScan integration.
-- **`@openzeppelin/contracts`**: The secure blueprints containing the `ERC20` and `Ownable` contracts we inherit from.
-- **`dotenv`**: For securely loading private keys and API credentials from a local `.env` file without hardcoding them.
-
-## Smart Contract Details
-- **Name**: Token 42 (As required, it contains "42").
-- **Symbol**: T42
+## NFT Details
+- **Collection Name**: TokenizeArt 42 (contains "42" as required).
+- **Symbol**: TA42
+- **Artist**: ookamonu
 - **Network Used**: BSC Testnet (Chain ID: 97)
-- **Smart Contract Address**: `0x0249bdBF64D6E8ab5277EaBB485D3b4913D550c5`
+- **Smart Contract Address**: *(To be filled after deployment)*
 
 ## Directory Structure
-- `code/`: Contains the Solidity smart contract.
+- `code/`: Contains the Solidity smart contract (`TokenizeArt42.sol`).
 - `deployment/`: Contains the Hardhat deployment script.
-- `documentation/`: Contains instructions on compiling, deploying, and using the token.
+- `mint/`: Contains the minting script to create NFTs after deployment.
+- `documentation/`: Contains instructions on usage and the project whitepaper.
 - `README.md`: Explains the structural choices and project overview.
