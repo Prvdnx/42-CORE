@@ -135,14 +135,26 @@ Verification allows anyone to read your code directly on BscScan:
 
 ## Viewing Your NFT
 
-1. Open the `tokenURI` link in a browser (replace `ipfs://` with `https://gateway.pinata.cloud/ipfs/`).
-2. Confirm the metadata JSON loads with your image link.
-3. Open the image link to confirm your "42" image displays.
+### Method 1: Blockchain Verification (BscScan)
+This is the most direct way to prove ownership on-chain:
+1.  Go to [testnet.bscscan.com](https://testnet.bscscan.com/) and search for your **Contract Address**.
+2.  Navigate to the **Contract** tab and then click **Read Contract**.
+3.  **Query `ownerOf`**: Enter token ID `0`. It should return your wallet address.
+4.  **Query `tokenURI`**: Enter token ID `0`. It will return your IPFS metadata link.
 
-### Adding the NFT to MetaMask
-1. In MetaMask, go to the **NFTs** tab → **Import NFT**.
-2. Paste the contract address and Token ID (`0`).
-3. Your NFT will appear in MetaMask with its image.
+### Method 2: Metadata & Image Check
+To see the artwork behind the token:
+1.  Copy the `tokenURI` from BscScan or your terminal.
+2.  Replace `ipfs://` with `https://gateway.pinata.cloud/ipfs/` to view it in a normal browser.
+3.  Within that JSON file, find the `image` link and do the same to view the high-resolution art.
+
+### Method 3: Mobile Wallet (MetaMask)
+To carry your NFT in your pocket (best on MetaMask Mobile):
+1.  Open MetaMask Mobile and switch to the **BSC Testnet**.
+2.  Go to the **NFTs** tab and tap **Import NFT**.
+3.  **Address**: Paste your contract address.
+4.  **Token ID**: `0`
+5.  Your NFT's image and name will appear in your gallery!
 
 ## Transferring the NFT
 Since this adheres to the BEP-721 (ERC-721) standard, any NFT-compatible wallet like MetaMask can display and transfer this NFT.
