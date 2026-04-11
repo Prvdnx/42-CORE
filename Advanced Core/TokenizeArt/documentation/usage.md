@@ -82,7 +82,7 @@ const METADATA_URI = "ipfs://<YOUR_METADATA_CID>/metadata.json";
    - Block Explorer: `https://testnet.bscscan.com/`
 
 ### Step 2: Get Test BNB
-1. Go to the [BNB Chain Faucet](https://testnet.bnbchain.org/faucet-smart).
+1. Go to the [BNB Chain Faucet](https://testnet.bnbchain.org/faucet-smart) or any other option.
 2. Paste your MetaMask wallet address.
 3. Request tBNB (you only need ~0.01 tBNB for gas fees).
 
