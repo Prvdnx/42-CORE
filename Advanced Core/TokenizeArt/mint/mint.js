@@ -1,9 +1,10 @@
 const hre = require("hardhat");
 
+// the IPFS metadata URI after uploading
 const METADATA_URI = "ipfs://bafkreifu7moc4pvs265yxxxx65vfznkxmvndbesrpgtyurzonwxbi77t6q";
 
 async function main() {
-  // get the deployed contract address (replace after deployment)
+  // the deployed contract address
   const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
   if (!CONTRACT_ADDRESS) {
     // if no address provided, deploy a fresh one for local testing
