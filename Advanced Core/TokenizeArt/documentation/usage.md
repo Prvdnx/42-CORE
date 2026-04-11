@@ -55,7 +55,7 @@ Create a `metadata.json` file:
   "description": "A unique NFT created for the TokenizeArt project.",
   "image": "ipfs://<IMAGE_CID>",
   "attributes": [
-    { "trait_type": "Artist", "value": "ookamonu" },
+    { "trait_type": "Artist", "value": "intra name" },
     { "trait_type": "Project", "value": "42" }
   ]
 }
@@ -91,25 +91,22 @@ const METADATA_URI = "ipfs://<YOUR_METADATA_CID>/metadata.json";
 2. Enter your password and copy the key.
 
 ### Step 4: Deploy the Contract
-1. Set your private key as an environment variable:
-   ```bash
-   export PRIVATE_KEY="your-private-key-here"
-   ```
+1. Ensure your `.env` has your `PRIVATE_KEY`.
 2. Deploy:
    ```bash
-   npx hardhat run deployment/deploy.js --network bscTestnet
+   ./run.sh dp
    ```
 3. Copy the deployed contract address from the output.
 4. Paste it into `README.md` under **Smart Contract Address**.
 
 ### Step 5: Mint Your NFT on Testnet
-1. Set the contract address:
+1. Add the address to `.env`:
    ```bash
-   export CONTRACT_ADDRESS="0xYourDeployedAddress"
+   CONTRACT_ADDRESS="0xYourDeployedAddress"
    ```
 2. Mint:
    ```bash
-   npx hardhat run mint/mint.js --network bscTestnet
+   ./run.sh mint
    ```
 3. Verify the output shows:
    - `Minted NFT #0`
@@ -129,6 +126,12 @@ const METADATA_URI = "ipfs://<YOUR_METADATA_CID>/metadata.json";
    - Call `tokenURI(0)` → should return your IPFS metadata link
    - Call `owner()` → should return the contract owner address
    - Call `name()` → should return "TokenizeArt 42"
+
+### Step 6: Verify the Source Code
+Verification allows anyone to read your code directly on BscScan:
+```bash
+./run.sh vfy
+```
 
 ## Viewing Your NFT
 
