@@ -15,11 +15,11 @@ In order to keep the implementation **simple**, **concise**, and highly **secure
 - **Symbol**: TA42
 - **Artist**: ookamonu
 - **Network Used**: BSC Testnet (Chain ID: 97)
-- **Smart Contract Address**: *(To be filled after deployment)*
+- **Smart Contract Address**: `0xF87Ea69f76E31F811cb6Ab5F77754930f7da7b21`
 
 ## Directory Structure
 - `code/`: Contains the Solidity smart contract (`TokenizeArt42.sol`).
 - `deployment/`: Contains the Hardhat deployment script.
 - `mint/`: Contains the minting script to create NFTs after deployment.
-- `documentation/`: Contains instructions on compiling, deploying, minting, and using the NFT.
+- `documentation/`: Contains instructions on usage and the project whitepaper.
 - `README.md`: Explains the structural choices and project overview.
