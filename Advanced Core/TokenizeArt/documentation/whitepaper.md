@@ -4,7 +4,7 @@ TokenizeArt 42 (TA42) is a non-fungible digital asset standard residing on the B
 
 ## 1. Token Representation & Purpose
 
-Unlike traditional fungible tokens, TokenizeArt 42 represents a shift toward **verified digital scarcity**. Each token is unique, carrying its own distinct identity and metadata, making it an ideal vehicle for representing individual works of art within the 42 curriculum.
+Unlike traditional fungible tokens, TokenizeArt 42 represents a shift toward **verified digital scarcity**. Each TokenizeArt token is unique, carrying its own distinct identity and metadata, making it an ideal vehicle for representing individual works of art within the 42 curriculum.
 
 **Key Objectives:**
 - **Proof of Provenance:** Establishing an immutable record of when an artwork was created and by whom.

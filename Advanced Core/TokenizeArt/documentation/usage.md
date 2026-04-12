@@ -31,6 +31,17 @@ Hardhat allows testing locally without real network costs.
   ```bash
   npx hardhat run mint/mint.js --network localhost
   ```
+### **Local Development + Metamask(Visual Interface)**
+Since `npx hardhat node` is terminal-only, you can use MetaMask as your visual interface to see balances and send local transactions:
+
+1. Run `npx hardhat node` in your terminal.
+2. Open MetaMask -> **Add Network** -> **Add a network manually**.
+3. Set the details:
+   - Network Name: `Hardhat Localhost`
+   - RPC URL: `http://127.0.0.1:8545`
+   - Chain ID: `31337` (Hardhat's default)
+   - Currency Symbol: `GO` (or ETH)
+4. Now, your MetaMask is connected to your local Hardhat blockchain. Use one of the **Private Keys** printed in your Hardhat terminal terminal to import a test account into MetaMask!
 
 ## Preparing the NFT Image & Metadata
 
