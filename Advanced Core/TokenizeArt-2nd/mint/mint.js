@@ -9,7 +9,7 @@ async function main() {
   if (!CONTRACT_ADDRESS) {
     // if no address provided, deploy a fresh one for local testing
     console.log("No CONTRACT_ADDRESS set, deploying fresh contract for local test...");
-    const NFT = await hre.ethers.getContractFactory("42TokenizeArt");
+    const NFT = await hre.ethers.getContractFactory("_42TokenizeArt");
     const nft = await NFT.deploy();
     await nft.waitForDeployment();
 
@@ -28,7 +28,7 @@ async function main() {
   }
 
   // attach to existing deployed contract
-  const NFT = await hre.ethers.getContractFactory("42TokenizeArt");
+  const NFT = await hre.ethers.getContractFactory("_42TokenizeArt");
   const nft = NFT.attach(CONTRACT_ADDRESS);
 
   const [deployer] = await hre.ethers.getSigners();

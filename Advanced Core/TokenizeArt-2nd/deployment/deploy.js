@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
   console.log("Deploying 42TokenizeArt...");
 
-  const NFT = await hre.ethers.getContractFactory("42TokenizeArt");
+  const NFT = await hre.ethers.getContractFactory("_42TokenizeArt");
   const nft = await NFT.deploy();
   await nft.waitForDeployment();
 

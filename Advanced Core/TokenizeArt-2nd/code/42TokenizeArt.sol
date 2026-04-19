@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev A simple ERC-721 NFT contract adhering to BEP-721 standards.
  *      Artist: ookamonu
  */
-contract 42TokenizeArt is ERC721, ERC721URIStorage, Ownable {
+contract _42TokenizeArt is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
 
     // Initialize NFT collection with name "42TokenizeArt" and set deployer as owner
