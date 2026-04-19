@@ -22,6 +22,10 @@ Advanced specialization projects focusing on mobile development and machine lear
   - Data visualization
   - Price prediction model
 
+### Web3 Development
+- **Tokenizer** - A Web3 exercise to create a custom token on a blockchain, adhering to the standard BEP-20 requirements for the BNB chain.
+- **TokenizeArt** - A Web3 exercise designed to create and deploy a non-fungible token (NFT) on the blockchain, adhering to the BEP-721 (ERC-721) standard for the BNB Smart Chain.
+
 ## Skills Developed
 - Cross-platform mobile development (React Native/Expo)
 - Native Android development (Kotlin)
@@ -30,5 +34,6 @@ Advanced specialization projects focusing on mobile development and machine lear
 - Authentication and secure storage
 - Machine learning fundamentals
 - Data analysis and visualization
+- Web3 and Blockchain development (Solidity, Smart Contracts, NFTs)
 
 > **Note:** Some code may need to be refactored and updated.
