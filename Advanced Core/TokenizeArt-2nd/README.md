@@ -16,7 +16,7 @@ In order to keep the implementation **simple**, **concise**, and highly **secure
 - **Artist**: ookamonu
 - **Art Style**: Cosmic Sacred Geometry
 - **Network Used**: BSC Testnet (Chain ID: 97)
-- **Smart Contract Address**: ``
+- **Smart Contract Address**: `0x1C4C5811de1b9d895c4442A6186FBBc0Ec6C0999`
 
 ## Directory Structure
 - `code/`: Contains the Solidity smart contract (`42TokenizeArt.sol`).
