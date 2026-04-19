@@ -1,0 +1,11 @@
+{
+  "artist": "ookamonu",
+  "name": "42TokenizeArt",
+  "description": "A stunning celestial artwork featuring a glowing 42 integrated with intricate sacred geometry, set against a cosmic nebula background.",
+  "image": "ipfs://bafybeibuqnohfdek7emtdb5a72dikpw2jde3bilqjqbt6hfflncxhfvway",
+  "attributes": [
+    { "trait_type": "Style", "value": "Cosmic Sacred Geometry" },
+    { "trait_type": "Collection", "value": "TokenizeArt 42" },
+    { "trait_type": "Network", "value": "BNB Smart Chain Testnet" }
+  ]
+}
