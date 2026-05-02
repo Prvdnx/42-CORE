@@ -37,3 +37,6 @@
 [submodule "Common Core/Philosophers"]
 	path = Common Core/Philosophers
 	url = https://github.com/Prvdnx/42-Philosophers.git
+[submodule "Advanced Core/red-tetris"]
+	path = Advanced Core/red-tetris
+	url = https://github.com/Prvdnx/red-tetris.git
