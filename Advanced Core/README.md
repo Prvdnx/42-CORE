@@ -26,6 +26,9 @@ Advanced specialization projects focusing on mobile development and machine lear
 - **Tokenizer** - A Web3 exercise to create a custom token on a blockchain, adhering to the standard BEP-20 requirements for the BNB chain.
 - **TokenizeArt** - A Web3 exercise designed to create and deploy a non-fungible token (NFT) on the blockchain, adhering to the BEP-721 (ERC-721) standard for the BNB Smart Chain.
 
+### Web Development
+- **red-tetris** - A multiplayer Tetris game using React, Redux, and Socket.io, focusing on real-time state synchronization and high-performance frontend architecture.
+
 ## Skills Developed
 - Cross-platform mobile development (React Native/Expo)
 - Native Android development (Kotlin)

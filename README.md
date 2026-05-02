@@ -35,6 +35,7 @@ Advanced specialization projects.
 - **[ft_hangouts:](<Advanced Core/ft_hangouts/>)** An Android SMS and contact management application.
 - **[Tokenizer:](<Advanced Core/Tokenizer/>)** A Web3 exercise to create a custom token on a blockchain, adhering to the standard BEP-20 requirements for the BNB chain.
 - **[TokenizeArt:](<Advanced Core/TokenizeArt-2nd/>)** A Web3 exercise designed to create and deploy a non-fungible token (NFT) on the blockchain, adhering to the BEP-721 (ERC-721) standard for the BNB Smart Chain.
+- **[red-tetris:](https://github.com/Prvdnx/red-tetris)** A multiplayer Tetris game using React, Redux, and Socket.io.
 - **[Piscine Django [INCOMPLETE] :](<Advanced Core/Django_RoR_Symfony--Piscines/Piscine-Django/>)** Web development with Python and Django.
 
 > **Note:** Some code may need to be refactored and updated.
