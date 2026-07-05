@@ -1,6 +1,6 @@
 # 42-CORE
 
-Welcome to my 42 School core curriculum repository. This repository tracks my progress and projects through the 42 program.
+This repository tracks my progress and projects through the 42 program.
 
 ## Repository Structure
 
